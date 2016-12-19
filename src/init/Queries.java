@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
- *
+ * test
  * @author Shai Gutman
  */
 public abstract class Queries {
