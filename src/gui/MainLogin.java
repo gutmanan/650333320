@@ -6,9 +6,15 @@
 package gui;
 
 import core.Agent;
-import init.Queries;
+import init.Main;
+
 import init.WindowManager;
+import java.awt.event.ItemEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.JPanel;
 
@@ -21,9 +27,17 @@ public class MainLogin extends javax.swing.JFrame {
     /**
      * Creates new form MainLogin
      */
-    public MainLogin() {
+    public MainLogin() throws SQLException {
         initComponents();
+        
+        ResultSet rs = Main.getDB().query("SELECT * FROM tblAgent");
+        jComboBox1.addItem("Select Agent");
+        while (rs.next()) {
+            jComboBox1.addItem(rs.getString(1));
+        }
+        
         setVisible(true);
+        
     }
 
     /**
@@ -62,9 +76,11 @@ public class MainLogin extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(220, 540, 190, 16);
 
-        for(Agent a: Queries.getAgents()) {
-            jComboBox1.addItem(a.getId());
-        }
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -81,53 +97,42 @@ public class MainLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        Agent tmp = null;
-        for (Agent a : Queries.getAgents()) {
-            if (a.getId().equals(jComboBox1.getSelectedItem())) {
-                tmp = a;
-            }
-        }
-        WindowManager.setUser(1, tmp);
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         System.exit(1);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
+            if (evt.getStateChange() != ItemEvent.SELECTED) {
+                return;
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
+            Object item = evt.getItem();
+            if (item.equals("Select Agent")) {
+                return;
+            }
+            
+            ResultSet rs = Main.getDB().query("SELECT * FROM tblAgent WHERE ID = \""+item+"\"");
+            
+            while (rs.next()) {
+                Agent tmp = new Agent(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+                System.out.println(tmp.getFirstName());
+                WindowManager.setUser(1, tmp);
+                this.dispose();
+                WindowManager.startMain();
+                
+                
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(MainLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainLogin().setVisible(true);
-            }
-        });
-    }
+        
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;

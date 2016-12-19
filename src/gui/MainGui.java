@@ -6,6 +6,9 @@
 package gui;
 
 import init.WindowManager;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 
@@ -138,7 +141,13 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        WindowManager.closeMain();
+        
+        
+        try {
+            WindowManager.closeMain();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed

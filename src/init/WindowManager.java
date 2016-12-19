@@ -4,6 +4,7 @@ import core.Agent;
 import gui.MainGui;
 import gui.MainLogin;
 import java.awt.Color;
+import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
@@ -22,19 +23,20 @@ public abstract class WindowManager {
     protected static JFrame loginFrame;
 
     //======================================= Main ==========================================
-    public static void openLogin(){
+    public static void openLogin() throws SQLException {
          loginFrame= new MainLogin();
     }
-    public static void closeLogin(){
-        loginFrame.dispose();
+    public static void startMain(){
+        
         mainFrame = new MainGui();
         welcome = new JLabel();
         welcome.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
         welcome.setForeground(new java.awt.Color(255, 255, 255));
         mainFrame.getContentPane().add(welcome, mainFrame.getContentPane().countComponents()-1);
         welcome.setBounds(440, 30, 500, 50);
+        welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
     }
-    public static void closeMain(){
+    public static void closeMain() throws SQLException {
         mainFrame.dispose();
         loginFrame = new MainLogin();
     }
@@ -144,10 +146,9 @@ public abstract class WindowManager {
         authLogged = AuthType;
         switch (AuthType) {
             case 1:
-                closeLogin();
+                
                 tmpAgent = (Agent)user;
-                welcome.setText("Welcome "+WindowManager.getTmpAgent().getFirstName()+" "
-                                          +WindowManager.getTmpAgent().getLastName());
+
                 break;
             default:
                 System.err.println("EMPLOYEE");

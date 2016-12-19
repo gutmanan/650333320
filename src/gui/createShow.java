@@ -5,6 +5,15 @@
  */
 package gui;
 
+import init.Main;
+import init.WindowManager;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Shai Gutman
@@ -27,41 +36,65 @@ public class createShow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel5 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jLabel4 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
         jTextField1 = new javax.swing.JTextField();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
+        jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
 
+        jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Set ticket price:");
+        add(jLabel6);
+        jLabel6.setBounds(60, 190, 140, 20);
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Set minimum age:");
+        add(jLabel7);
+        jLabel7.setBounds(60, 160, 140, 20);
+
+        jTextField3.setPreferredSize(new java.awt.Dimension(30, 25));
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
+        add(jTextField3);
+        jTextField3.setBounds(250, 190, 140, 25);
+
+        jTextField1.setPreferredSize(new java.awt.Dimension(30, 25));
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        add(jTextField1);
+        jTextField1.setBounds(250, 160, 140, 25);
+
+        jComboBox2.addItem("Select Place");
+        add(jComboBox2);
+        jComboBox2.setBounds(250, 130, 140, 25);
+
+        jComboBox1.addItem("Select Artist");
+        add(jComboBox1);
+        jComboBox1.setBounds(250, 100, 140, 25);
+
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Available Places for date:");
         add(jLabel5);
-        jLabel5.setBounds(60, 260, 180, 20);
-
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
-
-        add(jScrollPane2);
-        jScrollPane2.setBounds(60, 280, 453, 100);
+        jLabel5.setBounds(60, 130, 180, 20);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -69,35 +102,19 @@ public class createShow extends javax.swing.JPanel {
         add(jLabel4);
         jLabel4.setBounds(60, 100, 180, 20);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+        jXDatePicker1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXDatePicker1ActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        add(jScrollPane1);
-        jScrollPane1.setBounds(60, 120, 453, 100);
+        });
+        add(jXDatePicker1);
+        jXDatePicker1.setBounds(250, 70, 140, 24);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Create New Show");
         add(jLabel3);
         jLabel3.setBounds(60, 20, 230, 40);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1);
-        jTextField1.setBounds(220, 70, 110, 20);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,21 +127,78 @@ public class createShow extends javax.swing.JPanel {
         jLabel1.setBounds(0, 0, 780, 580);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
+        jXDatePicker1.setEditable(false);
+        Date selectedDate = new Date(jXDatePicker1.getDate().getDay(), jXDatePicker1.getDate().getMonth(), jXDatePicker1.getDate().getYear());
+        ResultSet rs1 = Main.getDB().query("SELECT tblArtist.*\n" +
+                                            "FROM tblAgent INNER JOIN tblArtist ON tblAgent.ID = tblArtist.agentID\n" +
+                                            "WHERE (((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
+        ResultSet rs2 = Main.getDB().query("SELECT tblPerformance.artistID\n" +
+                                            "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
+                                            "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");  
+        ResultSet rs3 = Main.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
+                                            "FROM tblPlace INNER JOIN tblFavoritePlace ON tblPlace.ID = tblFavoritePlace.placeID\n" +
+                                            "WHERE (((tblFavoritePlace.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");      
+        ResultSet rs4 = Main.getDB().query("SELECT tblPlace.*, tblShow.date, tblShow.place\n" +
+                                            "FROM tblPlace INNER JOIN tblShow ON tblPlace.ID = tblShow.place\n" +
+                                            "WHERE (((tblShow.date)=#"+selectedDate+"#) AND ((tblShow.place)=[tblPlace].[ID]))");  
+        HashMap<String,String> availableAgents = new HashMap<>();
+        HashMap<String,String> availableShows = new HashMap<>();
+        try {
+            while (rs1.next()) {
+                availableAgents.put(rs1.getString(1), rs1.getString(2));
+            }
+            while (rs2.next()) {
+                if (availableAgents.containsKey(rs2.getString(1))) {
+                    availableAgents.remove(rs2.getString(1));
+                }
+            }
+            for (String s : availableAgents.keySet()) {
+                jComboBox1.addItem(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(createShow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            while (rs3.next()) {
+                availableShows.put(rs3.getString(1), rs3.getString(2));
+            }
+            while (rs4.next()) {
+                if (availableShows.containsKey(rs4.getString(1))) {
+                    availableShows.remove(rs4.getString(1));
+                }
+            }
+            for (String s : availableShows.keySet()) {
+                jComboBox2.addItem(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(createShow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jXDatePicker1ActionPerformed
+
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
+    private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
     // End of variables declaration//GEN-END:variables
 }
