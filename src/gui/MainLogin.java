@@ -105,7 +105,9 @@ public class MainLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        
+        if (jComboBox1.getSelectedIndex()==0) {
+            return;
+        }
         try {
             if (evt.getStateChange() != ItemEvent.SELECTED) {
                 return;

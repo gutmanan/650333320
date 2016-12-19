@@ -5,6 +5,7 @@
  */
 package gui;
 
+import core.Address;
 import init.Main;
 import init.WindowManager;
 import java.sql.Date;
@@ -36,6 +37,15 @@ public class createShow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -51,6 +61,66 @@ public class createShow extends javax.swing.JPanel {
 
         setOpaque(false);
         setLayout(null);
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btnInvite.png"))); // NOI18N
+        jButton1.setBorder(null);
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1);
+        jButton1.setBounds(40, 250, 150, 40);
+
+        jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Address:");
+        add(jLabel15);
+        jLabel15.setBounds(420, 130, 340, 20);
+
+        jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Phone number:");
+        add(jLabel14);
+        jLabel14.setBounds(420, 110, 340, 20);
+
+        jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setText("Representative ID:");
+        add(jLabel13);
+        jLabel13.setBounds(420, 190, 340, 20);
+
+        jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Maximum capacity:");
+        add(jLabel11);
+        jLabel11.setBounds(420, 170, 340, 20);
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Loacation:");
+        add(jLabel12);
+        jLabel12.setBounds(420, 150, 340, 20);
+
+        jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Email:");
+        add(jLabel10);
+        jLabel10.setBounds(420, 90, 340, 20);
+
+        jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Name:");
+        add(jLabel9);
+        jLabel9.setBounds(420, 70, 340, 20);
+
+        jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Selected place info:");
+        add(jLabel8);
+        jLabel8.setBounds(420, 40, 170, 20);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,10 +153,20 @@ public class createShow extends javax.swing.JPanel {
         jTextField1.setBounds(250, 160, 140, 25);
 
         jComboBox2.addItem("Select Place");
+        jComboBox2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox2ItemStateChanged(evt);
+            }
+        });
         add(jComboBox2);
         jComboBox2.setBounds(250, 130, 140, 25);
 
         jComboBox1.addItem("Select Artist");
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         add(jComboBox1);
         jComboBox1.setBounds(250, 100, 140, 25);
 
@@ -186,17 +266,71 @@ public class createShow extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField3ActionPerformed
 
+    private void jComboBox2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox2ItemStateChanged
+        if (jComboBox2.getSelectedIndex()==0) {
+            return;
+        }
+        jLabel9.setText("Name:");
+        jLabel10.setText("Email:");
+        jLabel14.setText("Phone number:");
+        jLabel15.setText("Address:");
+        jLabel12.setText("Location:");
+        jLabel11.setText("Maximum capacity:");
+        jLabel13.setText("Representative ID:");
+        ResultSet rs = Main.getDB().query("SELECT tblPlace.*\n" +
+                                            "FROM tblPlace\n" +
+                                            "WHERE tblPlace.ID="+jComboBox2.getSelectedItem());
+        try {
+            while (rs.next()) {
+                jLabel9.setText(jLabel9.getText()+" "+rs.getString(2));
+                jLabel10.setText(jLabel10.getText()+" "+rs.getString(7));
+                jLabel14.setText(jLabel14.getText()+" "+rs.getString(8));
+                jLabel15.setText(jLabel15.getText()+" "+new Address(rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6)).toString());
+                jLabel12.setText(jLabel12.getText()+" "+rs.getString(9));
+                jLabel11.setText(jLabel11.getText()+" "+rs.getString(10));
+                jLabel13.setText(jLabel13.getText()+" "+rs.getString(11));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(createShow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox2ItemStateChanged
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        if (jComboBox2.getSelectedIndex()==0) {
+            return;
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        /*Date selectedDate = new Date(jXDatePicker1.getDate().getDay(), jXDatePicker1.getDate().getMonth(), jXDatePicker1.getDate().getYear());
+        ResultSet rs2 = Main.getDB().query("SELECT tblPerformance.artistID\n" +
+                                            "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
+                                            "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");
+        ResultSet rs = Main.getDB().query("SELECT tblArtist.*\n" +
+                                            "FROM tblArtist\n" +
+                                            "WHERE tblPlace.ID="+jComboBox2.getSelectedItem());*/
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;
