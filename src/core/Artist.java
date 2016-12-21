@@ -9,15 +9,12 @@ public class Artist {
 	private String id;
 	private String stageName;
 	private String biography;
-	private URL facebook;
-	private URL email;
+	private String facebook;
+	private String email;
 	private boolean active;
 	private Agent agent;
-	private ArrayList<Show> shows;
-	private ArrayList<Artist> Appreciated;
 
-	public Artist(String id, String stageName, String biography, URL facebook, URL email, boolean active, Agent agent,
-			ArrayList<Show> shows, ArrayList<Artist> appreciated) {
+	public Artist(String id, String stageName, String biography, String facebook, String email, boolean active, Agent agent) {
 		super();
 		this.id = id;
 		this.stageName = stageName;
@@ -26,8 +23,6 @@ public class Artist {
 		this.email = email;
 		this.active = active;
 		this.setAgent(agent);
-		this.shows = shows;
-		setAppreciated(appreciated);
 	}
 
 	public String getId() {
@@ -54,19 +49,19 @@ public class Artist {
 		this.biography = biography;
 	}
 
-	public URL getFacebook() {
+	public String getFacebook() {
 		return facebook;
 	}
 
-	public void setFacebook(URL facebook) {
+	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
 
-	public URL getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(URL email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -84,38 +79,6 @@ public class Artist {
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
-	}
-
-	public ArrayList<Artist> getAppreciated() {
-		return Appreciated;
-	}
-
-	public void setAppreciated(ArrayList<Artist> appreciated) {
-		Appreciated = appreciated;
-	}
-	
-	public void updateInfo(String name, String bio, URL fb, URL eml) {
-		if (name != null) {
-			setStageName(name);
-		}
-		if (bio != null) {
-			setBiography(bio);
-		}
-		if (fb != null) {
-			setFacebook(fb);
-		}
-		if (eml != null) {
-			setEmail(eml);
-		}
-	}
-	
-	public boolean checkAvailability(Date date) {
-		if (shows != null) {
-			for (Show s : shows) {
-				
-			}
-		}
-		return false;
 	}
 
 }

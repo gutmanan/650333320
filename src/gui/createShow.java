@@ -6,14 +6,25 @@
 package gui;
 
 import core.Address;
+import core.Agent;
+import core.Artist;
+import init.DBManager;
 import init.Main;
 import init.WindowManager;
+import java.awt.Checkbox;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JRadioButton;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -37,6 +48,31 @@ public class createShow extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable() {
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                    return String.class;
+                    case 1:
+                    return String.class;
+                    case 2:
+                    return Integer.class;
+                    case 3:
+                    return Double.class;
+                    default:
+                    return Boolean.class;
+                }
+            }
+        };
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -61,6 +97,52 @@ public class createShow extends javax.swing.JPanel {
 
         setOpaque(false);
         setLayout(null);
+
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
+        jPanel1.setVisible(false);
+
+        jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel16.setText("Biography:");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(310, 120, 230, 20);
+
+        jScrollPane3.setViewportView(jTable3);
+
+        jPanel1.add(jScrollPane3);
+        jScrollPane3.setBounds(20, 20, 270, 220);
+
+        jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel18.setText("Selected artist info:");
+        jPanel1.add(jLabel18);
+        jLabel18.setBounds(310, 30, 190, 20);
+
+        jLabel19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel19.setText("Facebook:");
+        jPanel1.add(jLabel19);
+        jLabel19.setBounds(310, 100, 230, 20);
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel20.setText("Agent:");
+        jPanel1.add(jLabel20);
+        jLabel20.setBounds(310, 60, 230, 20);
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel21.setText("Email:");
+        jPanel1.add(jLabel21);
+        jLabel21.setBounds(310, 80, 230, 20);
+
+        jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/subContainer1.png"))); // NOI18N
+        jPanel1.add(jLabel22);
+        jLabel22.setBounds(0, 0, 650, 260);
+
+        add(jPanel1);
+        jPanel1.setBounds(25, 305, 650, 260);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btnInvite.png"))); // NOI18N
         jButton1.setBorder(null);
@@ -209,7 +291,7 @@ public class createShow extends javax.swing.JPanel {
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         jXDatePicker1.setEditable(false);
-        Date selectedDate = new Date(jXDatePicker1.getDate().getDay(), jXDatePicker1.getDate().getMonth(), jXDatePicker1.getDate().getYear());
+        Date selectedDate = new Date(jXDatePicker1.getDate().getTime());
         ResultSet rs1 = Main.getDB().query("SELECT tblArtist.*\n" +
                                             "FROM tblAgent INNER JOIN tblArtist ON tblAgent.ID = tblArtist.agentID\n" +
                                             "WHERE (((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
@@ -302,13 +384,71 @@ public class createShow extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*Date selectedDate = new Date(jXDatePicker1.getDate().getDay(), jXDatePicker1.getDate().getMonth(), jXDatePicker1.getDate().getYear());
+        if (jXDatePicker1.getDate() == null) {
+            return;
+        }
+        jPanel1.setVisible(true);
+        jPanel1.setBounds(25, 305, 650, 260);
+        Date selectedDate = new Date(jXDatePicker1.getDate().getDay(), jXDatePicker1.getDate().getMonth(), jXDatePicker1.getDate().getYear());
         ResultSet rs2 = Main.getDB().query("SELECT tblPerformance.artistID\n" +
                                             "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
                                             "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");
-        ResultSet rs = Main.getDB().query("SELECT tblArtist.*\n" +
-                                            "FROM tblArtist\n" +
-                                            "WHERE tblPlace.ID="+jComboBox2.getSelectedItem());*/
+
+        ResultSet rs1 = Main.getDB().query("SELECT tblAppreciation.appreciatedArtistID, tblArtist.*\n" +
+                                          "FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.ID = tblAppreciation.artistID\n" +
+                                          "WHERE (((tblArtist.ID)=[tblAppreciation_1].[appreciatedArtistID]) AND ((tblAppreciation.appreciatedArtistID)=\""+jComboBox1.getSelectedItem()+"\") AND ((tblArtist.active)=Yes))");
+        
+        final HashMap<String,Artist> availableAdditionalArtists = new HashMap<>();
+        try {
+            while (rs1.next()) {
+                availableAdditionalArtists.put(rs1.getString(1), new Artist(rs1.getString(1), rs1.getString(2), 
+                                                                            rs1.getString(3), rs1.getString(4), 
+                                                                            rs1.getString(5), true, 
+                                                                            new Agent(rs1.getString(7))));
+            }
+            while (rs2.next()) {
+                if (availableAdditionalArtists.containsKey(rs2.getString(1))) {
+                    availableAdditionalArtists.remove(rs2.getString(1));
+                }
+            }
+            DefaultTableModel model = new DefaultTableModel(); 
+            jTable3.setModel(model);
+            model.addColumn("Name"); 
+            model.addColumn("Invite");
+            TableColumn tc = jTable3.getColumnModel().getColumn(1);
+            tc.setCellEditor(jTable3.getDefaultEditor(Boolean.class));
+            tc.setCellRenderer(jTable3.getDefaultRenderer(Boolean.class));
+            for (Artist a : availableAdditionalArtists.values()) {
+                model.addRow(new Object[]{a.getStageName(), false});
+            }
+        
+            jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+                @Override
+                public void valueChanged(ListSelectionEvent e) {
+                    if (jTable3.getSelectedRow() > -1) {
+                        jLabel20.setText("Agent:");
+                        jLabel21.setText("Email:");
+                        jLabel19.setText("Facebook:");
+                        jLabel16.setText("Biography:");
+                        ResultSet rs4 = DBManager.query("SELECT tblArtist.*\n" +
+                                                        "FROM tblArtist " +
+                                                        "WHERE tblArtist.ID=\""+jTable3.getValueAt(jTable3.getSelectedRow(),0).toString()+"\"");
+                        try {
+                            while (rs4.next()) {
+                                 jLabel20.setText(jLabel20.getText()+" "+rs4.getString(7));
+                                 jLabel21.setText(jLabel21.getText()+" "+rs4.getString(4));
+                                 jLabel19.setText(jLabel19.getText()+" "+rs4.getString(5));
+                                 jLabel16.setText(jLabel16.getText()+" "+rs4.getString(3));
+                            }
+                        } catch (SQLException ex) {
+                            Logger.getLogger(createShow.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }                
+                }
+            });
+        } catch (SQLException ex) {
+            Logger.getLogger(createShow.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -323,7 +463,13 @@ public class createShow extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -331,6 +477,9 @@ public class createShow extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
     private org.jdesktop.swingx.JXDatePicker jXDatePicker1;

@@ -13,6 +13,11 @@ public class Agent {
 	private ArrayList<Artist> Represented;
 	private ArrayList<Place> faivoritePlaces;
 	
+        public Agent(String id) {
+		super();
+		this.id = id;
+	}
+        
 	public Agent(String id, String firstName, String lastName, String phoneNum, String email) {
 		super();
 		this.id = id;

@@ -33,7 +33,6 @@ public class DBManager {
         }
     }
     
-    
     public static ResultSet query(String qry) {
         ResultSet rs = null;
         try {
@@ -43,10 +42,6 @@ public class DBManager {
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
       return rs;
-        
     }
-
-        
 }
