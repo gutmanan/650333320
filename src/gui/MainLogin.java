@@ -6,7 +6,7 @@
 package gui;
 
 import core.Agent;
-import init.Main;
+import init.MainClass;
 
 import init.WindowManager;
 import java.awt.event.ItemEvent;
@@ -30,7 +30,7 @@ public class MainLogin extends javax.swing.JFrame {
     public MainLogin() throws SQLException {
         initComponents();
         
-        ResultSet rs = Main.getDB().query("SELECT * FROM tblAgent");
+        ResultSet rs = MainClass.getDB().query("SELECT * FROM tblAgent");
         jComboBox1.addItem("Select Agent");
         while (rs.next()) {
             jComboBox1.addItem(rs.getString(1));
@@ -118,7 +118,7 @@ public class MainLogin extends javax.swing.JFrame {
                 return;
             }
             
-            ResultSet rs = Main.getDB().query("SELECT * FROM tblAgent WHERE ID = \""+item+"\"");
+            ResultSet rs = MainClass.getDB().query("SELECT * FROM tblAgent WHERE ID = \""+item+"\"");
             
             while (rs.next()) {
                 Agent tmp = new Agent(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));

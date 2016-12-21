@@ -133,7 +133,7 @@ public class MainGui extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        WindowManager.openWin(new createShow());
+        WindowManager.openWin(new CreateShow());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -159,7 +159,7 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        WindowManager.openWin(new approveParticipation());
+        WindowManager.openWin(new ApproveParticipation());
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Main {
+public class MainClass {
 
     private static DBManager DB = null;
 
@@ -16,12 +16,10 @@ public class Main {
 
         DB = new DBManager();
         try {
-            MainLogin loginFrame= new MainLogin();
-            
+            MainLogin loginFrame = new MainLogin();  
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public static DBManager getDB() {
@@ -29,7 +27,7 @@ public class Main {
     }
 
     public static void setDB(DBManager DB) {
-        Main.DB = DB;
+        MainClass.DB = DB;
     }
 
 }
