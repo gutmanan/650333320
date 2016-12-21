@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 import java.util.Date;
-import util.E_STATUS;
 
 public class Show {
 	

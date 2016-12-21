@@ -2,7 +2,6 @@ package core;
 
 import java.net.URL;
 import java.util.ArrayList;
-import util.E_COVERS;
 
 public class OpenPlace extends Place{
 	

@@ -300,7 +300,9 @@ public class createShow extends javax.swing.JPanel {
                                             "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");  
         ResultSet rs3 = Main.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
                                             "FROM tblPlace INNER JOIN tblFavoritePlace ON tblPlace.ID = tblFavoritePlace.placeID\n" +
-                                            "WHERE (((tblFavoritePlace.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");      
+                                            "WHERE (((tblFavoritePlace.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");    
+        
+        
         ResultSet rs4 = Main.getDB().query("SELECT tblPlace.*, tblShow.date, tblShow.place\n" +
                                             "FROM tblPlace INNER JOIN tblShow ON tblPlace.ID = tblShow.place\n" +
                                             "WHERE (((tblShow.date)=#"+selectedDate+"#) AND ((tblShow.place)=[tblPlace].[ID]))");  
