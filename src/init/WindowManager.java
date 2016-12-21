@@ -24,10 +24,9 @@ public abstract class WindowManager {
 
     //======================================= Main ==========================================
     public static void openLogin() throws SQLException {
-         loginFrame= new MainLogin();
+         loginFrame = new MainLogin();
     }
     public static void startMain(){
-        
         mainFrame = new MainGui();
         welcome = new JLabel();
         welcome.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
@@ -73,11 +72,9 @@ public abstract class WindowManager {
     }
 
     public static void returnWindow() {
-
         if (getCurrentWindow() == null || getLastWindow() == null) {
             return;
         }
-
         getCurrentWindow().hide();
         JPanel tmp = getCurrentWindow();
         setCurrentWindow(getLastWindow());
@@ -102,34 +99,13 @@ public abstract class WindowManager {
                 toReturn = "Agent";
                 break;
             case 2:
-                toReturn = "EMPLOYEE";
+                toReturn = "Representative";
                 break;
             default:
                 toReturn = "ERROR";
                 break;
         }
         return toReturn;
-
-    }
-
-    public static Color getAuthColor() {
-        Color color = Color.white;
-        switch (authLogged) {
-            case 1:
-                color = Color.green;
-                break;
-            case 2:
-                color = Color.orange;
-                break;
-            case 3:
-                color = Color.blue;
-                break;
-            case 4:
-                color = Color.red;
-                break;
-
-        }
-        return color;
     }
 
     public static int getAuthValue() {
@@ -146,12 +122,13 @@ public abstract class WindowManager {
         authLogged = AuthType;
         switch (AuthType) {
             case 1:
-                
                 tmpAgent = (Agent)user;
-
+                break;
+            case 2:
+                tmpAgent = null;
                 break;
             default:
-                System.err.println("EMPLOYEE");
+                System.err.println("ERROR");
                 break;
         }
         return;
@@ -180,7 +157,7 @@ public abstract class WindowManager {
         getCurrentWindow().setVisible(true);
     }
 
-    public static void update(JInternalFrame frame) {
+    public static void update(JFrame frame) {
         frame.setVisible(false);
         frame.setVisible(true);
     }
