@@ -8,6 +8,8 @@ package gui;
 import core.Address;
 import core.Agent;
 import core.Artist;
+import core.Place;
+import init.CreateShowControl;
 import init.DBManager;
 import init.MainClass;
 import init.WindowManager;
@@ -31,7 +33,7 @@ import javax.swing.table.TableColumn;
  * @author Shai Gutman
  */
 public class CreateShow extends javax.swing.JPanel {
-
+    CreateShowControl csController = new CreateShowControl();
     /**
      * Creates new form createShow
      */
@@ -291,55 +293,13 @@ public class CreateShow extends javax.swing.JPanel {
 
     private void jXDatePicker1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePicker1ActionPerformed
         jXDatePicker1.setEditable(false);
-        Date selectedDate = new Date(jXDatePicker1.getDate().getTime());
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblArtist.*\n" +
-                                            "FROM tblAgent INNER JOIN tblArtist ON tblAgent.ID = tblArtist.agentID\n" +
-                                            "WHERE (((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
-        ResultSet rs2 = MainClass.getDB().query("SELECT tblPerformance.artistID\n" +
-                                            "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
-                                            "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");  
-        ResultSet rs3 = MainClass.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
-                                            "FROM tblPlace INNER JOIN tblFavoritePlace ON tblPlace.ID = tblFavoritePlace.placeID\n" +
-                                            "WHERE (((tblFavoritePlace.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");    
-        
-        
-        ResultSet rs4 = MainClass.getDB().query("SELECT tblPlace.*, tblShow.date, tblShow.place\n" +
-                                            "FROM tblPlace INNER JOIN tblShow ON tblPlace.ID = tblShow.place\n" +
-                                            "WHERE (((tblShow.date)=#"+selectedDate+"#) AND ((tblShow.place)=[tblPlace].[ID]))");  
-        HashMap<String,String> availableAgents = new HashMap<>();
-        HashMap<String,String> availableShows = new HashMap<>();
-        try {
-            while (rs1.next()) {
-                availableAgents.put(rs1.getString(1), rs1.getString(2));
-            }
-            while (rs2.next()) {
-                if (availableAgents.containsKey(rs2.getString(1))) {
-                    availableAgents.remove(rs2.getString(1));
-                }
-            }
-            for (String s : availableAgents.keySet()) {
-                jComboBox1.addItem(s);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
+        Date selectedDate = new Date(jXDatePicker1.getDate().getTime()); 
+        for (String s : csController.getAvailableMainArtistForDate(selectedDate)) {
+            jComboBox1.addItem(s);
         }
-
-        try {
-            while (rs3.next()) {
-                availableShows.put(rs3.getString(1), rs3.getString(2));
-            }
-            while (rs4.next()) {
-                if (availableShows.containsKey(rs4.getString(1))) {
-                    availableShows.remove(rs4.getString(1));
-                }
-            }
-            for (String s : availableShows.keySet()) {
-                jComboBox2.addItem(s);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
+        for (String s : csController.getAvailablePlacesForDate(selectedDate)) {
+            jComboBox2.addItem(s);
         }
-
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -361,22 +321,14 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel12.setText("Location:");
         jLabel11.setText("Maximum capacity:");
         jLabel13.setText("Representative ID:");
-        ResultSet rs = MainClass.getDB().query("SELECT tblPlace.*\n" +
-                                            "FROM tblPlace\n" +
-                                            "WHERE tblPlace.ID="+jComboBox2.getSelectedItem());
-        try {
-            while (rs.next()) {
-                jLabel9.setText(jLabel9.getText()+" "+rs.getString(2));
-                jLabel10.setText(jLabel10.getText()+" "+rs.getString(7));
-                jLabel14.setText(jLabel14.getText()+" "+rs.getString(8));
-                jLabel15.setText(jLabel15.getText()+" "+new Address(rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6)).toString());
-                jLabel12.setText(jLabel12.getText()+" "+rs.getString(9));
-                jLabel11.setText(jLabel11.getText()+" "+rs.getString(10));
-                jLabel13.setText(jLabel13.getText()+" "+rs.getString(11));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Place selectedPlace = csController.getPlace(jComboBox2.getSelectedItem().toString());
+        jLabel9.setText(jLabel9.getText()+" "+selectedPlace.getName());
+        jLabel10.setText(jLabel10.getText()+" "+selectedPlace.getEmail());
+        jLabel14.setText(jLabel14.getText()+" "+selectedPlace.getPhoneNumber());
+        jLabel15.setText(jLabel15.getText()+" "+selectedPlace.getAddress().toString());
+        jLabel12.setText(jLabel12.getText()+" "+selectedPlace.getLocation());
+        jLabel11.setText(jLabel11.getText()+" "+selectedPlace.getMaxCapacity());
+        jLabel13.setText(jLabel13.getText()+" "+selectedPlace.getRepresentativeID());
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -392,27 +344,7 @@ public class CreateShow extends javax.swing.JPanel {
         jPanel1.setVisible(true);
         jPanel1.setBounds(25, 305, 650, 260);
         Date selectedDate = new Date(jXDatePicker1.getDate().getDay(), jXDatePicker1.getDate().getMonth(), jXDatePicker1.getDate().getYear());
-        ResultSet rs2 = MainClass.getDB().query("SELECT tblPerformance.artistID\n" +
-                                            "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
-                                            "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");
-
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblAppreciation.appreciatedArtistID, tblArtist.*\n" +
-                                          "FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.ID = tblAppreciation.artistID\n" +
-                                          "WHERE (((tblArtist.ID)=[tblAppreciation_1].[appreciatedArtistID]) AND ((tblAppreciation.appreciatedArtistID)=\""+jComboBox1.getSelectedItem()+"\") AND ((tblArtist.active)=Yes))");
         
-        final HashMap<String,Artist> availableAdditionalArtists = new HashMap<>();
-        try {
-            while (rs1.next()) {
-                availableAdditionalArtists.put(rs1.getString(1), new Artist(rs1.getString(1), rs1.getString(2), 
-                                                                            rs1.getString(3), rs1.getString(4), 
-                                                                            rs1.getString(5), true, 
-                                                                            new Agent(rs1.getString(7))));
-            }
-            while (rs2.next()) {
-                if (availableAdditionalArtists.containsKey(rs2.getString(1))) {
-                    availableAdditionalArtists.remove(rs2.getString(1));
-                }
-            }
             DefaultTableModel model = new DefaultTableModel(); 
             jTable3.setModel(model);
             model.addColumn("Name"); 
@@ -420,10 +352,9 @@ public class CreateShow extends javax.swing.JPanel {
             TableColumn tc = jTable3.getColumnModel().getColumn(1);
             tc.setCellEditor(jTable3.getDefaultEditor(Boolean.class));
             tc.setCellRenderer(jTable3.getDefaultRenderer(Boolean.class));
-            for (Artist a : availableAdditionalArtists.values()) {
+            for (Artist a : csController.getAvailableAdditionalArtists(selectedDate, jComboBox1.getSelectedItem().toString())) {
                 model.addRow(new Object[]{a.getStageName(), false});
             }
-        
             jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
                 @Override
                 public void valueChanged(ListSelectionEvent e) {
@@ -432,25 +363,14 @@ public class CreateShow extends javax.swing.JPanel {
                         jLabel21.setText("Email:");
                         jLabel19.setText("Facebook:");
                         jLabel16.setText("Biography:");
-                        ResultSet rs4 = DBManager.query("SELECT tblArtist.*\n" +
-                                                        "FROM tblArtist " +
-                                                        "WHERE tblArtist.ID=\""+jTable3.getValueAt(jTable3.getSelectedRow(),0).toString()+"\"");
-                        try {
-                            while (rs4.next()) {
-                                 jLabel20.setText(jLabel20.getText()+" "+rs4.getString(7));
-                                 jLabel21.setText(jLabel21.getText()+" "+rs4.getString(4));
-                                 jLabel19.setText(jLabel19.getText()+" "+rs4.getString(5));
-                                 jLabel16.setText(jLabel16.getText()+" "+rs4.getString(3));
-                            }
-                        } catch (SQLException ex) {
-                            Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        Artist tmp = csController.getArtist(jTable3.getValueAt(jTable3.getSelectedRow(),0).toString());
+                        jLabel20.setText(jLabel20.getText()+" "+tmp.getAgent().getId());
+                        jLabel21.setText(jLabel21.getText()+" "+tmp.getEmail());
+                        jLabel19.setText(jLabel19.getText()+" "+tmp.getFacebook());
+                        jLabel16.setText(jLabel16.getText()+" "+tmp.getBiography());
                     }                
                 }
             });
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

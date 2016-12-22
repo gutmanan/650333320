@@ -8,14 +8,13 @@ public class Place {
 	private int id;
 	private String name;
 	private Address address;
-	private URL email;
+	private String email;
 	private String phoneNumber;
-	private URL location;
+	private String location;
 	private int maxCapacity;
-	private ArrayList<Show> shows;
+        private int representativeID;
 	
-	public Place(int id, String name, Address address, URL email, String phoneNumber, URL location, int maxCapacity,
-			ArrayList<Show> shows) {
+	public Place(int id, String name, Address address, String email, String phoneNumber, String location, int maxCapacity, int representativeID) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -24,8 +23,12 @@ public class Place {
 		this.phoneNumber = phoneNumber;
 		this.location = location;
 		this.maxCapacity = maxCapacity;
-		this.shows = shows;
+                this.representativeID = representativeID;
 	}
+
+        public int getRepresentativeID() {
+            return representativeID;
+        }
 
 	public int getId() {
 		return id;
@@ -51,11 +54,11 @@ public class Place {
 		this.address = address;
 	}
 
-	public URL getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(URL email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 
@@ -67,11 +70,11 @@ public class Place {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public URL getLocation() {
+	public String getLocation() {
 		return location;
 	}
 
-	public void setLocation(URL location) {
+	public void setLocation(String location) {
 		this.location = location;
 	}
 
@@ -82,14 +85,4 @@ public class Place {
 	public void setMaxCapacity(int maxCapacity) {
 		this.maxCapacity = maxCapacity;
 	}
-
-	public ArrayList<Show> getShows() {
-		return shows;
-	}
-
-	public void setShows(ArrayList<Show> shows) {
-		this.shows = shows;
-	}
-	
-
 }

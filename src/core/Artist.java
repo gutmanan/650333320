@@ -14,7 +14,7 @@ public class Artist {
 	private boolean active;
 	private Agent agent;
 
-	public Artist(String id, String stageName, String biography, String facebook, String email, boolean active, Agent agent) {
+	public Artist(String id, String stageName, String biography, String sfacebook, String email, boolean active, Agent agent) {
 		super();
 		this.id = id;
 		this.stageName = stageName;
