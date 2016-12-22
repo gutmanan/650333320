@@ -12,22 +12,29 @@ public class Show {
 	private int ticketPrice;
 	private int minAge;
 	private Artist mainArtist;
-	private ArrayList<Artist> Performing;
-	private ArrayList<User> audiance;
+        private Place place;
+        private Agent creatAgent;
 	
-	public Show(int id, Date date, E_STATUS isCanceled, Date createDate, int ticketPrice, int minAge, Artist mainArtist,
-			ArrayList<Artist> performing, ArrayList<User> audiance) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.isCanceled = isCanceled;
-		this.createDate = createDate;
-		this.ticketPrice = ticketPrice;
-		this.minAge = minAge;
-		this.mainArtist = mainArtist;
-		Performing = performing;
-		this.audiance = audiance;
+	public Show(int id, Artist mainArtist, Date date, Place place, E_STATUS isCanceled, Date createDate, int ticketPrice, int minAge, Agent creatAgent) {
+            super();
+            this.id = id;
+            this.date = date;
+            this.isCanceled = isCanceled;
+            this.createDate = createDate;
+            this.ticketPrice = ticketPrice;
+            this.minAge = minAge;
+            this.mainArtist = mainArtist;
+            this.place = place;
+            this.creatAgent = creatAgent;
 	}
+
+        public Place getPlace() {
+            return place;
+        }
+
+        public Agent getCreatAgent() {
+            return creatAgent;
+        }
 
 	public int getId() {
 		return id;
@@ -84,24 +91,4 @@ public class Show {
 	public void setMainArtist(Artist mainArtist) {
 		this.mainArtist = mainArtist;
 	}
-
-	public ArrayList<Artist> getPerforming() {
-		return Performing;
-	}
-
-	public void setPerforming(ArrayList<Artist> performing) {
-		Performing = performing;
-	}
-
-	public ArrayList<User> getAudiance() {
-		return audiance;
-	}
-
-	public void setAudiance(ArrayList<User> audiance) {
-		this.audiance = audiance;
-	}
-
-	
-	
-	
 }

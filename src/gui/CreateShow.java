@@ -322,13 +322,15 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel11.setText("Maximum capacity:");
         jLabel13.setText("Representative ID:");
         Place selectedPlace = csController.getPlace(jComboBox2.getSelectedItem().toString());
-        jLabel9.setText(jLabel9.getText()+" "+selectedPlace.getName());
-        jLabel10.setText(jLabel10.getText()+" "+selectedPlace.getEmail());
-        jLabel14.setText(jLabel14.getText()+" "+selectedPlace.getPhoneNumber());
-        jLabel15.setText(jLabel15.getText()+" "+selectedPlace.getAddress().toString());
-        jLabel12.setText(jLabel12.getText()+" "+selectedPlace.getLocation());
-        jLabel11.setText(jLabel11.getText()+" "+selectedPlace.getMaxCapacity());
-        jLabel13.setText(jLabel13.getText()+" "+selectedPlace.getRepresentativeID());
+        if (selectedPlace != null) {
+            jLabel9.setText(jLabel9.getText()+" "+selectedPlace.getName());
+            jLabel10.setText(jLabel10.getText()+" "+selectedPlace.getEmail());
+            jLabel14.setText(jLabel14.getText()+" "+selectedPlace.getPhoneNumber());
+            jLabel15.setText(jLabel15.getText()+" "+selectedPlace.getAddress().toString());
+            jLabel12.setText(jLabel12.getText()+" "+selectedPlace.getLocation());
+            jLabel11.setText(jLabel11.getText()+" "+selectedPlace.getMaxCapacity());
+            jLabel13.setText(jLabel13.getText()+" "+selectedPlace.getRepresentativeID());
+        }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -364,10 +366,12 @@ public class CreateShow extends javax.swing.JPanel {
                         jLabel19.setText("Facebook:");
                         jLabel16.setText("Biography:");
                         Artist tmp = csController.getArtist(jTable3.getValueAt(jTable3.getSelectedRow(),0).toString());
-                        jLabel20.setText(jLabel20.getText()+" "+tmp.getAgent().getId());
-                        jLabel21.setText(jLabel21.getText()+" "+tmp.getEmail());
-                        jLabel19.setText(jLabel19.getText()+" "+tmp.getFacebook());
-                        jLabel16.setText(jLabel16.getText()+" "+tmp.getBiography());
+                        if (tmp != null) {
+                            jLabel20.setText(jLabel20.getText()+" "+tmp.getAgent().getId());
+                            jLabel21.setText(jLabel21.getText()+" "+tmp.getEmail());
+                            jLabel19.setText(jLabel19.getText()+" "+tmp.getFacebook());
+                            jLabel16.setText(jLabel16.getText()+" "+tmp.getBiography());
+                        }
                     }                
                 }
             });

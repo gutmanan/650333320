@@ -10,18 +10,16 @@ public class OpenPlace extends Place{
 	private boolean withPlatform;
 	private boolean withAmplification;
 	private boolean withToilet;
-	
-	public OpenPlace(int id, String name, Address address, URL email, String phoneNumber, URL location, int maxCapacity,
-			ArrayList<Show> shows, E_COVERS cover, boolean withSeats, boolean withPlatform, boolean withAmplification,
-			boolean withToilet) {
-		super(id, name, address, email, phoneNumber, location, maxCapacity, shows);
-		this.cover = cover;
-		this.withSeats = withSeats;
-		this.withPlatform = withPlatform;
-		this.withAmplification = withAmplification;
-		this.withToilet = withToilet;
-	}
 
+        public OpenPlace(E_COVERS cover, boolean withSeats, boolean withPlatform, boolean withAmplification, boolean withToilet, int id, String name, Address address, String email, String phoneNumber, String location, int maxCapacity, int representativeID) {
+            super(id, name, address, email, phoneNumber, location, maxCapacity, representativeID);
+            this.cover = cover;
+            this.withSeats = withSeats;
+            this.withPlatform = withPlatform;
+            this.withAmplification = withAmplification;
+            this.withToilet = withToilet;
+        }
+	
 	public E_COVERS getCover() {
 		return cover;
 	}

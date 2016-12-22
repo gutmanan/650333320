@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 public abstract class WindowManager {
 
-    protected static int authLogged;
+    private static int authLogged;
     protected static Agent tmpAgent = null;
     protected static JLabel welcome = null;
 
@@ -33,7 +33,10 @@ public abstract class WindowManager {
         welcome.setForeground(new java.awt.Color(255, 255, 255));
         mainFrame.getContentPane().add(welcome, mainFrame.getContentPane().countComponents()-1);
         welcome.setBounds(440, 30, 500, 50);
-        welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
+        if (getTmpAgent()!= null)
+            welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
+        else if (getTmpAgent() == null)
+            welcome.setText("Welcome Muza Representative");
     }
     public static void closeMain() throws SQLException {
         mainFrame.dispose();
@@ -116,9 +119,9 @@ public abstract class WindowManager {
         if (AuthType <= 0) {
             return;
         }
-        if (user == null) {
+        /*if (user == null) {
             return;
-        }
+        }*/
         authLogged = AuthType;
         switch (AuthType) {
             case 1:

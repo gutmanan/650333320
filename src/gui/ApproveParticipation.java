@@ -6,11 +6,14 @@
 package gui;
 
 import core.Artist;
+import core.Show;
+import init.ApproveParticipationControl;
 import init.DBManager;
 import init.MainClass;
 import init.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
@@ -30,7 +33,6 @@ public class ApproveParticipation extends javax.swing.JPanel {
     public ApproveParticipation() {
         initComponents();
         setTable();
-        
     }
 
     /**
@@ -79,25 +81,25 @@ public class ApproveParticipation extends javax.swing.JPanel {
         jLabel22.setForeground(new java.awt.Color(0, 0, 0));
         jLabel22.setText("Date of creation:");
         add(jLabel22);
-        jLabel22.setBounds(50, 370, 230, 20);
+        jLabel22.setBounds(50, 370, 560, 20);
 
         jLabel23.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(0, 0, 0));
         jLabel23.setText("Tickect price:");
         add(jLabel23);
-        jLabel23.setBounds(50, 390, 230, 20);
+        jLabel23.setBounds(50, 390, 560, 20);
 
         jLabel24.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(0, 0, 0));
         jLabel24.setText("Minimum age:");
         add(jLabel24);
-        jLabel24.setBounds(50, 410, 230, 20);
+        jLabel24.setBounds(50, 410, 560, 20);
 
         jLabel17.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setText("Created by:");
         add(jLabel17);
-        jLabel17.setBounds(50, 430, 230, 20);
+        jLabel17.setBounds(50, 430, 560, 20);
 
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
@@ -109,25 +111,25 @@ public class ApproveParticipation extends javax.swing.JPanel {
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Main artist:");
         add(jLabel20);
-        jLabel20.setBounds(50, 290, 230, 20);
+        jLabel20.setBounds(50, 290, 560, 20);
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Date:");
         add(jLabel21);
-        jLabel21.setBounds(50, 310, 230, 20);
+        jLabel21.setBounds(50, 310, 560, 20);
 
         jLabel19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Place:");
         add(jLabel19);
-        jLabel19.setBounds(50, 330, 230, 20);
+        jLabel19.setBounds(50, 330, 560, 20);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Status:");
         add(jLabel16);
-        jLabel16.setBounds(50, 350, 230, 20);
+        jLabel16.setBounds(50, 350, 560, 20);
 
         jScrollPane3.setViewportView(jTable3);
 
@@ -146,9 +148,6 @@ public class ApproveParticipation extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     public void setTable() {
-        ResultSet rs = MainClass.getDB().query("SELECT tblPerformance.showID,  tblArtist.*\n" +
-                                        "FROM tblArtist INNER JOIN tblPerformance ON tblArtist.ID = tblPerformance.artistID\n" +
-                                        "WHERE (((tblPerformance.approvel)=\"Waiting\") AND ((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
         DefaultTableModel model = new DefaultTableModel(); 
         jTable3.setModel(model);
         model.addColumn("ID"); 
@@ -157,46 +156,36 @@ public class ApproveParticipation extends javax.swing.JPanel {
         TableColumn tc = jTable3.getColumnModel().getColumn(2);
         tc.setCellEditor(jTable3.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(jTable3.getDefaultRenderer(Boolean.class));
-        try {
-            while (rs.next()) {
-                model.addRow(new Object[]{rs.getString(2), rs.getString(1), false});
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(ApproveParticipation.class.getName()).log(Level.SEVERE, null, ex);
+        final ApproveParticipationControl apController = new ApproveParticipationControl();
+        for (Map.Entry<String, String> entry : apController.getArtistsWaitingForApproval().entrySet()) {
+            model.addRow(new Object[]{entry.getKey(), entry.getValue(), false});
         }
-    
-    jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-        @Override
-        public void valueChanged(ListSelectionEvent e) {
-            if (jTable3.getSelectedRow() > -1) {
-                jLabel20.setText("Main Artist:");
-                jLabel21.setText("Date:");
-                jLabel19.setText("Place:");
-                jLabel16.setText("Status:");
-                jLabel22.setText("Date of creation:");
-                jLabel23.setText("Ticket price:");
-                jLabel24.setText("Minimum age:");
-                jLabel17.setText("Created by:");
-                ResultSet rs4 = DBManager.query("SELECT tblShow.*\n" +
-                                                "FROM tblShow " +
-                                                "WHERE tblShow.ID=\""+jTable3.getValueAt(jTable3.getSelectedRow(),1).toString()+"\"");
-                try {
-                    while (rs4.next()) {
-                         jLabel20.setText(jLabel20.getText()+" "+rs4.getString(2));
-                         jLabel21.setText(jLabel21.getText()+" "+rs4.getString(3));
-                         jLabel19.setText(jLabel19.getText()+" "+rs4.getString(4));
-                         jLabel16.setText(jLabel16.getText()+" "+rs4.getString(5));
-                         jLabel22.setText(jLabel22.getText()+" "+rs4.getString(6));
-                         jLabel23.setText(jLabel23.getText()+" "+rs4.getString(7));
-                         jLabel24.setText(jLabel24.getText()+" "+rs4.getString(8));
-                         jLabel17.setText(jLabel17.getText()+" "+rs4.getString(9));
+        jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (jTable3.getSelectedRow() > -1) {
+                    jLabel20.setText("Main Artist:");
+                    jLabel21.setText("Date:");
+                    jLabel19.setText("Place:");
+                    jLabel16.setText("Status:");
+                    jLabel22.setText("Date of creation:");
+                    jLabel23.setText("Ticket price:");
+                    jLabel24.setText("Minimum age:");
+                    jLabel17.setText("Created by:");
+                    Show tmp = apController.getShow(jTable3.getValueAt(jTable3.getSelectedRow(),1).toString());
+                    if (tmp != null) {
+                        jLabel20.setText(jLabel20.getText()+" "+tmp.getMainArtist().getId());
+                        jLabel21.setText(jLabel21.getText()+" "+tmp.getDate());
+                        jLabel19.setText(jLabel19.getText()+" "+tmp.getPlace().getId());
+                        jLabel16.setText(jLabel16.getText()+" "+tmp.getIsCanceled());
+                        jLabel22.setText(jLabel22.getText()+" "+tmp.getCreateDate());
+                        jLabel23.setText(jLabel23.getText()+" "+tmp.getTicketPrice());
+                        jLabel24.setText(jLabel24.getText()+" "+tmp.getMinAge());
+                        jLabel17.setText(jLabel17.getText()+" "+tmp.getCreatAgent().getId());
                     }
-                } catch (SQLException ex) {
-                    Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }                
-        }
-    });
+                }                
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

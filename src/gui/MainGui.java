@@ -97,31 +97,40 @@ public class MainGui extends JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(1070, 610, 130, 40);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn0.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3.png"))); // NOI18N
         jButton3.setBorderPainted(false);
         jButton3.setContentAreaFilled(false);
+        jButton3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3dis.png"))); // NOI18N
+        if(WindowManager.getAuthValue()==1)
+        jButton3.setEnabled(false);
         getContentPane().add(jButton3);
         jButton3.setBounds(35, 344, 225, 50);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn2.png"))); // NOI18N
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
+        jButton2.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn2dis.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        if(WindowManager.getAuthValue()!=1)
+        jButton2.setEnabled(false);
         getContentPane().add(jButton2);
         jButton2.setBounds(35, 302, 225, 50);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1.png"))); // NOI18N
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
+        jButton1.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1dis.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        if(WindowManager.getAuthValue()!=1)
+        jButton1.setEnabled(false);
         getContentPane().add(jButton1);
         jButton1.setBounds(35, 260, 225, 50);
 

@@ -25,6 +25,10 @@ public class Place {
 		this.maxCapacity = maxCapacity;
                 this.representativeID = representativeID;
 	}
+        
+        public Place(int id) {
+            this.id = id;
+        }
 
         public int getRepresentativeID() {
             return representativeID;
