@@ -61,7 +61,10 @@ public class MainGui extends JFrame {
         getContentPane().add(jButton7);
         jButton7.setBounds(190, 610, 80, 65);
 
+        if (WindowManager.getAuthValue() == 1)
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/agentBtn.png"))); // NOI18N
+        if (WindowManager.getAuthValue() == 2)
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/repBtn.png"))); // NOI18N
         jButton6.setBorder(null);
         jButton6.setBorderPainted(false);
         jButton6.setContentAreaFilled(false);
@@ -103,6 +106,11 @@ public class MainGui extends JFrame {
         jButton3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3dis.png"))); // NOI18N
         if(WindowManager.getAuthValue()==1)
         jButton3.setEnabled(false);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton3);
         jButton3.setBounds(35, 344, 225, 50);
 
@@ -170,6 +178,10 @@ public class MainGui extends JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         WindowManager.openWin(new ApproveParticipation());
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        WindowManager.openWin(new ReportProduce());
+    }//GEN-LAST:event_jButton3ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

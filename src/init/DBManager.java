@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,4 +45,16 @@ public class DBManager {
         }
       return rs;
     }
+    /*
+    public static void insert() {
+        try {          
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("INSERT tblAgent" + "(ID, firstName, lastName, phoneNumber, email)"
+                                 + "VALUES(" + "jj66" + ", '" + "two" + "', " + "three" + "0526548732" + "fds@gmail.com" + ")");
+            stmt.close();
+         }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }*/
 }
