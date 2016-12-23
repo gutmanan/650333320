@@ -103,7 +103,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
 
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel18.setText("Selected artist info:");
+        jLabel18.setText("Selected show info:");
         add(jLabel18);
         jLabel18.setBounds(50, 260, 190, 20);
 
