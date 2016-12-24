@@ -5,15 +5,16 @@
  */
 package gui;
 
+import init.ReportProduceControl;
+
 /**
  *
  * @author Shai Gutman
  */
 public class ReportProduce extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ReportProduce
-     */
+    ReportProduceControl rpController = new ReportProduceControl();
+    
     public ReportProduce() {
         initComponents();
     }
@@ -66,6 +67,14 @@ public class ReportProduce extends javax.swing.JPanel {
         jButton1.setBounds(440, 70, 140, 24);
 
         jComboBox1.addItem("Select year");
+        for(int i = 2010; i < 2018; i++) {
+            jComboBox1.addItem(String.valueOf(i));
+        }
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
         add(jComboBox1);
         jComboBox1.setBounds(200, 70, 140, 24);
 
@@ -85,6 +94,10 @@ public class ReportProduce extends javax.swing.JPanel {
         add(jLabel1);
         jLabel1.setBounds(0, 0, 780, 580);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        rpController.getPresaleAmonutPerShow(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

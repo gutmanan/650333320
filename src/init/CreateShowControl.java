@@ -6,6 +6,8 @@ import core.Agent;
 import core.Artist;
 import core.Place;
 import gui.CreateShow;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -78,7 +80,7 @@ public class CreateShowControl {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        }
         return tmp;
     }
     public Collection<Artist> getAvailableAdditionalArtists(Date selectedDate, String mainArtistID) {
