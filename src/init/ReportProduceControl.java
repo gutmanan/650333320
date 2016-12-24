@@ -20,7 +20,7 @@ public class ReportProduceControl {
     public ReportProduceControl() {
     }
     
-    public void /*HashMap<Show, Integer>*/ getPresaleAmonutPerShow(int year) {
+    public HashMap<String, Integer> getPresaleAmonutPerShow(int year) {
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
         ResultSet rs1 = MainClass.getDB().query("SELECT tblShow.*\n" +
@@ -47,13 +47,42 @@ public class ReportProduceControl {
                     presaleAmonutPerShow.put(rs3.getString(1), presaleAmonutPerShow.get(rs3.getString(1))+rs3.getInt(2));
                 }
             }
-            for (Map.Entry<String, Integer> entry : presaleAmonutPerShow.entrySet()) {
-                String key = entry.getKey();
-                Integer value = entry.getValue();
-                System.out.println(key+" "+value);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return presaleAmonutPerShow;
+    }
+    public HashMap<String, Integer> getRegularAmonutPerShow(int year) {
+        Date yearStart = new Date(year-1900, 0, 1);
+        Date yearEnd = new Date(year-1900, 11, 31);
+        ResultSet rs1 = MainClass.getDB().query("SELECT tblShow.*\n" +
+                                                "FROM tblShow\n" +
+                                                "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
+        ResultSet rs2 = MainClass.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
+                                                "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.ID = tblTicketOrder.showID\n" +
+                                                "WHERE ((DateDiff(\"d\",[purchaseDate],[date])<=14))");
+        ResultSet rs3 = MainClass.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
+                                                "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.ID = tblTicketOrder.showID\n" +
+                                                "WHERE ((DateDiff(\"d\",[createDate],[date])<=21))");
+        
+        HashMap<String,Integer> regularAmonutPerShow = new HashMap<>();
+        try {
+            while (rs1.next()) {            
+                regularAmonutPerShow.put(rs1.getString(1),0);
+            }
+            while (rs2.next()) {            
+                if (regularAmonutPerShow.containsKey(rs2.getString(1))) {
+                    regularAmonutPerShow.put(rs2.getString(1), rs2.getInt(2));
+                }
+            }
+            while (rs3.next()) {            
+                if (regularAmonutPerShow.containsKey(rs3.getString(1))) {
+                    regularAmonutPerShow.put(rs3.getString(1), regularAmonutPerShow.get(rs3.getString(1))+rs3.getInt(2));
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return regularAmonutPerShow;
     }
 }

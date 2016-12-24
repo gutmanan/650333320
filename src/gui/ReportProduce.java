@@ -97,6 +97,7 @@ public class ReportProduce extends javax.swing.JPanel {
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
         rpController.getPresaleAmonutPerShow(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
+        rpController.getRegularAmonutPerShow(Integer.parseInt(jComboBox1.getSelectedItem().toString()));
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
 
