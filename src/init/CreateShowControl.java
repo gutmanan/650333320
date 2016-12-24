@@ -21,6 +21,7 @@ public class CreateShowControl {
 
     public CreateShowControl() {
     }
+    
     public Set<String> getAvailableMainArtistForDate(Date selectedDate) {
         ResultSet rs1 = MainClass.getDB().query("SELECT tblArtist.*\n" +
                                             "FROM tblAgent INNER JOIN tblArtist ON tblAgent.ID = tblArtist.agentID\n" +
@@ -43,7 +44,6 @@ public class CreateShowControl {
         }
         return availableMainArtist.keySet();
     }
-    
     public Set<String> getAvailablePlacesForDate(Date selectedDate) {
         ResultSet rs3 = MainClass.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
                                             "FROM tblPlace INNER JOIN tblFavoritePlace ON tblPlace.ID = tblFavoritePlace.placeID\n" +
