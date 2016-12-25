@@ -172,7 +172,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
                     jLabel23.setText("Ticket price:");
                     jLabel24.setText("Minimum age:");
                     jLabel17.setText("Created by:");
-                    Show tmp = apController.getShow(jTable3.getValueAt(jTable3.getSelectedRow(),1).toString());
+                    Show tmp = apController.getShowDetails(jTable3.getValueAt(jTable3.getSelectedRow(),1).toString());
                     if (tmp != null) {
                         jLabel20.setText(jLabel20.getText()+" "+tmp.getMainArtist().getId());
                         jLabel21.setText(jLabel21.getText()+" "+tmp.getDate());

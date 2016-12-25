@@ -321,7 +321,7 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel12.setText("Location:");
         jLabel11.setText("Maximum capacity:");
         jLabel13.setText("Representative ID:");
-        Place selectedPlace = csController.getPlace(jComboBox2.getSelectedItem().toString());
+        Place selectedPlace = csController.getPlaceDetails(jComboBox2.getSelectedItem().toString());
         if (selectedPlace != null) {
             jLabel9.setText(jLabel9.getText()+" "+selectedPlace.getName());
             jLabel10.setText(jLabel10.getText()+" "+selectedPlace.getEmail());
@@ -365,7 +365,7 @@ public class CreateShow extends javax.swing.JPanel {
                         jLabel21.setText("Email:");
                         jLabel19.setText("Facebook:");
                         jLabel16.setText("Biography:");
-                        Artist tmp = csController.getArtist(jTable3.getValueAt(jTable3.getSelectedRow(),0).toString());
+                        Artist tmp = csController.getArtistDetails(jTable3.getValueAt(jTable3.getSelectedRow(),0).toString());
                         if (tmp != null) {
                             jLabel20.setText(jLabel20.getText()+" "+tmp.getAgent().getId());
                             jLabel21.setText(jLabel21.getText()+" "+tmp.getEmail());

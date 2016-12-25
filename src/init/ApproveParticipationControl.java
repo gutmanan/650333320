@@ -38,7 +38,7 @@ public class ApproveParticipationControl {
         }
         return artistsWaitingForApproval;
     }
-    public Show getShow(String showID) {
+    public Show getShowDetails(String showID) {
         Show tmp = null;
         ResultSet rs4 = DBManager.query("SELECT tblShow.*\n" +
                                         "FROM tblShow " +

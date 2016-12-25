@@ -68,7 +68,7 @@ public class CreateShowControl {
         }
         return availableShows.keySet();
     }
-    public Place getPlace(String placeID) {
+    public Place getPlaceDetails(String placeID) {
         Place tmp = null;
         ResultSet rs = MainClass.getDB().query("SELECT tblPlace.*\n" +
                                                 "FROM tblPlace\n" +
@@ -109,7 +109,7 @@ public class CreateShowControl {
         }
         return availableAdditionalArtists.values();
     }
-    public Artist getArtist(String artistID) {
+    public Artist getArtistDetails(String artistID) {
         Artist tmp = null;
         ResultSet rs4 = DBManager.query("SELECT tblArtist.*\n" +
                                         "FROM tblArtist " +
