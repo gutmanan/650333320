@@ -20,8 +20,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.AbstractListModel;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
+import static javax.swing.JComponent.TOOL_TIP_TEXT_KEY;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
@@ -178,12 +180,12 @@ public class ReportProduce extends javax.swing.JPanel {
             public void valueChanged(ListSelectionEvent e) {
                 if (jTable1.getSelectedRow() > -1) {
                     final Show tmp = rpController.getShow(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString()));
-                    AbstractListModel alm = new javax.swing.AbstractListModel<String>() {
-                        String[] strings = {tmp.getMainArtist().getId()};
-                        public int getSize() { return strings.length; }
-                        public String getElementAt(int i) { return strings[i]; }
-                    };
-                    jList1.setModel(alm);
+                    DefaultListModel<String> dlm = new DefaultListModel<String>();
+                    dlm.addElement(tmp.getMainArtist().getId());
+                    for (String s : rpController.getParticipatedArtists(tmp.getId())) {
+                        dlm.addElement(s);
+                    }
+                    jList1.setModel(dlm);
                 }      
             }
         });

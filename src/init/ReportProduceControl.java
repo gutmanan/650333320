@@ -174,7 +174,18 @@ public class ReportProduceControl {
 		}
 		return sortedCrunchifyMap;
 	}
-    /*public String[] getParticipatedArtists() {
-        
-    }*/
+    public ArrayList<String> getParticipatedArtists(int showID) {
+        ResultSet rs = MainClass.getDB().query("SELECT tblArtist.ID\n" +
+                                                "FROM tblArtist INNER JOIN tblPerformance ON tblArtist.ID = tblPerformance.artistID\n" +
+                                                "WHERE (((tblPerformance.showID)="+showID+"))");
+        ArrayList<String> artists = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                artists.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReportProduceControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return artists;
+    }
 }
