@@ -111,6 +111,10 @@ public abstract class WindowManager {
         return toReturn;
     }
 
+    public static JFrame getMainFrame() {
+        return mainFrame;
+    }
+
     public static int getAuthValue() {
         return authLogged;
     }

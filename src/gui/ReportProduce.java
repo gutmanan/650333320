@@ -5,31 +5,55 @@
  */
 package gui;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.ListItem;
+import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileOutputStream;
 import core.Show;
 import init.ApproveParticipationControl;
 import init.ReportProduceControl;
+import init.WindowManager;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Paint;
 import java.awt.Rectangle;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import static javax.swing.JComponent.TOOL_TIP_TEXT_KEY;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -63,6 +87,7 @@ public class ReportProduce extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel18 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -85,6 +110,15 @@ public class ReportProduce extends javax.swing.JPanel {
         add(jLabel18);
         jLabel18.setBounds(50, 350, 360, 20);
 
+        jButton2.setText("Printable document");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(530, 70, 180, 24);
+
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -104,7 +138,7 @@ public class ReportProduce extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(440, 70, 140, 24);
+        jButton1.setBounds(380, 70, 140, 24);
 
         jComboBox1.addItem("Select year");
         for(int i = 2010; i < 2018; i++) {
@@ -140,11 +174,75 @@ public class ReportProduce extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jComboBox1.getSelectedIndex()==0) {
+            return;
+        }
         setTable();
         jComboBox1.setEnabled(false);
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private Element setTable(int colCount, int rowCount, String[] titles, TableModel tblModel) {
+        if (colCount == 0 || rowCount == 0 || titles == null || tblModel == null) {
+            return null;
+        }
+        PdfPTable table = new PdfPTable(colCount);
+        for (String s : titles) {
+            table.addCell(s);
+        }
+        String artists = null;
+        PdfPCell cell = null;
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < colCount; j++) {
+                table.addCell(tblModel.getValueAt(i, j).toString());
+            }
+            ArrayList<String> rs = rpController.getParticipatedArtists(Integer.valueOf(tblModel.getValueAt(i, 0).toString()));
+            artists = "Participated artists: "+rpController.getShow(Integer.valueOf(tblModel.getValueAt(i, 0).toString())).getMainArtist().getId();
+            for (String r : rs) {
+                artists += ", "+r;
+            }
+            cell = new PdfPCell(new Phrase(artists));
+            cell.setColspan(colCount);
+            table.addCell(cell);
+        }
+        return table;
+    }
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        try {
+            try {
+                Document doc = new Document(PageSize.A4);
+                PdfWriter.getInstance(doc, new FileOutputStream("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report.pdf"));
+                doc.open();
+                Paragraph p1 = new Paragraph();
+                p1.add("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
+                String[] titles = new String[]{"Show ID","Created By","Presale sales","Regular sales","Total income","Total cost","Profit"};
+                Element table = setTable(jTable1.getColumnCount(),jTable1.getRowCount(),titles,jTable1.getModel());
+                p1.add(table);
+                doc.add(p1);
+                doc.close();
+                File pdfFile = new File("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report.pdf");
+                if (pdfFile.exists()) {
+                    if (Desktop.isDesktopSupported()) {
+                            Desktop.getDesktop().open(pdfFile);
+                    } else {
+                            JOptionPane.showMessageDialog(WindowManager.getMainFrame(), "Awt Desktop is not supported :(",
+                                            "File error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                        JOptionPane.showMessageDialog(WindowManager.getMainFrame(), "File not found :(",
+                                            "File error", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (DocumentException ex) {
+            Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+    
     public void setTable() {
         int year = Integer.parseInt(jComboBox1.getSelectedItem().toString());
         DefaultTableModel model = new DefaultTableModel(); 
@@ -225,6 +323,7 @@ public class ReportProduce extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel18;
