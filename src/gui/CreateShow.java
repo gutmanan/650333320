@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JRadioButton;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -95,6 +97,7 @@ public class CreateShow extends javax.swing.JPanel {
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jSpinner2 = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -105,7 +108,6 @@ public class CreateShow extends javax.swing.JPanel {
         jPanel1.setVisible(false);
 
         jLabel16.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Biography:");
         jPanel1.add(jLabel16);
         jLabel16.setBounds(310, 120, 230, 20);
@@ -116,25 +118,21 @@ public class CreateShow extends javax.swing.JPanel {
         jScrollPane3.setBounds(20, 20, 270, 220);
 
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Selected artist info:");
         jPanel1.add(jLabel18);
         jLabel18.setBounds(310, 30, 190, 20);
 
         jLabel19.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setText("Facebook:");
         jPanel1.add(jLabel19);
         jLabel19.setBounds(310, 100, 230, 20);
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Agent:");
         jPanel1.add(jLabel20);
         jLabel20.setBounds(310, 60, 230, 20);
 
         jLabel21.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Email:");
         jPanel1.add(jLabel21);
         jLabel21.setBounds(310, 80, 230, 20);
@@ -162,49 +160,49 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Address:");
         add(jLabel15);
-        jLabel15.setBounds(420, 130, 340, 20);
+        jLabel15.setBounds(500, 130, 240, 20);
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Phone number:");
         add(jLabel14);
-        jLabel14.setBounds(420, 110, 340, 20);
+        jLabel14.setBounds(500, 110, 240, 20);
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Representative ID:");
         add(jLabel13);
-        jLabel13.setBounds(420, 190, 340, 20);
+        jLabel13.setBounds(500, 190, 240, 20);
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Maximum capacity:");
         add(jLabel11);
-        jLabel11.setBounds(420, 170, 340, 20);
+        jLabel11.setBounds(500, 170, 240, 20);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Loacation:");
         add(jLabel12);
-        jLabel12.setBounds(420, 150, 340, 20);
+        jLabel12.setBounds(500, 150, 240, 20);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Email:");
         add(jLabel10);
-        jLabel10.setBounds(420, 90, 340, 20);
+        jLabel10.setBounds(500, 90, 240, 20);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Name:");
         add(jLabel9);
-        jLabel9.setBounds(420, 70, 340, 20);
+        jLabel9.setBounds(500, 70, 240, 20);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Selected place info:");
         add(jLabel8);
-        jLabel8.setBounds(420, 40, 170, 20);
+        jLabel8.setBounds(500, 50, 170, 20);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -243,7 +241,7 @@ public class CreateShow extends javax.swing.JPanel {
             }
         });
         add(jComboBox2);
-        jComboBox2.setBounds(250, 130, 140, 25);
+        jComboBox2.setBounds(250, 130, 140, 20);
 
         jComboBox1.addItem("Select Artist");
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -252,7 +250,7 @@ public class CreateShow extends javax.swing.JPanel {
             }
         });
         add(jComboBox1);
-        jComboBox1.setBounds(250, 100, 140, 25);
+        jComboBox1.setBounds(250, 100, 140, 20);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -272,7 +270,7 @@ public class CreateShow extends javax.swing.JPanel {
             }
         });
         add(jXDatePicker1);
-        jXDatePicker1.setBounds(250, 70, 140, 24);
+        jXDatePicker1.setBounds(250, 70, 140, 22);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -285,6 +283,11 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel2.setText("Choose show's date:");
         add(jLabel2);
         jLabel2.setBounds(60, 70, 150, 20);
+
+        jSpinner2.setModel(new SpinnerDateModel());
+        jSpinner2.setEditor(new JSpinner.DateEditor(jSpinner2, "HH:mm"));
+        add(jSpinner2);
+        jSpinner2.setBounds(410, 70, 60, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container1.png"))); // NOI18N
         add(jLabel1);
@@ -405,6 +408,7 @@ public class CreateShow extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSpinner jSpinner2;
     private javax.swing.JTable jTable3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField3;
