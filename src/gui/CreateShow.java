@@ -160,49 +160,49 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Address:");
         add(jLabel15);
-        jLabel15.setBounds(500, 130, 240, 20);
+        jLabel15.setBounds(450, 130, 310, 20);
 
         jLabel14.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Phone number:");
         add(jLabel14);
-        jLabel14.setBounds(500, 110, 240, 20);
+        jLabel14.setBounds(450, 110, 310, 20);
 
         jLabel13.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Representative ID:");
         add(jLabel13);
-        jLabel13.setBounds(500, 190, 240, 20);
+        jLabel13.setBounds(450, 190, 310, 20);
 
         jLabel11.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Maximum capacity:");
         add(jLabel11);
-        jLabel11.setBounds(500, 170, 240, 20);
+        jLabel11.setBounds(450, 170, 310, 20);
 
         jLabel12.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Loacation:");
         add(jLabel12);
-        jLabel12.setBounds(500, 150, 240, 20);
+        jLabel12.setBounds(450, 150, 310, 20);
 
         jLabel10.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Email:");
         add(jLabel10);
-        jLabel10.setBounds(500, 90, 240, 20);
+        jLabel10.setBounds(450, 90, 310, 20);
 
         jLabel9.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Name:");
         add(jLabel9);
-        jLabel9.setBounds(500, 70, 240, 20);
+        jLabel9.setBounds(450, 70, 310, 20);
 
         jLabel8.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Selected place info:");
         add(jLabel8);
-        jLabel8.setBounds(500, 50, 170, 20);
+        jLabel8.setBounds(450, 50, 170, 20);
 
         jLabel6.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -241,7 +241,7 @@ public class CreateShow extends javax.swing.JPanel {
             }
         });
         add(jComboBox2);
-        jComboBox2.setBounds(250, 130, 140, 20);
+        jComboBox2.setBounds(250, 130, 140, 25);
 
         jComboBox1.addItem("Select Artist");
         jComboBox1.addItemListener(new java.awt.event.ItemListener() {
@@ -250,7 +250,7 @@ public class CreateShow extends javax.swing.JPanel {
             }
         });
         add(jComboBox1);
-        jComboBox1.setBounds(250, 100, 140, 20);
+        jComboBox1.setBounds(250, 100, 140, 25);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -270,7 +270,7 @@ public class CreateShow extends javax.swing.JPanel {
             }
         });
         add(jXDatePicker1);
-        jXDatePicker1.setBounds(250, 70, 140, 22);
+        jXDatePicker1.setBounds(250, 70, 110, 24);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -287,7 +287,7 @@ public class CreateShow extends javax.swing.JPanel {
         jSpinner2.setModel(new SpinnerDateModel());
         jSpinner2.setEditor(new JSpinner.DateEditor(jSpinner2, "HH:mm"));
         add(jSpinner2);
-        jSpinner2.setBounds(410, 70, 60, 20);
+        jSpinner2.setBounds(370, 70, 60, 24);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container1.png"))); // NOI18N
         add(jLabel1);

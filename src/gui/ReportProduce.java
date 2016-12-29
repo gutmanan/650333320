@@ -8,51 +8,33 @@ package gui;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
-import com.itextpdf.text.ListItem;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Phrase;
-import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import core.Show;
-import init.ApproveParticipationControl;
+import init.MainClass;
+import init.PDFManager;
 import init.ReportProduceControl;
 import init.WindowManager;
-import java.awt.Color;
 import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Paint;
-import java.awt.Rectangle;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import static javax.swing.JComponent.TOOL_TIP_TEXT_KEY;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.ListModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -182,67 +164,34 @@ public class ReportProduce extends javax.swing.JPanel {
         jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private Element setTable(int colCount, int rowCount, String[] titles, TableModel tblModel) {
-        if (colCount == 0 || rowCount == 0 || titles == null || tblModel == null) {
-            return null;
-        }
-        PdfPTable table = new PdfPTable(colCount);
-        for (String s : titles) {
-            table.addCell(s);
-        }
-        String artists = null;
-        PdfPCell cell = null;
-        for (int i = 0; i < rowCount; i++) {
-            for (int j = 0; j < colCount; j++) {
-                table.addCell(tblModel.getValueAt(i, j).toString());
-            }
-            ArrayList<String> rs = rpController.getParticipatedArtists(Integer.valueOf(tblModel.getValueAt(i, 0).toString()));
-            artists = "Participated artists: "+rpController.getShow(Integer.valueOf(tblModel.getValueAt(i, 0).toString())).getMainArtist().getId();
-            for (String r : rs) {
-                artists += ", "+r;
-            }
-            cell = new PdfPCell(new Phrase(artists));
-            cell.setColspan(colCount);
-            table.addCell(cell);
-        }
-        return table;
-    }
-    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        MainClass.getPDF().createPDF(1, "Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
+        PDFManager.PDFFile pdf1 = MainClass.getPDF().getPDFFile(1);
         try {
-            try {
-                Document doc = new Document(PageSize.A4);
-                PdfWriter.getInstance(doc, new FileOutputStream("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report.pdf"));
-                doc.open();
-                Paragraph p1 = new Paragraph();
-                p1.add("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
-                String[] titles = new String[]{"Show ID","Created By","Presale sales","Regular sales","Total income","Total cost","Profit"};
-                Element table = setTable(jTable1.getColumnCount(),jTable1.getRowCount(),titles,jTable1.getModel());
-                p1.add(table);
-                doc.add(p1);
-                doc.close();
-                File pdfFile = new File("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report.pdf");
-                if (pdfFile.exists()) {
-                    if (Desktop.isDesktopSupported()) {
-                            Desktop.getDesktop().open(pdfFile);
-                    } else {
-                            JOptionPane.showMessageDialog(WindowManager.getMainFrame(), "Awt Desktop is not supported :(",
-                                            "File error", JOptionPane.ERROR_MESSAGE);
-                    }
-                } else {
-                        JOptionPane.showMessageDialog(WindowManager.getMainFrame(), "File not found :(",
-                                            "File error", JOptionPane.ERROR_MESSAGE);
+            pdf1.addTitlePage("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
+            String[] titles = new String[]{"Show ID","Created By","Presale sales","Regular sales","Total income","Total cost","Profit"};
+            ArrayList<String> row = new ArrayList();
+            ArrayList<String> artists = new ArrayList<>();
+            for (int i = 0; i < jTable1.getRowCount(); i++) {
+                row.clear();
+                artists.clear();
+                for (int j = 0; j < jTable1.getColumnCount(); j++) {
+                    row.add(jTable1.getModel().getValueAt(i, j).toString());
                 }
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
+                pdf1.addTable(jTable1.getColumnCount(),1, titles, row.toArray(new String[row.size()]));
+                ArrayList<String> rs = rpController.getParticipatedArtists(Integer.valueOf(jTable1.getModel().getValueAt(i, 0).toString()));
+                artists.add(rpController.getShow(Integer.valueOf(jTable1.getModel().getValueAt(i, 0).toString())).getMainArtist().getId());
+                for (String r : rs) {
+                    artists.add(r);
+                }
+                pdf1.addList("Participated Artists:",artists);
             }
         } catch (DocumentException ex) {
             Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
         }
+        MainClass.getPDF().getPDFFile(1).launchPDF();
     }//GEN-LAST:event_jButton2ActionPerformed
-    
+        
     public void setTable() {
         int year = Integer.parseInt(jComboBox1.getSelectedItem().toString());
         DefaultTableModel model = new DefaultTableModel(); 
@@ -254,7 +203,7 @@ public class ReportProduce extends javax.swing.JPanel {
         model.addColumn("Total income");
         model.addColumn("Total cost");
         model.addColumn("Profit");
-
+        
         for (Map.Entry<Integer, Double> entry : rpController.getProfitableShows(year).entrySet()) {
             Integer key = entry.getKey();
             Double value = entry.getValue();
