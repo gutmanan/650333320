@@ -6,6 +6,7 @@
 package init;
 
 import core.Agent;
+import java.io.File;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,12 +26,22 @@ import net.ucanaccess.jdbc.UcanaccessDriver;
 public class DBManager {
 
     private static Connection conn = null;
-   
+    private static String dbFile;
+    
     public DBManager(){
         try {
-            conn = DriverManager.getConnection("jdbc:ucanaccess://src/init/MuzaDataBase.accdb;COLUMNORDER=DISPLAY");
+            System.out.println("Trying to load DB...");
+            dbFile = (new File("sources/MuzaDataBase.accdb")).getAbsolutePath();
+            conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
+            System.out.println("DB was loaded!");
         } catch (SQLException ex) {
-            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            try{
+                dbFile = (new File("src/sources/MuzaDataBase.accdb")).getAbsolutePath();
+                conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
+            } catch (SQLException ex1) {
+                System.out.println("Error loading DB!");
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
     }
     
