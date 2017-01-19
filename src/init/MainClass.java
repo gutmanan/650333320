@@ -14,6 +14,7 @@ public class MainClass {
 
     private static DBManager DB = null;
     private static PDFManager PDF = null;
+    private static XMLManager XML = null;
     private static String fileName = "MuzaMusic";
     private static PrintStream logFile;
     public static void main(String[] args) {
@@ -27,7 +28,15 @@ public class MainClass {
             
             DB = new DBManager();
             PDF = new PDFManager();
+            XML = new XMLManager();
             
+            XML.write(getDB().query("SELECT tblShow.mainArtist, tblShow.date\n"
+                                  + "FROM tblShow\n"
+                                  + "WHERE ((Not (tblShow.status)=\"Canceled\"));"));
+            XML.write(getDB().query("SELECT tblPerformance.artistID, tblShow.date\n"
+                                  + "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n"
+                                  + "WHERE ((Not (tblShow.status)=\"Canceled\"))"));
+            XML.export("MuzaMusic_Shows");
             MainLogin loginFrame = new MainLogin();  
             
         } catch (SQLException e) {
