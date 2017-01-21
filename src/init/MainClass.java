@@ -29,7 +29,7 @@ public class MainClass {
             DB = new DBManager();
             PDF = new PDFManager();
             XML = new XMLManager();
-            
+            XML.create("MuzaMusic_Shows");
             XML.write(getDB().query("SELECT tblShow.mainArtist, tblShow.date\n"
                                   + "FROM tblShow\n"
                                   + "WHERE ((Not (tblShow.status)=\"Canceled\"));"));

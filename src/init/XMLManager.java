@@ -17,17 +17,19 @@ public class XMLManager {
     private static Element rootElement = null;
         
     public XMLManager() {
+        
+    }
+    public void create(String title) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             doc = dBuilder.newDocument();
-            rootElement = doc.createElement("MuzaMusic_Shows");
+            rootElement = doc.createElement(title);
             doc.appendChild(rootElement);
-        } catch (NullPointerException | ParserConfigurationException e) {
-            e.printStackTrace();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     public void write(ResultSet rs) {
         try {
             while (rs.next()) {
