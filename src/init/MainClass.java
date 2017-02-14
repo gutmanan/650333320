@@ -29,7 +29,7 @@ public class MainClass {
             DB = new DBManager();
             PDF = new PDFManager();
             XML = new XMLManager();
-            XML.create("MuzaMusic_Shows");
+            /*XML.create("MuzaMusic_Shows");
             XML.write(getDB().query("SELECT tblShow.mainArtist, tblShow.date\n"
                                   + "FROM tblShow\n"
                                   + "WHERE ((Not (tblShow.status)=\"Canceled\"));"));
@@ -37,7 +37,8 @@ public class MainClass {
                                   + "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n"
                                   + "WHERE ((Not (tblShow.status)=\"Canceled\"))"));
             XML.export("MuzaMusic_Shows");
-            MainLogin loginFrame = new MainLogin();  
+        */    
+        MainLogin loginFrame = new MainLogin();  
             
         } catch (SQLException e) {
             e.printStackTrace();
