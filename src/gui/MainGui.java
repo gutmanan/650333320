@@ -35,163 +35,196 @@ public class MainGui extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton7 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        backBtn = new javax.swing.JButton();
+        adminBtn = new javax.swing.JButton();
+        logoutBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
+        reportProduceBtn = new javax.swing.JButton();
+        parametersBtn = new javax.swing.JButton();
+        createAgentBtn = new javax.swing.JButton();
+        viewAgentBtn = new javax.swing.JButton();
+        agentBtn = new javax.swing.JButton();
+        wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 725));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/arrowBtn.png"))); // NOI18N
-        jButton7.setBorder(null);
-        jButton7.setBorderPainted(false);
-        jButton7.setContentAreaFilled(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        backBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/arrowBtn.png"))); // NOI18N
+        backBtn.setBorder(null);
+        backBtn.setBorderPainted(false);
+        backBtn.setContentAreaFilled(false);
+        backBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                backBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton7);
-        jButton7.setBounds(190, 610, 80, 65);
+        getContentPane().add(backBtn);
+        backBtn.setBounds(190, 610, 80, 65);
 
         if (WindowManager.getAuthValue() == 1)
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/agentBtn.png"))); // NOI18N
-        if (WindowManager.getAuthValue() == 2)
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/repBtn.png"))); // NOI18N
-        jButton6.setBorder(null);
-        jButton6.setBorderPainted(false);
-        jButton6.setContentAreaFilled(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        adminBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/agentBtn.png"))); // NOI18N
+        if (WindowManager.getAuthValue() == 0)
+        adminBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/repBtn.png"))); // NOI18N
+        adminBtn.setBorder(null);
+        adminBtn.setBorderPainted(false);
+        adminBtn.setContentAreaFilled(false);
+        adminBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                adminBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton6);
-        jButton6.setBounds(1070, 520, 130, 40);
+        getContentPane().add(adminBtn);
+        adminBtn.setBounds(1070, 520, 130, 40);
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logoutBtn.png"))); // NOI18N
-        jButton5.setBorder(null);
-        jButton5.setBorderPainted(false);
-        jButton5.setContentAreaFilled(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        logoutBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/logoutBtn.png"))); // NOI18N
+        logoutBtn.setBorder(null);
+        logoutBtn.setBorderPainted(false);
+        logoutBtn.setContentAreaFilled(false);
+        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                logoutBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5);
-        jButton5.setBounds(1070, 565, 130, 40);
+        getContentPane().add(logoutBtn);
+        logoutBtn.setBounds(1070, 565, 130, 40);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/exitBtn.png"))); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        exitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/exitBtn.png"))); // NOI18N
+        exitBtn.setBorder(null);
+        exitBtn.setBorderPainted(false);
+        exitBtn.setContentAreaFilled(false);
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                exitBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(1070, 610, 130, 40);
+        getContentPane().add(exitBtn);
+        exitBtn.setBounds(1070, 610, 130, 40);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3.png"))); // NOI18N
-        jButton3.setBorderPainted(false);
-        jButton3.setContentAreaFilled(false);
-        jButton3.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3dis.png"))); // NOI18N
-        if(WindowManager.getAuthValue()==1)
-        jButton3.setEnabled(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        reportProduceBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3.png"))); // NOI18N
+        reportProduceBtn.setBorderPainted(false);
+        reportProduceBtn.setContentAreaFilled(false);
+        reportProduceBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3dis.png"))); // NOI18N
+        reportProduceBtn.setDisabledSelectedIcon(null);
+        reportProduceBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                reportProduceBtnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(35, 344, 225, 50);
+        getContentPane().add(reportProduceBtn);
+        reportProduceBtn.setBounds(35, 410, 225, 50);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn2.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setContentAreaFilled(false);
-        jButton2.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn2dis.png"))); // NOI18N
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        parametersBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/paramBtn1.png"))); // NOI18N
+        parametersBtn.setBorderPainted(false);
+        parametersBtn.setContentAreaFilled(false);
+        parametersBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3dis.png"))); // NOI18N
+        parametersBtn.setDisabledSelectedIcon(null);
+        parametersBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                parametersBtnActionPerformed(evt);
             }
         });
-        if(WindowManager.getAuthValue()!=1)
-        jButton2.setEnabled(false);
-        getContentPane().add(jButton2);
-        jButton2.setBounds(35, 302, 225, 50);
+        getContentPane().add(parametersBtn);
+        parametersBtn.setBounds(35, 365, 225, 50);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1.png"))); // NOI18N
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1dis.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        createAgentBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/createAgentBtn2.png"))); // NOI18N
+        createAgentBtn.setBorderPainted(false);
+        createAgentBtn.setContentAreaFilled(false);
+        createAgentBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1dis.png"))); // NOI18N
+        createAgentBtn.setDisabledSelectedIcon(null);
+        createAgentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                createAgentBtnActionPerformed(evt);
             }
         });
-        if(WindowManager.getAuthValue()!=1)
-        jButton1.setEnabled(false);
-        getContentPane().add(jButton1);
-        jButton1.setBounds(35, 260, 225, 50);
+        getContentPane().add(createAgentBtn);
+        createAgentBtn.setBounds(57, 305, 180, 31);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/MuzaBack.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1200, 700);
+        viewAgentBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/viewAgentBtn2.png"))); // NOI18N
+        viewAgentBtn.setBorderPainted(false);
+        viewAgentBtn.setContentAreaFilled(false);
+        viewAgentBtn.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1dis.png"))); // NOI18N
+        viewAgentBtn.setDisabledSelectedIcon(null);
+        viewAgentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewAgentBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(viewAgentBtn);
+        viewAgentBtn.setBounds(57, 336, 180, 31);
+
+        agentBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/agentBtn1.png"))); // NOI18N
+        agentBtn.setBorderPainted(false);
+        agentBtn.setContentAreaFilled(false);
+        agentBtn.setDisabledIcon(null);
+        agentBtn.setDisabledSelectedIcon(null);
+        agentBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(agentBtn);
+        agentBtn.setBounds(35, 260, 225, 50);
+
+        wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/MuzaBack.png"))); // NOI18N
+        getContentPane().add(wallpaper);
+        wallpaper.setBounds(0, 0, 1200, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        WindowManager.openWin(new CreateShow());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void agentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentBtnActionPerformed
+        
+    }//GEN-LAST:event_agentBtnActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         System.exit(1);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
-        
+    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
         try {
             WindowManager.closeMain();
         } catch (SQLException ex) {
             Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_logoutBtnActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void adminBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_adminBtnActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         WindowManager.returnWindow();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_backBtnActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        WindowManager.openWin(new ApproveParticipation());
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void parametersBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_parametersBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_parametersBtnActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void viewAgentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewAgentBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_viewAgentBtnActionPerformed
+
+    private void createAgentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAgentBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_createAgentBtnActionPerformed
+
+    private void reportProduceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportProduceBtnActionPerformed
         WindowManager.openWin(new ReportProduce());
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_reportProduceBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton adminBtn;
+    private javax.swing.JButton agentBtn;
+    private javax.swing.JButton backBtn;
+    private javax.swing.JButton createAgentBtn;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JButton logoutBtn;
+    private javax.swing.JButton parametersBtn;
+    private javax.swing.JButton reportProduceBtn;
+    private javax.swing.JButton viewAgentBtn;
+    private javax.swing.JLabel wallpaper;
     // End of variables declaration//GEN-END:variables
 }

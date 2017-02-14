@@ -10,6 +10,7 @@ import init.MainClass;
 
 import init.WindowManager;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
@@ -107,7 +108,6 @@ public class MainLogin extends javax.swing.JFrame {
         loginBtn.setContentAreaFilled(false);
         loginBtn.setDefaultCapable(false);
         loginBtn.setFocusPainted(false);
-        loginBtn.setOpaque(false);
         loginBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginBtnActionPerformed(evt);
@@ -118,11 +118,21 @@ public class MainLogin extends javax.swing.JFrame {
 
         passwordField.setBorder(null);
         passwordField.setOpaque(false);
+        passwordField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordFieldKeyPressed(evt);
+            }
+        });
         getContentPane().add(passwordField);
         passwordField.setBounds(740, 390, 280, 30);
 
         usernameField.setBorder(null);
         usernameField.setOpaque(false);
+        usernameField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameFieldKeyPressed(evt);
+            }
+        });
         getContentPane().add(usernameField);
         usernameField.setBounds(740, 340, 280, 30);
 
@@ -146,16 +156,29 @@ public class MainLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_forgotPasswordBtn2ActionPerformed
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            openMain();
+        }
+    }//GEN-LAST:event_usernameFieldKeyPressed
+
+    private void passwordFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordFieldKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            openMain();
+        }
+    }//GEN-LAST:event_passwordFieldKeyPressed
+    public void openMain() {
         if (usernameField.getText().equals("") || passwordField.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "You must enter username & password", "Login error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (usernameField.getText().equals("Admin") || passwordField.getText().equals("Admin")) {
-            
+            WindowManager.startMain();
         }
-        
-    }//GEN-LAST:event_loginBtnActionPerformed
-
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton forgotPasswordBtn2;
