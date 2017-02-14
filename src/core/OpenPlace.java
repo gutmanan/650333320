@@ -8,15 +8,15 @@ public class OpenPlace extends Place{
 	private E_COVERS cover;
 	private boolean withSeats;
 	private boolean withPlatform;
-	private boolean withAmplification;
+	private boolean withGear;
 	private boolean withToilet;
 
-        public OpenPlace(E_COVERS cover, boolean withSeats, boolean withPlatform, boolean withAmplification, boolean withToilet, int id, String name, Address address, String email, String phoneNumber, String location, int maxCapacity, int representativeID) {
-            super(id, name, address, email, phoneNumber, location, maxCapacity, representativeID);
+        public OpenPlace(E_COVERS cover, boolean withSeats, boolean withPlatform, boolean withAmplification, boolean withToilet, int id, String name, Address address, String email, String phoneNumber, URL location, int maxCapacity) {
+            super(id, name, address, email, phoneNumber, location, maxCapacity);
             this.cover = cover;
             this.withSeats = withSeats;
             this.withPlatform = withPlatform;
-            this.withAmplification = withAmplification;
+            this.withGear = withAmplification;
             this.withToilet = withToilet;
         }
 	
@@ -44,12 +44,12 @@ public class OpenPlace extends Place{
 		this.withPlatform = withPlatform;
 	}
 
-	public boolean isWithAmplification() {
-		return withAmplification;
+	public boolean isWithGear() {
+		return withGear;
 	}
 
-	public void setWithAmplification(boolean withAmplification) {
-		this.withAmplification = withAmplification;
+	public void setWithGear(boolean withGear) {
+		this.withGear = withGear;
 	}
 
 	public boolean isWithToilet() {

@@ -5,59 +5,59 @@ import java.util.Date;
 
 public class Show {
 	
-	private int id;
-	private Date date;
-	private E_STATUS isCanceled;
+	private int showNumber;
+	private Date showDate;
+	private E_STATUS status;
 	private Date createDate;
 	private int ticketPrice;
 	private int minAge;
 	private Artist mainArtist;
         private Place place;
-        private Agent creatAgent;
+        private Agent createAgent;
 	
 	public Show(int id, Artist mainArtist, Date date, Place place, E_STATUS isCanceled, Date createDate, int ticketPrice, int minAge, Agent creatAgent) {
             super();
-            this.id = id;
-            this.date = date;
-            this.isCanceled = isCanceled;
+            this.showNumber = id;
+            this.showDate = date;
+            this.status = isCanceled;
             this.createDate = createDate;
             this.ticketPrice = ticketPrice;
             this.minAge = minAge;
             this.mainArtist = mainArtist;
             this.place = place;
-            this.creatAgent = creatAgent;
+            this.createAgent = creatAgent;
 	}
 
         public Place getPlace() {
             return place;
         }
 
-        public Agent getCreatAgent() {
-            return creatAgent;
+        public Agent getCreateAgent() {
+            return createAgent;
         }
 
-	public int getId() {
-		return id;
+	public int getShowNumber() {
+		return showNumber;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setShowNumber(int showNumber) {
+		this.showNumber = showNumber;
 	}
 
-	public Date getDate() {
-		return date;
+	public Date getShowDate() {
+		return showDate;
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
+	public void setShowDate(Date showDate) {
+		this.showDate = showDate;
 	}
 
-	public E_STATUS getIsCanceled() {
-		return isCanceled;
+	public E_STATUS getStatus() {
+		return status;
 	}
 
-	public void setIsCanceled(E_STATUS isCanceled) {
-		this.isCanceled = isCanceled;
+	public void setStatus(E_STATUS status) {
+		this.status = status;
 	}
 
 	public Date getCreateDate() {

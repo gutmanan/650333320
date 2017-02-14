@@ -7,19 +7,19 @@ import java.util.Date;
 
 public class User {
 	
-	private String id;
+	private String userAlphaCode;
 	private String firstName;
 	private String lastName;
 	private String nickname;
 	private Date birthday;
-	private URL email;
+	private String email;
 	private Image image;
 	private ArrayList<Artist> artists;
 	
-	public User(String id, String firstName, String lastName, String nickname, Date birthday, URL email, Image image,
+	public User(String id, String firstName, String lastName, String nickname, Date birthday, String email, Image image,
 			ArrayList<Artist> artists) {
 		super();
-		this.id = id;
+		this.userAlphaCode = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.nickname = nickname;
@@ -29,12 +29,12 @@ public class User {
 		this.artists = artists;
 	}
 
-	public String getId() {
-		return id;
+	public String getUserAlphaCode() {
+		return userAlphaCode;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserAlphaCode(String userAlphaCode) {
+		this.userAlphaCode = userAlphaCode;
 	}
 
 	public String getFirstName() {
@@ -69,11 +69,11 @@ public class User {
 		this.birthday = birthday;
 	}
 
-	public URL getEmail() {
+	public String getEmail() {
 		return email;
 	}
 
-	public void setEmail(URL email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 

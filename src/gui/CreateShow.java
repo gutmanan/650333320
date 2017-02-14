@@ -332,7 +332,6 @@ public class CreateShow extends javax.swing.JPanel {
             jLabel15.setText(jLabel15.getText()+" "+selectedPlace.getAddress().toString());
             jLabel12.setText(jLabel12.getText()+" "+selectedPlace.getLocation());
             jLabel11.setText(jLabel11.getText()+" "+selectedPlace.getMaxCapacity());
-            jLabel13.setText(jLabel13.getText()+" "+selectedPlace.getRepresentativeID());
         }
     }//GEN-LAST:event_jComboBox2ItemStateChanged
 

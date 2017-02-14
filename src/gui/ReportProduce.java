@@ -180,7 +180,7 @@ public class ReportProduce extends javax.swing.JPanel {
                 }
                 pdf1.addTable(jTable1.getColumnCount(),1, titles, row.toArray(new String[row.size()]));
                 ArrayList<String> rs = rpController.getParticipatedArtists(Integer.valueOf(jTable1.getModel().getValueAt(i, 0).toString()));
-                artists.add(rpController.getShow(Integer.valueOf(jTable1.getModel().getValueAt(i, 0).toString())).getMainArtist().getId());
+                artists.add(rpController.getShow(Integer.valueOf(jTable1.getModel().getValueAt(i, 0).toString())).getMainArtist().getArtistAlphaCode());
                 for (String r : rs) {
                     artists.add(r);
                 }
@@ -211,7 +211,7 @@ public class ReportProduce extends javax.swing.JPanel {
             int presale = rpController.getPresaleAmonutPerShow(year).get(key)*tmpShow.getTicketPrice();
             int regular = rpController.getRegularAmonutPerShow(year).get(key)*tmpShow.getTicketPrice();
             
-            model.addRow(new Object[]{key, tmpShow.getCreatAgent().getId(), presale, regular, presale+regular, 
+            model.addRow(new Object[]{key, tmpShow.getCreateAgent().getId(), presale, regular, presale+regular, 
                                       formated(presale+regular-value), formated(value)});
         }
 
@@ -228,8 +228,8 @@ public class ReportProduce extends javax.swing.JPanel {
                 if (jTable1.getSelectedRow() > -1) {
                     final Show tmp = rpController.getShow(Integer.parseInt(jTable1.getValueAt(jTable1.getSelectedRow(),0).toString()));
                     DefaultListModel<String> dlm = new DefaultListModel<String>();
-                    dlm.addElement(tmp.getMainArtist().getId());
-                    for (String s : rpController.getParticipatedArtists(tmp.getId())) {
+                    dlm.addElement(tmp.getMainArtist().getArtistAlphaCode());
+                    for (String s : rpController.getParticipatedArtists(tmp.getShowNumber())) {
                         dlm.addElement(s);
                     }
                     jList1.setModel(dlm);

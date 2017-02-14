@@ -1,40 +1,43 @@
 package core;
 
+import java.awt.Image;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Artist {
 	
-	private String id;
+	private String artistAlphaCode;
 	private String stageName;
 	private String biography;
 	private String facebook;
 	private String email;
-	private boolean active;
+	private boolean isActive;
 	private Agent agent;
+        private Image signatrue;
 
-	public Artist(String id, String stageName, String biography, String facebook, String email, boolean active, Agent agent) {
+	public Artist(String id, String stageName, String biography, String facebook, String email, boolean active, Agent agent,Image image) {
             super();
-            this.id = id;
+            this.artistAlphaCode = id;
             this.stageName = stageName;
             this.biography = biography;
             this.facebook = facebook;
             this.email = email;
-            this.active = active;
+            this.isActive = active;
             this.setAgent(agent);
+            this.signatrue = image;
 	}
         
         public Artist(String id) {
-            this.id = id;
+            this.artistAlphaCode = id;
         }
 
-	public String getId() {
-		return id;
+	public String getArtistAlphaCode() {
+		return artistAlphaCode;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setArtistAlphaCode(String artistAlphaCode) {
+		this.artistAlphaCode = artistAlphaCode;
 	}
 
 	public String getStageName() {
@@ -69,12 +72,12 @@ public class Artist {
 		this.email = email;
 	}
 
-	public boolean isActive() {
-		return active;
+	public boolean isIsActive() {
+		return isActive;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Agent getAgent() {
@@ -83,6 +86,14 @@ public class Artist {
 
 	public void setAgent(Agent agent) {
 		this.agent = agent;
+	}
+        
+        public Image getSignatrue() {
+		return signatrue;
+	}
+
+	public void setImage(Image image) {
+		this.signatrue = image;
 	}
 
 }

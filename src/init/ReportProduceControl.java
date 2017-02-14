@@ -124,9 +124,9 @@ public class ReportProduceControl {
         try {
             while (rs1.next()) {
                 Show tmpShow = getShow(rs1.getInt(1));
-                int totalMissing = getMissingCountForOpenPlace(tmpShow.getPlace().getId());
-                int totalPresale = getPresaleAmonutPerShow(year).get(tmpShow.getId())*tmpShow.getTicketPrice();
-                int totalRegular = getRegularAmonutPerShow(year).get(tmpShow.getId())*tmpShow.getTicketPrice();
+                int totalMissing = getMissingCountForOpenPlace(tmpShow.getPlace().getPlaceNumber());
+                int totalPresale = getPresaleAmonutPerShow(year).get(tmpShow.getShowNumber())*tmpShow.getTicketPrice();
+                int totalRegular = getRegularAmonutPerShow(year).get(tmpShow.getShowNumber())*tmpShow.getTicketPrice();
                 profitableShows.put(rs1.getInt(1), ((totalPresale+totalRegular)*0.7)-(totalMissing*(totalPresale+totalRegular)*0.02));
             }
         } catch (SQLException ex) {

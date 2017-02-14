@@ -5,41 +5,36 @@ import java.util.ArrayList;
 
 public class Place {
 	
-	private int id;
+	private int placeNumber;
 	private String name;
 	private Address address;
 	private String email;
 	private String phoneNumber;
-	private String location;
+	private URL location;
 	private int maxCapacity;
-        private int representativeID;
 	
-	public Place(int id, String name, Address address, String email, String phoneNumber, String location, int maxCapacity, int representativeID) {
+	public Place(int id, String name, Address address, String email, String phoneNumber, URL location, int maxCapacity) {
 		super();
-		this.id = id;
+		this.placeNumber = id;
 		this.name = name;
 		this.address = address;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.location = location;
 		this.maxCapacity = maxCapacity;
-                this.representativeID = representativeID;
+
 	}
         
         public Place(int id) {
-            this.id = id;
+            this.placeNumber = id;
         }
 
-        public int getRepresentativeID() {
-            return representativeID;
-        }
-
-	public int getId() {
-		return id;
+	public int getPlaceNumber() {
+		return placeNumber;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setPlaceNumber(int placeNumber) {
+		this.placeNumber = placeNumber;
 	}
 
 	public String getName() {
@@ -74,11 +69,11 @@ public class Place {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getLocation() {
+	public URL getLocation() {
 		return location;
 	}
 
-	public void setLocation(String location) {
+	public void setLocation(URL location) {
 		this.location = location;
 	}
 

@@ -174,14 +174,14 @@ public class ApproveParticipation extends javax.swing.JPanel {
                     jLabel17.setText("Created by:");
                     Show tmp = apController.getShowDetails(jTable3.getValueAt(jTable3.getSelectedRow(),1).toString());
                     if (tmp != null) {
-                        jLabel20.setText(jLabel20.getText()+" "+tmp.getMainArtist().getId());
-                        jLabel21.setText(jLabel21.getText()+" "+tmp.getDate());
-                        jLabel19.setText(jLabel19.getText()+" "+tmp.getPlace().getId());
-                        jLabel16.setText(jLabel16.getText()+" "+tmp.getIsCanceled());
+                        jLabel20.setText(jLabel20.getText()+" "+tmp.getMainArtist().getArtistAlphaCode());
+                        jLabel21.setText(jLabel21.getText()+" "+tmp.getShowDate());
+                        jLabel19.setText(jLabel19.getText()+" "+tmp.getPlace().getPlaceNumber());
+                        jLabel16.setText(jLabel16.getText()+" "+tmp.getStatus());
                         jLabel22.setText(jLabel22.getText()+" "+tmp.getCreateDate());
                         jLabel23.setText(jLabel23.getText()+" "+tmp.getTicketPrice());
                         jLabel24.setText(jLabel24.getText()+" "+tmp.getMinAge());
-                        jLabel17.setText(jLabel17.getText()+" "+tmp.getCreatAgent().getId());
+                        jLabel17.setText(jLabel17.getText()+" "+tmp.getCreateAgent().getId());
                     }
                 }                
             }

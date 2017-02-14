@@ -1,6 +1,6 @@
 package core;
 
 
-public enum E_COVERS {none, partial, full
+public enum E_COVERS {None, Partial, Full
 
 }
