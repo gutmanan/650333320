@@ -43,6 +43,7 @@ public class DBManager {
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
+        insert("aa");
     }
     
     public static ResultSet query(String qry) {
@@ -56,9 +57,9 @@ public class DBManager {
         }
       return rs;
     }
-    /*
-    public static void insert() {
-        try {          
+    
+    public static void insert(String a) {
+       /* try {          
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("INSERT tblAgent" + "(ID, firstName, lastName, phoneNumber, email)"
                                  + "VALUES(" + "jj66" + ", '" + "two" + "', " + "three" + "0526548732" + "fds@gmail.com" + ")");
@@ -66,6 +67,16 @@ public class DBManager {
          }
         catch(Exception e) {
             e.printStackTrace();
-        }
-    }*/
+        }*/
+       a="abd";
+       ResultSet rs = null;
+       String statment = "INSERT into tblAgent (a) VALUES("+a+")";
+       try{
+       PreparedStatement stmt = conn.prepareStatement(statment);
+            stmt.executeUpdate(); 
+       }
+       catch(Exception w){
+       
+       }
+    }
 }

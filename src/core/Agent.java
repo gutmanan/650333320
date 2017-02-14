@@ -10,6 +10,7 @@ public class Agent {
 	private String lastName;
         private String phoneNum;
 	private String email;
+        private String password;
 	private ArrayList<Artist> Represented;
 	private ArrayList<Place> faivoritePlaces;
 	
@@ -18,14 +19,31 @@ public class Agent {
 		this.id = id;
 	}
         
-	public Agent(String id, String firstName, String lastName, String phoneNum, String email) {
+	public Agent(String id, String firstName, String lastName, String phoneNum, String email,String password) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
                 this.phoneNum = phoneNum;
 		this.email = email;
+                this.password = password;
 	}
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public String getPassword() {
+        return password;
+    }
 
 	public String getId() {
 		return id;
