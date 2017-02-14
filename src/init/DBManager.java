@@ -38,12 +38,13 @@ public class DBManager {
             try{
                 dbFile = (new File("src/sources/MuzaDataBase.accdb")).getAbsolutePath();
                 conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
+                System.out.println("DB was loaded!");
             } catch (SQLException ex1) {
                 System.out.println("Error loading DB!");
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
-        insert("aa");
+        insert("aaa");
     }
     
     public static ResultSet query(String qry) {
@@ -68,12 +69,12 @@ public class DBManager {
         catch(Exception e) {
             e.printStackTrace();
         }*/
-       a="abd";
-       ResultSet rs = null;
-       String statment = "INSERT into tblAgent (a) VALUES("+a+")";
+
+       Statement stmt = null;
        try{
-       PreparedStatement stmt = conn.prepareStatement(statment);
-            stmt.executeUpdate(); 
+           stmt = conn.createStatement();
+           String statment = "INSERT into tblAgent"+" VALUES(aa)";
+            stmt.executeUpdate(statment);
        }
        catch(Exception w){
        

@@ -23,8 +23,8 @@ public class MainClass {
             //Define log file
             String dateNow = (new SimpleDateFormat("ddM_hhmm")).format(new Date());
             logFile = new PrintStream(new File(fileName+"_"+dateNow+".log"));
-            System.setErr(logFile);
-            System.setOut(logFile);
+            //System.setErr(logFile);
+            //System.setOut(logFile);
             
             DB = new DBManager();
             PDF = new PDFManager();
