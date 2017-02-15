@@ -9,7 +9,7 @@ import core.Artist;
 import core.Show;
 import init.ApproveParticipationControl;
 import init.DBManager;
-import init.MainClass;
+import init.HandsInTheAir;
 import init.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;

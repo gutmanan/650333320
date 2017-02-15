@@ -7,7 +7,7 @@ package gui;
 
 import init.CreateAgentControl;
 import init.DBManager;
-import init.MainClass;
+import init.HandsInTheAir;
 import java.sql.ResultSet;
 
 /**

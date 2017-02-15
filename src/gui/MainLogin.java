@@ -6,16 +6,18 @@
 package gui;
 
 import core.Agent;
-import init.MainClass;
+import init.HandsInTheAir;
 
 import init.WindowManager;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -29,11 +31,6 @@ public class MainLogin extends javax.swing.JFrame {
      */
     public MainLogin() throws SQLException {
         initComponents();
-        ResultSet rs = MainClass.getDB().query("SELECT * FROM tblAgent");
-        jComboBox1.addItem("Select Agent");
-        while (rs.next()) {
-            jComboBox1.addItem(rs.getString(1));
-        }
         setVisible(true);
     }
 
@@ -46,127 +43,298 @@ public class MainLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton4 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        newAccountFrame = new javax.swing.JInternalFrame();
+        cancelButton = new javax.swing.JButton();
+        birthdayLabel = new javax.swing.JLabel();
+        emailLabel = new javax.swing.JLabel();
+        emailField = new javax.swing.JTextField();
+        nicknameLabel = new javax.swing.JLabel();
+        nicknameField = new javax.swing.JTextField();
+        lastnameLabel = new javax.swing.JLabel();
+        lastnameField = new javax.swing.JTextField();
+        firstnameLabel = new javax.swing.JLabel();
+        firstnameField = new javax.swing.JTextField();
+        usernameLabel = new javax.swing.JLabel();
+        usernameField = new javax.swing.JTextField();
+        internalWallpaper = new javax.swing.JLabel();
+        exitBtn = new javax.swing.JButton();
+        createUserBtn = new javax.swing.JButton();
+        loginBtn = new javax.swing.JButton();
+        passwordBtn = new javax.swing.JTextField();
+        usernameBtn = new javax.swing.JTextField();
+        wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1200, 725));
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/exitBtn.png"))); // NOI18N
-        jButton4.setBorder(null);
-        jButton4.setBorderPainted(false);
-        jButton4.setContentAreaFilled(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        newAccountFrame.setTitle("Create new account");
+        newAccountFrame.setVisible(true);
+        newAccountFrame.getContentPane().setLayout(null);
+
+        cancelButton.setText("Cancel");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                cancelButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton4);
-        jButton4.setBounds(1070, 610, 130, 40);
+        newAccountFrame.getContentPane().add(cancelButton);
+        cancelButton.setBounds(412, 290, 80, 26);
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Or login as representative:");
-        getContentPane().add(jLabel3);
-        jLabel3.setBounds(220, 580, 190, 16);
+        birthdayLabel.setForeground(new java.awt.Color(0, 0, 0));
+        birthdayLabel.setText("Birthday:");
+        newAccountFrame.getContentPane().add(birthdayLabel);
+        birthdayLabel.setBounds(70, 240, 90, 16);
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Choose an agent to login with:");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(220, 540, 190, 16);
+        emailLabel.setForeground(new java.awt.Color(0, 0, 0));
+        emailLabel.setText("Email:");
+        newAccountFrame.getContentPane().add(emailLabel);
+        emailLabel.setBounds(70, 200, 90, 16);
 
-        jButton1.setText("Representative");
-        jButton1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jButton1ItemStateChanged(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                emailFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(410, 570, 130, 30);
+        newAccountFrame.getContentPane().add(emailField);
+        emailField.setBounds(170, 200, 90, 20);
 
-        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jComboBox1ItemStateChanged(evt);
-            }
-        });
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        nicknameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        nicknameLabel.setText("Nickname:");
+        newAccountFrame.getContentPane().add(nicknameLabel);
+        nicknameLabel.setBounds(300, 140, 90, 16);
+
+        nicknameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                nicknameFieldActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(410, 530, 130, 30);
+        newAccountFrame.getContentPane().add(nicknameField);
+        nicknameField.setBounds(400, 140, 90, 20);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/muzaLogin.png"))); // NOI18N
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1200, 700);
+        lastnameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        lastnameLabel.setText("Last Name:");
+        newAccountFrame.getContentPane().add(lastnameLabel);
+        lastnameLabel.setBounds(300, 170, 90, 16);
+
+        lastnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lastnameFieldActionPerformed(evt);
+            }
+        });
+        newAccountFrame.getContentPane().add(lastnameField);
+        lastnameField.setBounds(400, 170, 90, 20);
+
+        firstnameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        firstnameLabel.setText("First Name:");
+        newAccountFrame.getContentPane().add(firstnameLabel);
+        firstnameLabel.setBounds(70, 170, 90, 16);
+
+        firstnameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstnameFieldActionPerformed(evt);
+            }
+        });
+        newAccountFrame.getContentPane().add(firstnameField);
+        firstnameField.setBounds(170, 170, 90, 20);
+
+        usernameLabel.setForeground(new java.awt.Color(0, 0, 0));
+        usernameLabel.setText("Username:");
+        newAccountFrame.getContentPane().add(usernameLabel);
+        usernameLabel.setBounds(70, 140, 90, 16);
+
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameFieldActionPerformed(evt);
+            }
+        });
+        newAccountFrame.getContentPane().add(usernameField);
+        usernameField.setBounds(170, 140, 90, 20);
+
+        internalWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container2.png"))); // NOI18N
+        newAccountFrame.getContentPane().add(internalWallpaper);
+        internalWallpaper.setBounds(0, 0, 545, 370);
+
+        getContentPane().add(newAccountFrame);
+        newAccountFrame.setBounds(320, 230, 545, 370);
+
+        exitBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/exitBtn.png"))); // NOI18N
+        exitBtn.setBorder(null);
+        exitBtn.setBorderPainted(false);
+        exitBtn.setContentAreaFilled(false);
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exitBtn);
+        exitBtn.setBounds(1070, 610, 130, 40);
+
+        createUserBtn.setForeground(new java.awt.Color(51, 51, 51));
+        createUserBtn.setText("Create new account");
+        createUserBtn.setBorder(null);
+        createUserBtn.setBorderPainted(false);
+        createUserBtn.setContentAreaFilled(false);
+        createUserBtn.setFocusPainted(false);
+        createUserBtn.setOpaque(false);
+        createUserBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createUserBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(createUserBtn);
+        createUserBtn.setBounds(690, 560, 140, 16);
+
+        loginBtn.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setBorder(null);
+        loginBtn.setContentAreaFilled(false);
+        loginBtn.setLabel("Login");
+        loginBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginBtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(loginBtn);
+        loginBtn.setBounds(697, 500, 310, 40);
+
+        passwordBtn.setBorder(null);
+        passwordBtn.setOpaque(false);
+        passwordBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                passwordBtnKeyPressed(evt);
+            }
+        });
+        getContentPane().add(passwordBtn);
+        passwordBtn.setBounds(730, 450, 280, 30);
+
+        usernameBtn.setBorder(null);
+        usernameBtn.setOpaque(false);
+        usernameBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                usernameBtnKeyPressed(evt);
+            }
+        });
+        getContentPane().add(usernameBtn);
+        usernameBtn.setBounds(730, 400, 280, 30);
+
+        wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/muzaLogin.png"))); // NOI18N
+        getContentPane().add(wallpaper);
+        wallpaper.setBounds(0, 0, 1200, 700);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
         System.exit(1);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_exitBtnActionPerformed
 
-    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
-        if (jComboBox1.getSelectedIndex()==0) {
+    private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
+        openMain();
+    }//GEN-LAST:event_loginBtnActionPerformed
+
+    private void usernameBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameBtnKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+            openMain();
+        } 
+    }//GEN-LAST:event_usernameBtnKeyPressed
+
+    private void passwordBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordBtnKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) { 
+            openMain();
+        }
+    }//GEN-LAST:event_passwordBtnKeyPressed
+
+    private void createUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserBtnActionPerformed
+        newAccountFrame.setVisible(true);
+    }//GEN-LAST:event_createUserBtnActionPerformed
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void firstnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstnameFieldActionPerformed
+
+    private void lastnameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lastnameFieldActionPerformed
+
+    private void nicknameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nicknameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nicknameFieldActionPerformed
+
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFieldActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        newAccountFrame.dispose();
+    }//GEN-LAST:event_cancelButtonActionPerformed
+    
+    public void openMain() {
+        if (usernameBtn.getText().equals("") || passwordBtn.getText().equals("")) {
+            JOptionPane.showMessageDialog(this,
+                "You must enter username & password",
+                "Login error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
-        try {
-            if (evt.getStateChange() != ItemEvent.SELECTED) {
-                return;
+        if (usernameBtn.getText().equals("Admin") && passwordBtn.getText().equals("Admin")) {
+            WindowManager.setUser(2, null);
+            this.dispose();
+            WindowManager.startMain();
+            return;
+        } if (usernameBtn.getText().equals("Place") && passwordBtn.getText().equals("Place")) {
+            WindowManager.setUser(4, null);
+            this.dispose();
+            WindowManager.startMain();
+            return;
+        } else {
+            ResultSet rs = HandsInTheAir.getDB().query("SELECT tblAgent.*\n" +
+                                                       "FROM tblAgent " +
+                                                       "WHERE tblAgent.ID=\""+usernameBtn.getText()+"\"");
+            try {
+                while (rs.next()) {
+                    if (rs.getString(6).equals(passwordBtn.getText())) {
+                        WindowManager.setUser(1, new Agent(rs.getString(1), rs.getString(2), rs.getString(3), 
+                                                           rs.getString(4), rs.getString(5), rs.getString(6)));
+                        this.dispose();
+                        WindowManager.startMain();
+                        return;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(MainLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-            Object item = evt.getItem();
-            if (item.equals("Select Agent")) {
-                return;
-            }
-            
-            ResultSet rs = MainClass.getDB().query("SELECT * FROM tblAgent WHERE ID=\""+item+"\"");
-            
-            while (rs.next()) {
-                Agent tmp = new Agent(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),"aaa");
-                WindowManager.setUser(1, tmp);
-                this.dispose();
-                WindowManager.startMain();
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(MainLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }//GEN-LAST:event_jComboBox1ItemStateChanged
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        WindowManager.setUser(2, null);
-        this.dispose();
-        WindowManager.startMain();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jButton1ItemStateChanged
-
-    }//GEN-LAST:event_jButton1ItemStateChanged
-
+        JOptionPane.showMessageDialog(this,
+                "Incorrect username or password",
+                "Login error",
+                JOptionPane.ERROR_MESSAGE);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel birthdayLabel;
+    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton createUserBtn;
+    private javax.swing.JTextField emailField;
+    private javax.swing.JLabel emailLabel;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JTextField firstnameField;
+    private javax.swing.JLabel firstnameLabel;
+    private javax.swing.JLabel internalWallpaper;
+    private javax.swing.JTextField lastnameField;
+    private javax.swing.JLabel lastnameLabel;
+    private javax.swing.JButton loginBtn;
+    private javax.swing.JInternalFrame newAccountFrame;
+    private javax.swing.JTextField nicknameField;
+    private javax.swing.JLabel nicknameLabel;
+    private javax.swing.JTextField passwordBtn;
+    private javax.swing.JTextField usernameBtn;
+    private javax.swing.JTextField usernameField;
+    private javax.swing.JLabel usernameLabel;
+    private javax.swing.JLabel wallpaper;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,7 +24,7 @@ public class ApproveParticipationControl {
     }
     
     public HashMap<String, String> getArtistsWaitingForApproval() {
-        ResultSet rs = MainClass.getDB().query("SELECT tblPerformance.showID,  tblArtist.*\n" +
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblPerformance.showID,  tblArtist.*\n" +
                                                "FROM tblArtist INNER JOIN tblPerformance ON tblArtist.ID = tblPerformance.artistID\n" +
                                                "WHERE (((tblPerformance.approvel)=\"Waiting\") AND ((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
         HashMap<String, String> artistsWaitingForApproval = new HashMap<>();

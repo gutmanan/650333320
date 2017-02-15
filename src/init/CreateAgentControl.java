@@ -31,7 +31,7 @@ public class CreateAgentControl {
     }
     
     public boolean checkIfExsist(String id){
-        ResultSet rs = MainClass.getDB().query("SELECT tblAgent.ID\n" +
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblAgent.ID\n" +
                                                 "FROM tblAgent\n" +
                                                 "WHERE (((tblAgent.ID) Like \""+id+"\"));");
         if (rs==null) return true;
@@ -42,19 +42,19 @@ public class CreateAgentControl {
     }
     
     public void newAgent(String id){
-        MainClass.getDB().insert(id);
+        HandsInTheAir.getDB().insert(id);
     }
     
     public HashMap<Integer, Integer> getPresaleAmonutPerShow(int year) {
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblShow.ID\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.ID\n" +
                                                 "FROM tblShow\n" +
                                                 "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
-        ResultSet rs2 = MainClass.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
+        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
                                                 "FROM (tblTicketOrder INNER JOIN tblFanOf ON tblTicketOrder.userID = tblFanOf.userID) INNER JOIN tblShow ON (tblTicketOrder.showID = tblShow.ID) AND (tblFanOf.artistID = tblShow.mainArtist)\n" +
                                                 "WHERE ((DateDiff(\"d\",[createDate],[date])>21) AND (DateDiff(\"d\",[purchaseDate],[date])>14))");
-        ResultSet rs3 = MainClass.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
+        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
                                                 "FROM tblShow INNER JOIN ((tblTicketOrder INNER JOIN tblFanOf ON tblTicketOrder.userID = tblFanOf.userID) INNER JOIN tblPerformance ON (tblFanOf.artistID = tblPerformance.artistID) AND (tblTicketOrder.showID = tblPerformance.showID)) ON (tblShow.ID = tblTicketOrder.showID) AND (tblShow.ID = tblPerformance.showID)\n" +
                                                 "WHERE ((DateDiff(\"d\",[createDate],[date])>21) AND (DateDiff(\"d\",[purchaseDate],[date])>14))");
         HashMap<Integer,Integer> presaleAmonutPerShow = new HashMap<>();
@@ -80,13 +80,13 @@ public class CreateAgentControl {
     public HashMap<Integer, Integer> getRegularAmonutPerShow(int year) {
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblShow.ID\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.ID\n" +
                                                 "FROM tblShow\n" +
                                                 "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
-        ResultSet rs2 = MainClass.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
+        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
                                                 "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.ID = tblTicketOrder.showID\n" +
                                                 "WHERE ((DateDiff(\"d\",[purchaseDate],[date])<=14))");
-        ResultSet rs3 = MainClass.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
+        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
                                                 "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.ID = tblTicketOrder.showID\n" +
                                                 "WHERE ((DateDiff(\"d\",[createDate],[date])<=21))");
         
@@ -134,7 +134,7 @@ public class CreateAgentControl {
         HashMap<Integer, Double> profitableShows = new HashMap<>();
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblShow.ID\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.ID\n" +
                                                 "FROM tblShow\n" +
                                                 "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
         try {
@@ -191,7 +191,7 @@ public class CreateAgentControl {
 		return sortedCrunchifyMap;
 	}
     public ArrayList<String> getParticipatedArtists(int showID) {
-        ResultSet rs = MainClass.getDB().query("SELECT tblArtist.ID\n" +
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblArtist.ID\n" +
                                                 "FROM tblArtist INNER JOIN tblPerformance ON tblArtist.ID = tblPerformance.artistID\n" +
                                                 "WHERE (((tblPerformance.showID)="+showID+"))");
         ArrayList<String> artists = new ArrayList<>();

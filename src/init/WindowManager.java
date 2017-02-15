@@ -1,6 +1,7 @@
 package init;
 
 import core.Agent;
+import core.User;
 import gui.MainGui;
 import gui.MainLogin;
 import java.awt.Color;
@@ -11,9 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public abstract class WindowManager {
-
+    //Global parameters
     private static int authLogged;
     protected static Agent tmpAgent = null;
+    protected static User tmpUser = null;
     protected static JLabel welcome = null;
 
     //Window Management
@@ -28,15 +30,7 @@ public abstract class WindowManager {
     }
     public static void startMain(){
         mainFrame = new MainGui();
-        welcome = new JLabel();
-        welcome.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        welcome.setForeground(new java.awt.Color(255, 255, 255));
-        mainFrame.getContentPane().add(welcome, mainFrame.getContentPane().countComponents()-1);
-        welcome.setBounds(440, 30, 500, 50);
-        if (getTmpAgent()!= null)
-            welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
-        else if (getTmpAgent() == null)
-            welcome.setText("Welcome Muza Representative");
+        setWelcome();
     }
     public static void closeMain() throws SQLException {
         mainFrame.dispose();
@@ -65,7 +59,7 @@ public abstract class WindowManager {
                 setCurrentWindow(panel);
             }
         }
-        getCurrentWindow().setBounds(280, 90, 810, 595);
+        getCurrentWindow().setBounds(190, 90, 850, 580);
         mainFrame.getContentPane().add(getCurrentWindow(), mainFrame.getContentPane().countComponents()-1);
         mainFrame.getContentPane().setVisible(true);
         panel.setVisible(true);
@@ -73,7 +67,6 @@ public abstract class WindowManager {
         WindowManager.update();
         return;
     }
-
     public static void returnWindow() {
         if (getCurrentWindow() == null || getLastWindow() == null) {
             return;
@@ -85,24 +78,26 @@ public abstract class WindowManager {
 
         WindowManager.update();
     }
-
     public static void setLastWindow(JPanel panel) {
         lastWindow = panel;
     }
-
     public static JPanel getLastWindow() {
         return lastWindow;
     }
-
     public static String getAuthType() {
         String toReturn = null;
-
         switch (authLogged) {
             case 1:
                 toReturn = "Agent";
                 break;
             case 2:
-                toReturn = "Representative";
+                toReturn = "Muza Representative";
+                break;
+            case 3:
+                toReturn = "User";
+                break;
+            case 4:
+                toReturn = "Place Representative";
                 break;
             default:
                 toReturn = "ERROR";
@@ -110,22 +105,16 @@ public abstract class WindowManager {
         }
         return toReturn;
     }
-
     public static JFrame getMainFrame() {
         return mainFrame;
     }
-
     public static int getAuthValue() {
         return authLogged;
     }
-
     public static void setUser(int AuthType, Object user) {
         if (AuthType <= 0) {
             return;
         }
-        /*if (user == null) {
-            return;
-        }*/
         authLogged = AuthType;
         switch (AuthType) {
             case 1:
@@ -133,6 +122,14 @@ public abstract class WindowManager {
                 break;
             case 2:
                 tmpAgent = null;
+                tmpUser = null;
+                break;
+            case 3:
+                tmpUser = (User)user;
+                break;
+            case 4:
+                tmpAgent = null;
+                tmpUser = null;
                 break;
             default:
                 System.err.println("ERROR");
@@ -140,22 +137,25 @@ public abstract class WindowManager {
         }
         return;
     }
-
     public static void setTmpAgent(Agent agent) {
         tmpAgent = agent;
     }
-    
     public static Agent getTmpAgent() {
         return tmpAgent;
     }
-
+    public static User getTmpUser() {
+        return tmpUser;
+    }
+    public static void setTmpUser(User tmpUser) {
+        WindowManager.tmpUser = tmpUser;
+    }
     public static void clean() {
         authLogged = 0;
         currentWindow = null;
         welcome = null;
         tmpAgent = null;
+        tmpUser = null;
     }
-
     public static void update() {
         if (getCurrentWindow() == null) {
             return;
@@ -163,9 +163,19 @@ public abstract class WindowManager {
         getCurrentWindow().setVisible(false);
         getCurrentWindow().setVisible(true);
     }
-
     public static void update(JFrame frame) {
         frame.setVisible(false);
         frame.setVisible(true);
+    }
+    private static void setWelcome() {
+        welcome = new JLabel();
+        welcome.setFont(new java.awt.Font("Dialog", 0, 36));
+        welcome.setForeground(new java.awt.Color(255, 255, 255));
+        mainFrame.getContentPane().add(welcome, mainFrame.getContentPane().countComponents()-1);
+        welcome.setBounds(400, 30, 500, 50);
+        if (getTmpAgent()!= null)
+            welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
+        else if (getTmpAgent() == null || getTmpUser() == null)
+            welcome.setText("Welcome "+getAuthType());
     }
 }

@@ -25,10 +25,10 @@ public class CreateShowControl {
     }
     
     public Set<String> getAvailableMainArtistForDate(Date selectedDate) {
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblArtist.*\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblArtist.*\n" +
                                             "FROM tblAgent INNER JOIN tblArtist ON tblAgent.ID = tblArtist.agentID\n" +
                                             "WHERE (((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
-        ResultSet rs2 = MainClass.getDB().query("SELECT tblPerformance.artistID\n" +
+        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblPerformance.artistID\n" +
                                             "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
                                             "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");  
         HashMap<String,String> availableMainArtist = new HashMap<>();
@@ -47,10 +47,10 @@ public class CreateShowControl {
         return availableMainArtist.keySet();
     }
     public Set<String> getAvailablePlacesForDate(Date selectedDate) {
-        ResultSet rs3 = MainClass.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
+        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
                                             "FROM tblPlace INNER JOIN tblFavoritePlace ON tblPlace.ID = tblFavoritePlace.placeID\n" +
                                             "WHERE (((tblFavoritePlace.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");    
-        ResultSet rs4 = MainClass.getDB().query("SELECT tblPlace.*, tblShow.date, tblShow.place\n" +
+        ResultSet rs4 = HandsInTheAir.getDB().query("SELECT tblPlace.*, tblShow.date, tblShow.place\n" +
                                             "FROM tblPlace INNER JOIN tblShow ON tblPlace.ID = tblShow.place\n" +
                                             "WHERE (((tblShow.date)=#"+selectedDate+"#) AND ((tblShow.place)=[tblPlace].[ID]))");  
         HashMap<String,String> availableShows = new HashMap<>();
@@ -70,7 +70,7 @@ public class CreateShowControl {
     }
     public Place getPlaceDetails(String placeID) {
         Place tmp = null;
-        ResultSet rs = MainClass.getDB().query("SELECT tblPlace.*\n" +
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblPlace.*\n" +
                                                 "FROM tblPlace\n" +
                                                 "WHERE tblPlace.ID="+placeID);
         /*try {
@@ -84,11 +84,11 @@ public class CreateShowControl {
         return tmp;
     }
     public Collection<Artist> getAvailableAdditionalArtists(Date selectedDate, String mainArtistID) {
-        ResultSet rs2 = MainClass.getDB().query("SELECT tblPerformance.artistID\n" +
+        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblPerformance.artistID\n" +
                                             "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n" +
                                             "WHERE (((tblPerformance.showID)=[tblShow].[ID]) AND ((tblShow.date)=#"+selectedDate+"#))");
 
-        ResultSet rs1 = MainClass.getDB().query("SELECT tblAppreciation.appreciatedArtistID, tblArtist.*\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblAppreciation.appreciatedArtistID, tblArtist.*\n" +
                                           "FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.ID = tblAppreciation.artistID\n" +
                                           "WHERE (((tblArtist.ID)=[tblAppreciation_1].[appreciatedArtistID]) AND ((tblAppreciation.appreciatedArtistID)=\""+mainArtistID+"\") AND ((tblArtist.active)=Yes))");
         

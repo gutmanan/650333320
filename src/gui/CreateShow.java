@@ -11,7 +11,7 @@ import core.Artist;
 import core.Place;
 import init.CreateShowControl;
 import init.DBManager;
-import init.MainClass;
+import init.HandsInTheAir;
 import init.WindowManager;
 import java.awt.Checkbox;
 import java.net.MalformedURLException;

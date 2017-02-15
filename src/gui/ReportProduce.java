@@ -16,7 +16,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.FileOutputStream;
 import core.Show;
-import init.MainClass;
+import init.HandsInTheAir;
 import init.PDFManager;
 import init.ReportProduceControl;
 import init.WindowManager;
@@ -135,20 +135,20 @@ public class ReportProduce extends javax.swing.JPanel {
         jComboBox1.setBounds(200, 70, 140, 24);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Choose year:");
         add(jLabel2);
         jLabel2.setBounds(60, 70, 150, 20);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Yearly Profit Report");
         add(jLabel3);
         jLabel3.setBounds(60, 20, 260, 40);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container1.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
-        jLabel1.setBounds(0, 0, 780, 580);
+        jLabel1.setBounds(0, 0, 850, 580);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
@@ -165,8 +165,8 @@ public class ReportProduce extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        MainClass.getPDF().createPDF(1, "Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
-        PDFManager.PDFFile pdf1 = MainClass.getPDF().getPDFFile(1);
+        HandsInTheAir.getPDF().createPDF(1, "Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
+        PDFManager.PDFFile pdf1 = HandsInTheAir.getPDF().getPDFFile(1);
         try {
             pdf1.addTitlePage("Muza Music "+jComboBox1.getSelectedItem().toString()+" Profit Report");
             String[] titles = new String[]{"Show ID","Created By","Presale sales","Regular sales","Total income","Total cost","Profit"};
@@ -189,7 +189,7 @@ public class ReportProduce extends javax.swing.JPanel {
         } catch (DocumentException ex) {
             Logger.getLogger(ReportProduce.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MainClass.getPDF().getPDFFile(1).launchPDF();
+        HandsInTheAir.getPDF().getPDFFile(1).launchPDF();
     }//GEN-LAST:event_jButton2ActionPerformed
         
     public void setTable() {

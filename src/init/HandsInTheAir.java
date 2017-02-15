@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MainClass {
+public class HandsInTheAir {
 
     private static DBManager DB = null;
     private static PDFManager PDF = null;
@@ -19,12 +19,13 @@ public class MainClass {
     private static PrintStream logFile;
     public static void main(String[] args) {
         
+    
         try {
             //Define log file
             String dateNow = (new SimpleDateFormat("ddM_hhmm")).format(new Date());
             logFile = new PrintStream(new File(fileName+"_"+dateNow+".log"));
-            //System.setErr(logFile);
-            //System.setOut(logFile);
+            System.setErr(logFile);
+            System.setOut(logFile);
             
             DB = new DBManager();
             PDF = new PDFManager();
@@ -43,16 +44,20 @@ public class MainClass {
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(MainClass.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HandsInTheAir.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    public static void writeLog(String info) {
+        logFile.print("\n"+info);
+    }
+    
     public static DBManager getDB() {
         return DB;
     }
 
     public static void setDB(DBManager DB) {
-        MainClass.DB = DB;
+        HandsInTheAir.DB = DB;
     }
     
     public static PDFManager getPDF() {
@@ -60,7 +65,7 @@ public class MainClass {
     }
 
     public static void setPDF(PDFManager PDF) {
-        MainClass.PDF = PDF;
+        HandsInTheAir.PDF = PDF;
     }
 
 }
