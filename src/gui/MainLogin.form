@@ -32,7 +32,6 @@
     <Container class="javax.swing.JInternalFrame" name="newAccountFrame">
       <Properties>
         <Property name="title" type="java.lang.String" value="Create new account"/>
-        <Property name="opaque" type="boolean" value="false"/>
         <Property name="visible" type="boolean" value="false"/>
       </Properties>
       <Constraints>
@@ -121,9 +120,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="birthdayLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Birthday:"/>
           </Properties>
           <Constraints>
@@ -134,9 +130,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="emailLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Email:"/>
           </Properties>
           <Constraints>
@@ -157,9 +150,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="nicknameLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Nickname:"/>
           </Properties>
           <Constraints>
@@ -180,9 +170,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lastnameLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Last Name:"/>
           </Properties>
           <Constraints>
@@ -203,9 +190,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="firstnameLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="First Name:"/>
           </Properties>
           <Constraints>
@@ -216,9 +200,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="passwordLabel1">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Please upload a profile picture:"/>
           </Properties>
           <Constraints>
@@ -249,9 +230,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="passwordLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Password:"/>
           </Properties>
           <Constraints>
@@ -262,9 +240,6 @@
         </Component>
         <Component class="javax.swing.JLabel" name="usernameLabel">
           <Properties>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Username:"/>
           </Properties>
           <Constraints>
