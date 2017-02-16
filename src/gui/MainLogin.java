@@ -5,6 +5,7 @@
  */
 package gui;
 
+import com.itextpdf.tool.xml.svg.tags.UseTag;
 import core.Agent;
 import init.HandsInTheAir;
 
@@ -87,7 +88,7 @@ public class MainLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         newAccountFrame.setTitle("Create new account");
-        newAccountFrame.setVisible(false);
+        newAccountFrame.setVisible(true);
         newAccountFrame.getContentPane().setLayout(null);
 
         Date today = new Date(new java.util.Date().getTime());
@@ -97,21 +98,21 @@ public class MainLogin extends javax.swing.JFrame {
         years[i] = ""+((begin++)+1900);
         yearBox.setModel(new javax.swing.DefaultComboBoxModel<>(years));
         newAccountFrame.getContentPane().add(yearBox);
-        yearBox.setBounds(330, 270, 70, 20);
+        yearBox.setBounds(330, 270, 70, 25);
 
         String[] months =  new String[12];
         for (int i = 0; i < 12; i++)
         months[i] = ""+(i+1);
         monthBox.setModel(new javax.swing.DefaultComboBoxModel<>(months));
         newAccountFrame.getContentPane().add(monthBox);
-        monthBox.setBounds(250, 270, 70, 20);
+        monthBox.setBounds(250, 270, 70, 25);
 
         String[] days =  new String[31];
         for (int i = 0; i < 31; i++)
         days[i] = ""+(i+1);
         dayBox.setModel(new javax.swing.DefaultComboBoxModel<>(days));
         newAccountFrame.getContentPane().add(dayBox);
-        dayBox.setBounds(170, 270, 70, 20);
+        dayBox.setBounds(170, 270, 70, 25);
 
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +121,7 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(registerButton);
-        registerButton.setBounds(300, 320, 90, 23);
+        registerButton.setBounds(300, 320, 90, 26);
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -129,15 +130,15 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(cancelButton);
-        cancelButton.setBounds(410, 320, 80, 23);
+        cancelButton.setBounds(410, 320, 80, 26);
 
         birthdayLabel.setText("Birthday:");
         newAccountFrame.getContentPane().add(birthdayLabel);
-        birthdayLabel.setBounds(90, 280, 90, 14);
+        birthdayLabel.setBounds(90, 280, 90, 16);
 
         emailLabel.setText("Email:");
         newAccountFrame.getContentPane().add(emailLabel);
-        emailLabel.setBounds(90, 240, 90, 14);
+        emailLabel.setBounds(90, 240, 90, 16);
 
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,7 +150,7 @@ public class MainLogin extends javax.swing.JFrame {
 
         nicknameLabel.setText("Nickname:");
         newAccountFrame.getContentPane().add(nicknameLabel);
-        nicknameLabel.setBounds(90, 180, 90, 14);
+        nicknameLabel.setBounds(90, 180, 90, 16);
 
         nicknameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +162,7 @@ public class MainLogin extends javax.swing.JFrame {
 
         lastnameLabel.setText("Last Name:");
         newAccountFrame.getContentPane().add(lastnameLabel);
-        lastnameLabel.setBounds(280, 210, 90, 14);
+        lastnameLabel.setBounds(280, 210, 90, 16);
 
         lastnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,11 +174,11 @@ public class MainLogin extends javax.swing.JFrame {
 
         firstnameLabel.setText("First Name:");
         newAccountFrame.getContentPane().add(firstnameLabel);
-        firstnameLabel.setBounds(90, 210, 90, 14);
+        firstnameLabel.setBounds(90, 210, 90, 16);
 
         passwordLabel1.setText("Please upload a profile picture:");
         newAccountFrame.getContentPane().add(passwordLabel1);
-        passwordLabel1.setBounds(250, 90, 200, 14);
+        passwordLabel1.setBounds(250, 90, 200, 16);
 
         firstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,11 +198,11 @@ public class MainLogin extends javax.swing.JFrame {
 
         passwordLabel.setText("Password:");
         newAccountFrame.getContentPane().add(passwordLabel);
-        passwordLabel.setBounds(250, 60, 90, 14);
+        passwordLabel.setBounds(250, 60, 90, 16);
 
         usernameLabel.setText("Username:");
         newAccountFrame.getContentPane().add(usernameLabel);
-        usernameLabel.setBounds(250, 30, 90, 14);
+        usernameLabel.setBounds(250, 30, 90, 16);
 
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -218,7 +219,7 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(uploadButton);
-        uploadButton.setBounds(250, 135, 80, 23);
+        uploadButton.setBounds(250, 135, 80, 26);
 
         profileField.setEditable(false);
         newAccountFrame.getContentPane().add(profileField);
@@ -259,7 +260,7 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(createUserBtn);
-        createUserBtn.setBounds(690, 560, 140, 14);
+        createUserBtn.setBounds(690, 560, 140, 16);
 
         loginBtn.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -359,11 +360,10 @@ public class MainLogin extends javax.swing.JFrame {
         Integer birthYear = Integer.parseInt(String.valueOf(yearBox.getSelectedItem()));
         Integer birthMonth = Integer.parseInt(String.valueOf(monthBox.getSelectedItem()));
         Integer birthDay = Integer.parseInt(String.valueOf(dayBox.getSelectedItem()));
-        Date birthdate = new Date(birthYear, birthMonth, birthDay);
-        if (username == null || nickname == null || firstname == null || lastname == null ||
-            email == null || password == null || birthdate == null) {
-            System.out.println("error");
-        }
+        Date birthdate = new Date(birthYear-1900, birthMonth, birthDay);
+        System.out.println("id "+username+" birthdate "+birthdate.toString());
+        //HandsInTheAir.getDB().insert("INSERT INTO tblUser (userAlphaCode, firstName, lastName, nickname, birthday, email, image, password) VALUES('"+username+"','"+firstname+"','"+lastname+"','"+nickname+"','#"+birthdate+"#','"+email+"','"+profileLabel+"','"+password+"')");
+
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
