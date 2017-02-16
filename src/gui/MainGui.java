@@ -207,7 +207,9 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_genericBtn2ActionPerformed
 
     private void genericBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn4ActionPerformed
-        WindowManager.openWin(new ReportProduce());
+        if (WindowManager.getAuthValue() == 2) {
+            WindowManager.openWin(new ReportProduce());
+        }
     }//GEN-LAST:event_genericBtn4ActionPerformed
 
     private void genericBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn3ActionPerformed
