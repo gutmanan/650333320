@@ -40,6 +40,8 @@ public class MainGui extends JFrame {
         userBtn = new javax.swing.JButton();
         logoutBtn = new javax.swing.JButton();
         exitBtn = new javax.swing.JButton();
+        genericBtn6 = new javax.swing.JButton();
+        genericBtn5 = new javax.swing.JButton();
         genericBtn4 = new javax.swing.JButton();
         genericBtn2 = new javax.swing.JButton();
         genericBtn1 = new javax.swing.JButton();
@@ -115,6 +117,30 @@ public class MainGui extends JFrame {
         getContentPane().add(exitBtn);
         exitBtn.setBounds(1070, 610, 130, 40);
 
+        if (WindowManager.getAuthValue() == 1)
+        genericBtn6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/participationBtn.png"))); // NOI18N
+        genericBtn6.setBorderPainted(false);
+        genericBtn6.setContentAreaFilled(false);
+        genericBtn6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genericBtn6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(genericBtn6);
+        genericBtn6.setBounds(0, 460, 160, 46);
+
+        if (WindowManager.getAuthValue() == 1)
+        genericBtn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/viewPlaceBtn.png"))); // NOI18N
+        genericBtn5.setBorderPainted(false);
+        genericBtn5.setContentAreaFilled(false);
+        genericBtn5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                genericBtn5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(genericBtn5);
+        genericBtn5.setBounds(0, 420, 160, 46);
+
         if (WindowManager.getAuthValue() == 2)
         genericBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/reportProduceBtn.png"))); // NOI18N
         if (WindowManager.getAuthValue() == 1)
@@ -175,6 +201,9 @@ public class MainGui extends JFrame {
         if (WindowManager.getAuthValue() == 4) {
             WindowManager.openWin(new CreatePlace());
         }
+        if (WindowManager.getAuthValue() == 1) {
+            WindowManager.openWin(new CreateArtist());
+        }
     }//GEN-LAST:event_genericBtn1ActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -202,7 +231,10 @@ public class MainGui extends JFrame {
             WindowManager.openWin(new ViewAgents());
         }
         if (WindowManager.getAuthValue() == 4) {
-            //WindowManager.openWin(new ViewPlaceInfo());
+            WindowManager.openWin(new ViewPlaceInfo());
+        }
+        if (WindowManager.getAuthValue() == 1) {
+            WindowManager.openWin(new ChangeArtistDetails());
         }
     }//GEN-LAST:event_genericBtn2ActionPerformed
 
@@ -210,13 +242,31 @@ public class MainGui extends JFrame {
         if (WindowManager.getAuthValue() == 2) {
             WindowManager.openWin(new ReportProduce());
         }
+        if (WindowManager.getAuthValue() == 1) {
+            WindowManager.openWin(new ViewShows());
+        }
     }//GEN-LAST:event_genericBtn4ActionPerformed
 
     private void genericBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn3ActionPerformed
         if (WindowManager.getAuthValue() == 2) {
             WindowManager.openWin(new ChangeConstants());
         }
+        if (WindowManager.getAuthValue() == 1) {
+            WindowManager.openWin(new CreateShow());
+        }
     }//GEN-LAST:event_genericBtn3ActionPerformed
+
+    private void genericBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn5ActionPerformed
+        if (WindowManager.getAuthValue() == 1) {
+            WindowManager.openWin(new ViewPlaceInfo());
+        }
+    }//GEN-LAST:event_genericBtn5ActionPerformed
+
+    private void genericBtn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn6ActionPerformed
+        if (WindowManager.getAuthValue() == 1) {
+            WindowManager.openWin(new ApproveParticipation());
+        }
+    }//GEN-LAST:event_genericBtn6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -225,6 +275,8 @@ public class MainGui extends JFrame {
     private javax.swing.JButton genericBtn2;
     private javax.swing.JButton genericBtn3;
     private javax.swing.JButton genericBtn4;
+    private javax.swing.JButton genericBtn5;
+    private javax.swing.JButton genericBtn6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton userBtn;
