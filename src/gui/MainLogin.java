@@ -88,7 +88,7 @@ public class MainLogin extends javax.swing.JFrame {
 
         newAccountFrame.setTitle("Create new account");
         newAccountFrame.setOpaque(false);
-        newAccountFrame.setVisible(true);
+        newAccountFrame.setVisible(false);
         newAccountFrame.getContentPane().setLayout(null);
 
         Date today = new Date(new java.util.Date().getTime());

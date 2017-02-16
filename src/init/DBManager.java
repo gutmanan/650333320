@@ -47,6 +47,7 @@ public class DBManager {
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
+        /*
         String id = "ab1";
         String fn = "aa";
         String ln = "bb";
@@ -54,6 +55,7 @@ public class DBManager {
         String myURL = "http://example.com/pages/";
         String pass = "12d";
         insert("INSERT INTO tblAgent (ID, firstName, lastName, phoneNumber, email, password) VALUES('"+id+"','"+fn+"','"+ln+"','"+pn+"','"+myURL+"','"+pass+"')");
+        */
     }
     
     public static ResultSet query(String qry) {

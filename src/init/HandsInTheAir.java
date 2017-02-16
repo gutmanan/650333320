@@ -49,7 +49,7 @@ public class HandsInTheAir {
     }
 
     public static void writeLog(String info) {
-        logFile.print("\n"+info);
+        //logFile.print("\n"+info);
     }
     
     public static DBManager getDB() {
