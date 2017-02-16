@@ -21,11 +21,11 @@ import org.jfree.util.Rotation;
  *
  * @author Shai Gutman
  */
-public class CreateAgent extends javax.swing.JPanel {
+public class CreateArtist extends javax.swing.JPanel {
 
     ReportProduceControl rpController = new ReportProduceControl();
     
-    public CreateAgent() {
+    public CreateArtist() {
         initComponents();
     }
 
@@ -40,17 +40,15 @@ public class CreateAgent extends javax.swing.JPanel {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jTextField4 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -59,14 +57,34 @@ public class CreateAgent extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Create Agent :");
+        jLabel4.setText("Create Artist :");
         add(jLabel4);
         jLabel4.setBounds(30, 10, 170, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("ID Code :");
+        jLabel2.setText("Alpha Code :");
         add(jLabel2);
         jLabel2.setBounds(30, 70, 90, 15);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setText("Stage Name :");
+        add(jLabel3);
+        jLabel3.setBounds(30, 110, 90, 15);
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel5.setText("FaceBook :");
+        add(jLabel5);
+        jLabel5.setBounds(30, 150, 90, 15);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Email :");
+        add(jLabel6);
+        jLabel6.setBounds(30, 190, 110, 15);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel11.setText("Biography :");
+        add(jLabel11);
+        jLabel11.setBounds(340, 70, 110, 15);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,41 +93,15 @@ public class CreateAgent extends javax.swing.JPanel {
         });
         add(jTextField1);
         jTextField1.setBounds(130, 60, 150, 30);
-
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("First Name :");
-        add(jLabel3);
-        jLabel3.setBounds(30, 110, 90, 15);
+        jTextField1.setEditable(false);
         add(jTextField2);
         jTextField2.setBounds(130, 100, 150, 30);
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel5.setText("Last Name :");
-        add(jLabel5);
-        jLabel5.setBounds(30, 150, 90, 15);
-        add(jTextField3);
-        jTextField3.setBounds(130, 140, 150, 30);
         add(jTextField4);
-        jTextField4.setBounds(130, 180, 150, 30);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Email :");
-        add(jLabel6);
-        jLabel6.setBounds(30, 190, 60, 15);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("PhoneNumber :");
-        add(jLabel7);
-        jLabel7.setBounds(30, 230, 100, 15);
+        jTextField4.setBounds(130, 140, 150, 30);
+        add(jTextField9);
+        jTextField9.setBounds(440, 60, 350, 150);
         add(jTextField5);
-        jTextField5.setBounds(130, 220, 150, 30);
-        add(jTextField6);
-        jTextField6.setBounds(130, 260, 150, 30);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Password :");
-        add(jLabel8);
-        jLabel8.setBounds(30, 270, 100, 15);
+        jTextField5.setBounds(130, 180, 150, 30);
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -118,7 +110,7 @@ public class CreateAgent extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(50, 320, 90, 40);
+        jButton1.setBounds(240, 300, 90, 40);
 
         jButton2.setText("Clear");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -127,7 +119,7 @@ public class CreateAgent extends javax.swing.JPanel {
             }
         });
         add(jButton2);
-        jButton2.setBounds(180, 320, 90, 40);
+        jButton2.setBounds(370, 300, 90, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -186,18 +178,16 @@ public class CreateAgent extends javax.swing.JPanel {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }

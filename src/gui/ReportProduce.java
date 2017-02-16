@@ -84,10 +84,9 @@ public class ReportProduce extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jList1);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(50, 380, 230, 131);
+        jScrollPane2.setBounds(50, 380, 230, 130);
 
         jLabel18.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Artists participated in selected show:");
         add(jLabel18);
         jLabel18.setBounds(50, 350, 360, 20);
@@ -135,13 +134,11 @@ public class ReportProduce extends javax.swing.JPanel {
         jComboBox1.setBounds(200, 70, 140, 24);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Choose year:");
         add(jLabel2);
         jLabel2.setBounds(60, 70, 150, 20);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Yearly Profit Report");
         add(jLabel3);
         jLabel3.setBounds(60, 20, 260, 40);
