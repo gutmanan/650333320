@@ -9,8 +9,11 @@ import core.Agent;
 import init.HandsInTheAir;
 
 import init.WindowManager;
+import java.awt.Image;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,6 +21,9 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -312,17 +318,17 @@ public class MainLogin extends javax.swing.JFrame {
         openMain();
     }//GEN-LAST:event_loginBtnActionPerformed
 
-    private void usernameBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameBtnKeyPressed
+    private void usernameAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameAreaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) { 
             openMain();
         } 
-    }//GEN-LAST:event_usernameBtnKeyPressed
+    }//GEN-LAST:event_usernameAreaKeyPressed
 
-    private void passwordBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordBtnKeyPressed
+    private void passwordAreaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordAreaKeyPressed
         if(evt.getKeyCode() == KeyEvent.VK_ENTER) { 
             openMain();
         }
-    }//GEN-LAST:event_passwordBtnKeyPressed
+    }//GEN-LAST:event_passwordAreaKeyPressed
 
     private void createUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserBtnActionPerformed
         newAccountFrame.setVisible(true);
@@ -353,23 +359,49 @@ public class MainLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        // TODO add your handling code here:
+        String username = usernameField.getText();
+        String nickname = nicknameField.getText();
+        String firstname = firstnameField.getText();
+        String lastname = lastnameField.getText();
+        String email = emailField.getText();
+        String password = passwordField.getText();
+        Integer birthYear = Integer.parseInt(String.valueOf(yearBox.getSelectedItem()));
+        Integer birthMonth = Integer.parseInt(String.valueOf(monthBox.getSelectedItem()));
+        Integer birthDay = Integer.parseInt(String.valueOf(dayBox.getSelectedItem()));
+        Date birthdate = new Date(birthYear, birthMonth, birthDay);
+        if (username == null || nickname == null || firstname == null || lastname == null ||
+            email == null || password == null || birthdate == null) {
+            System.out.println("error");
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
+
+    private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        chooser.showOpenDialog(null);
+        File chosen = chooser.getSelectedFile();
+        String filename = chosen.getAbsolutePath();
+        profileField.setText(filename);
+        profileLabel.setIcon(new ImageIcon(filename));
+    }//GEN-LAST:event_uploadButtonActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passwordFieldActionPerformed
     
     public void openMain() {
-        if (usernameBtn.getText().equals("") || passwordBtn.getText().equals("")) {
+        if (usernameArea.getText().equals("") || passwordArea.getText().equals("")) {
             JOptionPane.showMessageDialog(this,
                 "You must enter username & password",
                 "Login error",
                 JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (usernameBtn.getText().equals("Admin") && passwordBtn.getText().equals("Admin")) {
+        if (usernameArea.getText().equals("Admin") && passwordArea.getText().equals("Admin")) {
             WindowManager.setUser(2, null);
             this.dispose();
             WindowManager.startMain();
             return;
-        } if (usernameBtn.getText().equals("Place") && passwordBtn.getText().equals("Place")) {
+        } if (usernameArea.getText().equals("Place") && passwordArea.getText().equals("Place")) {
             WindowManager.setUser(4, null);
             this.dispose();
             WindowManager.startMain();
@@ -377,10 +409,10 @@ public class MainLogin extends javax.swing.JFrame {
         } else {
             ResultSet rs = HandsInTheAir.getDB().query("SELECT tblAgent.*\n" +
                                                        "FROM tblAgent " +
-                                                       "WHERE tblAgent.ID=\""+usernameBtn.getText()+"\"");
+                                                       "WHERE tblAgent.ID=\""+usernameArea.getText()+"\"");
             try {
                 while (rs.next()) {
-                    if (rs.getString(6).equals(passwordBtn.getText())) {
+                    if (rs.getString(6).equals(passwordArea.getText())) {
                         WindowManager.setUser(1, new Agent(rs.getString(1), rs.getString(2), rs.getString(3), 
                                                            rs.getString(4), rs.getString(5), rs.getString(6)));
                         this.dispose();
