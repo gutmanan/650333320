@@ -58,15 +58,21 @@ public class MainLogin extends javax.swing.JFrame {
         lastnameLabel = new javax.swing.JLabel();
         lastnameField = new javax.swing.JTextField();
         firstnameLabel = new javax.swing.JLabel();
+        passwordLabel1 = new javax.swing.JLabel();
         firstnameField = new javax.swing.JTextField();
+        passwordField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
+        uploadButton = new javax.swing.JButton();
+        profileField = new javax.swing.JTextField();
+        profileLabel = new javax.swing.JLabel();
         internalWallpaper = new javax.swing.JLabel();
         exitBtn = new javax.swing.JButton();
         createUserBtn = new javax.swing.JButton();
         loginBtn = new javax.swing.JButton();
-        passwordBtn = new javax.swing.JTextField();
-        usernameBtn = new javax.swing.JTextField();
+        passwordArea = new javax.swing.JTextField();
+        usernameArea = new javax.swing.JTextField();
         wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -75,6 +81,7 @@ public class MainLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         newAccountFrame.setTitle("Create new account");
+        newAccountFrame.setOpaque(false);
         newAccountFrame.setVisible(true);
         newAccountFrame.getContentPane().setLayout(null);
 
@@ -85,21 +92,21 @@ public class MainLogin extends javax.swing.JFrame {
         years[i] = ""+((begin++)+1900);
         yearBox.setModel(new javax.swing.DefaultComboBoxModel<>(years));
         newAccountFrame.getContentPane().add(yearBox);
-        yearBox.setBounds(330, 260, 70, 25);
+        yearBox.setBounds(330, 270, 70, 25);
 
         String[] months =  new String[12];
         for (int i = 0; i < 12; i++)
         months[i] = ""+(i+1);
         monthBox.setModel(new javax.swing.DefaultComboBoxModel<>(months));
         newAccountFrame.getContentPane().add(monthBox);
-        monthBox.setBounds(250, 260, 70, 25);
+        monthBox.setBounds(250, 270, 70, 25);
 
         String[] days =  new String[31];
         for (int i = 0; i < 31; i++)
         days[i] = ""+(i+1);
         dayBox.setModel(new javax.swing.DefaultComboBoxModel<>(days));
         newAccountFrame.getContentPane().add(dayBox);
-        dayBox.setBounds(170, 260, 70, 25);
+        dayBox.setBounds(170, 270, 70, 25);
 
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +115,7 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(registerButton);
-        registerButton.setBounds(300, 310, 90, 26);
+        registerButton.setBounds(300, 320, 90, 26);
 
         cancelButton.setText("Cancel");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
@@ -117,17 +124,17 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(cancelButton);
-        cancelButton.setBounds(410, 310, 80, 26);
+        cancelButton.setBounds(410, 320, 80, 26);
 
         birthdayLabel.setForeground(new java.awt.Color(0, 0, 0));
         birthdayLabel.setText("Birthday:");
         newAccountFrame.getContentPane().add(birthdayLabel);
-        birthdayLabel.setBounds(90, 270, 90, 16);
+        birthdayLabel.setBounds(90, 280, 90, 16);
 
         emailLabel.setForeground(new java.awt.Color(0, 0, 0));
         emailLabel.setText("Email:");
         newAccountFrame.getContentPane().add(emailLabel);
-        emailLabel.setBounds(90, 230, 90, 16);
+        emailLabel.setBounds(90, 240, 90, 16);
 
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,12 +142,12 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(emailField);
-        emailField.setBounds(170, 230, 90, 20);
+        emailField.setBounds(170, 240, 150, 20);
 
         nicknameLabel.setForeground(new java.awt.Color(0, 0, 0));
         nicknameLabel.setText("Nickname:");
         newAccountFrame.getContentPane().add(nicknameLabel);
-        nicknameLabel.setBounds(280, 170, 90, 16);
+        nicknameLabel.setBounds(90, 180, 90, 16);
 
         nicknameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,12 +155,12 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(nicknameField);
-        nicknameField.setBounds(360, 170, 90, 20);
+        nicknameField.setBounds(170, 180, 90, 20);
 
         lastnameLabel.setForeground(new java.awt.Color(0, 0, 0));
         lastnameLabel.setText("Last Name:");
         newAccountFrame.getContentPane().add(lastnameLabel);
-        lastnameLabel.setBounds(280, 200, 90, 16);
+        lastnameLabel.setBounds(280, 210, 90, 16);
 
         lastnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,12 +168,17 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(lastnameField);
-        lastnameField.setBounds(360, 200, 90, 20);
+        lastnameField.setBounds(360, 210, 90, 20);
 
         firstnameLabel.setForeground(new java.awt.Color(0, 0, 0));
         firstnameLabel.setText("First Name:");
         newAccountFrame.getContentPane().add(firstnameLabel);
-        firstnameLabel.setBounds(90, 200, 90, 16);
+        firstnameLabel.setBounds(90, 210, 90, 16);
+
+        passwordLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        passwordLabel1.setText("Please upload a profile picture:");
+        newAccountFrame.getContentPane().add(passwordLabel1);
+        passwordLabel1.setBounds(250, 90, 200, 16);
 
         firstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,12 +186,25 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(firstnameField);
-        firstnameField.setBounds(170, 200, 90, 20);
+        firstnameField.setBounds(170, 210, 90, 20);
+
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+        newAccountFrame.getContentPane().add(passwordField);
+        passwordField.setBounds(330, 60, 120, 20);
+
+        passwordLabel.setForeground(new java.awt.Color(0, 0, 0));
+        passwordLabel.setText("Password:");
+        newAccountFrame.getContentPane().add(passwordLabel);
+        passwordLabel.setBounds(250, 60, 90, 16);
 
         usernameLabel.setForeground(new java.awt.Color(0, 0, 0));
         usernameLabel.setText("Username:");
         newAccountFrame.getContentPane().add(usernameLabel);
-        usernameLabel.setBounds(90, 170, 90, 16);
+        usernameLabel.setBounds(250, 30, 90, 16);
 
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +212,24 @@ public class MainLogin extends javax.swing.JFrame {
             }
         });
         newAccountFrame.getContentPane().add(usernameField);
-        usernameField.setBounds(170, 170, 90, 20);
+        usernameField.setBounds(330, 30, 120, 20);
+
+        uploadButton.setText("Upload");
+        uploadButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uploadButtonActionPerformed(evt);
+            }
+        });
+        newAccountFrame.getContentPane().add(uploadButton);
+        uploadButton.setBounds(250, 135, 80, 26);
+
+        profileField.setEditable(false);
+        newAccountFrame.getContentPane().add(profileField);
+        profileField.setBounds(250, 110, 200, 20);
+
+        profileLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/defaultProfile.png"))); // NOI18N
+        newAccountFrame.getContentPane().add(profileLabel);
+        profileLabel.setBounds(90, 30, 139, 131);
 
         internalWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container2.png"))); // NOI18N
         newAccountFrame.getContentPane().add(internalWallpaper);
@@ -235,25 +277,25 @@ public class MainLogin extends javax.swing.JFrame {
         getContentPane().add(loginBtn);
         loginBtn.setBounds(697, 500, 310, 40);
 
-        passwordBtn.setBorder(null);
-        passwordBtn.setOpaque(false);
-        passwordBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+        passwordArea.setBorder(null);
+        passwordArea.setOpaque(false);
+        passwordArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                passwordBtnKeyPressed(evt);
+                passwordAreaKeyPressed(evt);
             }
         });
-        getContentPane().add(passwordBtn);
-        passwordBtn.setBounds(730, 450, 280, 30);
+        getContentPane().add(passwordArea);
+        passwordArea.setBounds(730, 450, 280, 30);
 
-        usernameBtn.setBorder(null);
-        usernameBtn.setOpaque(false);
-        usernameBtn.addKeyListener(new java.awt.event.KeyAdapter() {
+        usernameArea.setBorder(null);
+        usernameArea.setOpaque(false);
+        usernameArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                usernameBtnKeyPressed(evt);
+                usernameAreaKeyPressed(evt);
             }
         });
-        getContentPane().add(usernameBtn);
-        usernameBtn.setBounds(730, 400, 280, 30);
+        getContentPane().add(usernameArea);
+        usernameArea.setBounds(730, 400, 280, 30);
 
         wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/muzaLogin.png"))); // NOI18N
         getContentPane().add(wallpaper);
@@ -373,9 +415,15 @@ public class MainLogin extends javax.swing.JFrame {
     private javax.swing.JInternalFrame newAccountFrame;
     private javax.swing.JTextField nicknameField;
     private javax.swing.JLabel nicknameLabel;
-    private javax.swing.JTextField passwordBtn;
+    private javax.swing.JTextField passwordArea;
+    private javax.swing.JTextField passwordField;
+    private javax.swing.JLabel passwordLabel;
+    private javax.swing.JLabel passwordLabel1;
+    private javax.swing.JTextField profileField;
+    private javax.swing.JLabel profileLabel;
     private javax.swing.JButton registerButton;
-    private javax.swing.JTextField usernameBtn;
+    private javax.swing.JButton uploadButton;
+    private javax.swing.JTextField usernameArea;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JLabel wallpaper;

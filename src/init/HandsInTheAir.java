@@ -22,10 +22,10 @@ public class HandsInTheAir {
     
         try {
             //Define log file
-            String dateNow = (new SimpleDateFormat("ddM_hhmm")).format(new Date());
-            logFile = new PrintStream(new File(fileName+"_"+dateNow+".log"));
-            System.setErr(logFile);
-            System.setOut(logFile);
+            //String dateNow = (new SimpleDateFormat("ddM_hhmm")).format(new Date());
+            //logFile = new PrintStream(new File(fileName+"_"+dateNow+".log"));
+            //System.setErr(logFile);
+            //System.setOut(logFile);
             
             DB = new DBManager();
             PDF = new PDFManager();
@@ -43,9 +43,9 @@ public class HandsInTheAir {
             
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (FileNotFoundException ex) {
+        } /*catch (FileNotFoundException ex) {
             Logger.getLogger(HandsInTheAir.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }
 
     public static void writeLog(String info) {
