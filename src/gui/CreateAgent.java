@@ -5,10 +5,13 @@
  */
 package gui;
 
+import init.HandsInTheAir;
 import init.ReportProduceControl;
+import init.ValidatorManager;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
@@ -52,7 +55,6 @@ public class CreateAgent extends javax.swing.JPanel {
         jTextField6 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -74,23 +76,23 @@ public class CreateAgent extends javax.swing.JPanel {
             }
         });
         add(jTextField1);
-        jTextField1.setBounds(130, 60, 150, 30);
+        jTextField1.setBounds(130, 60, 170, 30);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("First Name :");
         add(jLabel3);
         jLabel3.setBounds(30, 110, 90, 15);
         add(jTextField2);
-        jTextField2.setBounds(130, 100, 150, 30);
+        jTextField2.setBounds(130, 100, 170, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Last Name :");
         add(jLabel5);
         jLabel5.setBounds(30, 150, 90, 15);
         add(jTextField3);
-        jTextField3.setBounds(130, 140, 150, 30);
+        jTextField3.setBounds(130, 140, 170, 30);
         add(jTextField4);
-        jTextField4.setBounds(130, 180, 150, 30);
+        jTextField4.setBounds(130, 180, 170, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Email :");
@@ -102,9 +104,9 @@ public class CreateAgent extends javax.swing.JPanel {
         add(jLabel7);
         jLabel7.setBounds(30, 230, 100, 15);
         add(jTextField5);
-        jTextField5.setBounds(130, 220, 150, 30);
+        jTextField5.setBounds(130, 220, 170, 30);
         add(jTextField6);
-        jTextField6.setBounds(130, 260, 150, 30);
+        jTextField6.setBounds(130, 260, 170, 30);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Password :");
@@ -118,16 +120,7 @@ public class CreateAgent extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(50, 320, 90, 40);
-
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        add(jButton2);
-        jButton2.setBounds(180, 320, 90, 40);
+        jButton1.setBounds(110, 310, 90, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -139,12 +132,31 @@ public class CreateAgent extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
+        ValidatorManager valid = new ValidatorManager();
+        
+        if (!(valid.isAlpha(jTextField2.getText()) && valid.isAlpha(jTextField3.getText()))){
+            JOptionPane.showMessageDialog(null, "The first/last name field is incorrect");
+            return;
+        }
+        
+        if (!(valid.isValidEmailAddress(jTextField4.getText()))){
+            JOptionPane.showMessageDialog(null, "The Email field is incorrect");
+            return;
+        }
+        
+        if (!(valid.onlyContainsNumbers(jTextField5.getText()))){
+            JOptionPane.showMessageDialog(null, "The phone field is incorrect");
+            return;
+        }
+        
+        String qry = ("INSERT INTO tblAgent (ID, firstName, lastName, phoneNumber, email, password) VALUES('"
+                +jTextField1.getText()+"','"+jTextField2.getText()+"','"+jTextField3.getText()+"','"
+                +jTextField4.getText()+"','"+jTextField5.getText()+"','"+jTextField6.getText()+"')");
+                    
+        HandsInTheAir.getDB().insert(qry);
+        
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
         
     public void setTable() {
 
@@ -184,7 +196,6 @@ public class CreateAgent extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
