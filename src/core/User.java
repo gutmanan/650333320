@@ -1,9 +1,8 @@
 package core;
 
-import java.awt.Image;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
+import javax.swing.ImageIcon;
 
 public class User {
 	
@@ -13,11 +12,11 @@ public class User {
 	private String nickname;
 	private Date birthday;
 	private String email;
-	private Image image;
+        private String password;
+	private ImageIcon image;
 	private ArrayList<Artist> artists;
 	
-	public User(String id, String firstName, String lastName, String nickname, Date birthday, String email, Image image,
-			ArrayList<Artist> artists) {
+	public User(String id, String firstName, String lastName, String nickname, Date birthday, String email, String password) {
 		super();
 		this.userAlphaCode = id;
 		this.firstName = firstName;
@@ -25,8 +24,7 @@ public class User {
 		this.nickname = nickname;
 		this.birthday = birthday;
 		this.email = email;
-		this.image = image;
-		this.artists = artists;
+                this.password = password;
 	}
 
 	public String getUserAlphaCode() {
@@ -77,11 +75,11 @@ public class User {
 		this.email = email;
 	}
 
-	public Image getImage() {
+	public ImageIcon getImage() {
 		return image;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(ImageIcon image) {
 		this.image = image;
 	}
 

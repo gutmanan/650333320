@@ -7,6 +7,7 @@ package gui;
 
 import com.itextpdf.tool.xml.svg.tags.UseTag;
 import core.Agent;
+import core.User;
 import init.HandsInTheAir;
 
 import init.WindowManager;
@@ -88,7 +89,7 @@ public class MainLogin extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         newAccountFrame.setTitle("Create new account");
-        newAccountFrame.setVisible(true);
+        newAccountFrame.setVisible(false);
         newAccountFrame.getContentPane().setLayout(null);
 
         Date today = new Date(new java.util.Date().getTime());
@@ -398,14 +399,26 @@ public class MainLogin extends javax.swing.JFrame {
             WindowManager.startMain();
             return;
         } else {
-            ResultSet rs = HandsInTheAir.getDB().query("SELECT tblAgent.*\n" +
-                                                       "FROM tblAgent " +
-                                                       "WHERE tblAgent.ID=\""+usernameArea.getText()+"\"");
+            ResultSet agents = HandsInTheAir.getDB().query("SELECT tblAgent.*\n" +
+                                                        "FROM tblAgent\n" +
+                                                        "WHERE tblAgent.email=\""+usernameArea.getText()+"\"");
+            ResultSet users = HandsInTheAir.getDB().query("SELECT tblUser.*\n" +
+                                                        "FROM tblUser\n" +
+                                                        "WHERE tblUser.email=\""+usernameArea.getText()+"\"");
             try {
-                while (rs.next()) {
-                    if (rs.getString(6).equals(passwordArea.getText())) {
-                        WindowManager.setUser(1, new Agent(rs.getString(1), rs.getString(2), rs.getString(3), 
-                                                           rs.getString(4), rs.getString(5), rs.getString(6)));
+                while (agents.next()) {
+                    if (agents.getString(6).equals(passwordArea.getText())) {
+                        WindowManager.setUser(1, new Agent(agents.getString(1), agents.getString(2), agents.getString(3), 
+                                                           agents.getString(4), agents.getString(5), agents.getString(6)));
+                        this.dispose();
+                        WindowManager.startMain();
+                        return;
+                    }
+                }
+                while (users.next()) {
+                    if (users.getString(8).equals(passwordArea.getText())) {
+                        WindowManager.setUser(3, new User(users.getString(1), users.getString(2), users.getString(3), 
+                                                        users.getString(4), users.getDate(5), users.getString(6), users.getString(8)));
                         this.dispose();
                         WindowManager.startMain();
                         return;
