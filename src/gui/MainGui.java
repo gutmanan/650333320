@@ -50,6 +50,7 @@ public class MainGui extends JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        if (WindowManager.getAuthValue() == 2)
         genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/paramBtn1.png"))); // NOI18N
         genericBtn3.setBorderPainted(false);
         genericBtn3.setContentAreaFilled(false);
@@ -114,6 +115,7 @@ public class MainGui extends JFrame {
         getContentPane().add(exitBtn);
         exitBtn.setBounds(1070, 610, 130, 40);
 
+        if (WindowManager.getAuthValue() == 2)
         genericBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3.png"))); // NOI18N
         genericBtn4.setBorderPainted(false);
         genericBtn4.setContentAreaFilled(false);
@@ -169,7 +171,12 @@ public class MainGui extends JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void genericBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn1ActionPerformed
-        
+        if (WindowManager.getAuthValue() == 2) {
+            WindowManager.openWin(new CreateAgent());
+        }
+        if (WindowManager.getAuthValue() == 4) {
+            WindowManager.openWin(new CreatePlace());
+        }
     }//GEN-LAST:event_genericBtn1ActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -177,8 +184,6 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        
-        
         try {
             WindowManager.closeMain();
         } catch (SQLException ex) {
@@ -195,7 +200,12 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void genericBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn2ActionPerformed
-        
+        if (WindowManager.getAuthValue() == 2) {
+            WindowManager.openWin(new ViewAgents());
+        }
+        if (WindowManager.getAuthValue() == 4) {
+            //WindowManager.openWin(new ViewPlaceInfo());
+        }
     }//GEN-LAST:event_genericBtn2ActionPerformed
 
     private void genericBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn4ActionPerformed
@@ -203,7 +213,9 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_genericBtn4ActionPerformed
 
     private void genericBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn3ActionPerformed
-        // TODO add your handling code here:
+        if (WindowManager.getAuthValue() == 2) {
+            WindowManager.openWin(new ChangeConstants());
+        }
     }//GEN-LAST:event_genericBtn3ActionPerformed
 
 

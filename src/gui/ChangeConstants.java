@@ -69,9 +69,9 @@ public class ChangeConstants extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Create Place :");
+        jLabel4.setText("Change Constants :");
         add(jLabel4);
-        jLabel4.setBounds(30, 10, 170, 40);
+        jLabel4.setBounds(30, 10, 210, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Place Expanse (%) :");
@@ -161,7 +161,7 @@ public class ChangeConstants extends javax.swing.JPanel {
             }
         });
         add(jCheckBox1);
-        jCheckBox1.setBounds(30, 330, 170, 23);
+        jCheckBox1.setBounds(30, 330, 210, 24);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
