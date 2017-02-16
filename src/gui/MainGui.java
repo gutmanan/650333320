@@ -51,11 +51,9 @@ public class MainGui extends JFrame {
         getContentPane().setLayout(null);
 
         if (WindowManager.getAuthValue() == 2)
-        genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/paramBtn1.png"))); // NOI18N
+        genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/parametersBtn.png"))); // NOI18N
         genericBtn3.setBorderPainted(false);
         genericBtn3.setContentAreaFilled(false);
-        genericBtn3.setDisabledIcon(null);
-        genericBtn3.setDisabledSelectedIcon(null);
         genericBtn3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genericBtn3ActionPerformed(evt);
@@ -116,13 +114,9 @@ public class MainGui extends JFrame {
         exitBtn.setBounds(1070, 610, 130, 40);
 
         if (WindowManager.getAuthValue() == 2)
-        genericBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn3.png"))); // NOI18N
+        genericBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/reportProduceBtn.png"))); // NOI18N
         genericBtn4.setBorderPainted(false);
         genericBtn4.setContentAreaFilled(false);
-        genericBtn4.setDisabledIcon(null);
-        genericBtn4.setDisabledSelectedIcon(null);
-        if(WindowManager.getAuthValue() == 4)
-        genericBtn4.setVisible(false);
         genericBtn4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genericBtn4ActionPerformed(evt);
@@ -132,13 +126,11 @@ public class MainGui extends JFrame {
         genericBtn4.setBounds(0, 380, 160, 46);
 
         if (WindowManager.getAuthValue() == 2)
-        genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/viewAgentBtn2.png"))); // NOI18N
+        genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/viewAgentBtn.png"))); // NOI18N
         if (WindowManager.getAuthValue() == 4)
-        genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn2dis.png"))); // NOI18N
+        genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/viewPlaceBtn.png"))); // NOI18N
         genericBtn2.setBorderPainted(false);
         genericBtn2.setContentAreaFilled(false);
-        genericBtn2.setDisabledIcon(null);
-        genericBtn2.setDisabledSelectedIcon(null);
         genericBtn2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genericBtn2ActionPerformed(evt);
@@ -148,13 +140,11 @@ public class MainGui extends JFrame {
         genericBtn2.setBounds(0, 300, 160, 46);
 
         if (WindowManager.getAuthValue() == 2)
-        genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/createAgentBtn2.png"))); // NOI18N
+        genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/createAgentBtn.png"))); // NOI18N
         if (WindowManager.getAuthValue() == 4)
-        genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btn1dis.png"))); // NOI18N
+        genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/createPlaceBtn.png"))); // NOI18N
         genericBtn1.setBorderPainted(false);
         genericBtn1.setContentAreaFilled(false);
-        genericBtn1.setDisabledIcon(null);
-        genericBtn1.setDisabledSelectedIcon(null);
         genericBtn1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 genericBtn1ActionPerformed(evt);

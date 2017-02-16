@@ -32,16 +32,10 @@
     <Component class="javax.swing.JButton" name="genericBtn3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imgs/paramBtn1.png"/>
+          <Image iconType="3" name="/imgs/parametersBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
-        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
-        <Property name="disabledSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genericBtn3ActionPerformed"/>
@@ -141,22 +135,15 @@
     <Component class="javax.swing.JButton" name="genericBtn4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/imgs/btn3.png"/>
+          <Image iconType="3" name="/imgs/reportProduceBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
-        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
-        <Property name="disabledSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genericBtn4ActionPerformed"/>
       </Events>
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="if(WindowManager.getAuthValue() == 4)&#xa;genericBtn4.setVisible(false);"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="if (WindowManager.getAuthValue() == 2)"/>
       </AuxValues>
       <Constraints>
@@ -167,17 +154,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="genericBtn2">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/btn2dis.png&quot;))); // NOI18N">
-          <Image iconType="3" name="/imgs/viewAgentBtn2.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/viewPlaceBtn.png&quot;))); // NOI18N">
+          <Image iconType="3" name="/imgs/viewAgentBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
-        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
-        <Property name="disabledSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genericBtn2ActionPerformed"/>
@@ -193,17 +174,11 @@
     </Component>
     <Component class="javax.swing.JButton" name="genericBtn1">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/btn1dis.png&quot;))); // NOI18N">
-          <Image iconType="3" name="/imgs/createAgentBtn2.png"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/createPlaceBtn.png&quot;))); // NOI18N">
+          <Image iconType="3" name="/imgs/createAgentBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
-        <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
-        <Property name="disabledSelectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="0" name="null"/>
-        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="genericBtn1ActionPerformed"/>
