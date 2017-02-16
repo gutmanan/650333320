@@ -5,12 +5,20 @@
  */
 package gui;
 
+import init.HandsInTheAir;
 import init.ReportProduceControl;
+import init.ValidatorManager;
+import init.WindowManager;
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
@@ -52,7 +60,6 @@ public class CreateArtist extends javax.swing.JPanel {
         jTextField9 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         uploadButton = new javax.swing.JButton();
         profileLabel = new javax.swing.JLabel();
         profileField = new javax.swing.JTextField();
@@ -68,9 +75,9 @@ public class CreateArtist extends javax.swing.JPanel {
         jLabel4.setBounds(30, 10, 170, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Alpha Code :");
+        jLabel2.setText("Alphanumeric Code :");
         add(jLabel2);
-        jLabel2.setBounds(30, 70, 90, 15);
+        jLabel2.setBounds(30, 70, 130, 15);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Stage Name :");
@@ -85,12 +92,12 @@ public class CreateArtist extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Choose signature picture :");
         add(jLabel6);
-        jLabel6.setBounds(30, 250, 200, 10);
+        jLabel6.setBounds(30, 240, 200, 20);
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Biography :");
         add(jLabel11);
-        jLabel11.setBounds(340, 70, 110, 15);
+        jLabel11.setBounds(350, 70, 110, 15);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,16 +105,15 @@ public class CreateArtist extends javax.swing.JPanel {
             }
         });
         add(jTextField1);
-        jTextField1.setBounds(130, 60, 150, 30);
-        jTextField1.setEditable(false);
+        jTextField1.setBounds(170, 60, 150, 30);
         add(jTextField2);
-        jTextField2.setBounds(130, 100, 150, 30);
+        jTextField2.setBounds(170, 100, 150, 30);
         add(jTextField4);
-        jTextField4.setBounds(130, 140, 150, 30);
+        jTextField4.setBounds(170, 140, 150, 30);
         add(jTextField9);
-        jTextField9.setBounds(440, 60, 350, 150);
+        jTextField9.setBounds(440, 60, 340, 70);
         add(jTextField5);
-        jTextField5.setBounds(130, 180, 150, 30);
+        jTextField5.setBounds(170, 180, 150, 30);
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -116,16 +122,7 @@ public class CreateArtist extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(580, 440, 90, 40);
-
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        add(jButton2);
-        jButton2.setBounds(710, 440, 90, 40);
+        jButton1.setBounds(620, 420, 90, 40);
 
         uploadButton.setText("Upload");
         uploadButton.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +135,7 @@ public class CreateArtist extends javax.swing.JPanel {
 
         profileLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/defaultProfile.png"))); // NOI18N
         add(profileLabel);
-        profileLabel.setBounds(260, 230, 200, 100);
+        profileLabel.setBounds(260, 230, 140, 150);
 
         profileField.setEditable(false);
         add(profileField);
@@ -160,11 +157,72 @@ public class CreateArtist extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ValidatorManager valid = new ValidatorManager();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        try {
+            String sql = "SELECT tblArtist.artistAlphaCode FROM tblArtist WHERE (((tblArtist.artistAlphaCode) Like \""+jTextField1.getText()+"\"))";
+            ResultSet rs = HandsInTheAir.getDB().query(sql);
+            if (rs!=null && rs.next()){
+                JOptionPane.showMessageDialog(null, "The artist alphanumeric code is already exsist");
+                return;
+            }
+            
+            sql = "SELECT tblArtist.stageName FROM tblArtist WHERE (((tblArtist.stageName) Like \""+jTextField2.getText()+"\"))";
+            rs = HandsInTheAir.getDB().query(sql);
+            if (rs!=null && rs.next()){
+                JOptionPane.showMessageDialog(null, "The artist stage name is already exsist");
+                return;
+            }
+            
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Something wrong. Please try again latter..");
+             return;
+        }
+
+        if (!valid.isAlphaCode(jTextField1.getText()) || jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter only numbers and chars to alphanumeric code field");
+            return;
+        }
+        
+        if (!(valid.isAlpha(jTextField2.getText())) || jTextField2.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "The stage name field is incorrect or empty");
+            return;
+        }
+        
+        if (!(valid.isValidEmailAddress(jTextField5.getText()))){
+            JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
+            return;
+        }
+        
+        if (!(valid.isValidURL(jTextField4.getText()))){
+            JOptionPane.showMessageDialog(null, "The facebook field is incorrect or empty. \n Please enter full URL address");
+            return;
+        }
+                
+        if (jTextField9.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "The biography field is incorrect or empty");
+            return;
+        }
+
+        DataSource source = new FileDataSource(profileField.getText());
+       /* MimeBodyPart messageBodyPart = new MimeBodyPart();     
+        try {
+            messageBodyPart.setFileName(profileField.getText());
+        } catch (MessagingException ex) {
+            Logger.getLogger(CreateArtist.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        messageBodyPart.setDataHandler(new DataHandler(source));*/
+        
+        
+        String qry = ("INSERT INTO tblArtist (artistAlphaCode, stageName, biography, email, facebook, IsActive, Signature, agentID) VALUES('"
+                +jTextField1.getText()+"','"+jTextField2.getText()+"','"+jTextField9.getText()+"','"
+                +jTextField5.getText()+"','"+jTextField4.getText()+"','"+true+"','"+source+"','"+WindowManager.getTmpAgent().getId()+"')");
+                    
+        HandsInTheAir.getDB().insert(qry);
+        
+        JOptionPane.showMessageDialog(null, "The artist was added successfuly!");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
         JFileChooser chooser = new JFileChooser();
@@ -213,7 +271,6 @@ public class CreateArtist extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;

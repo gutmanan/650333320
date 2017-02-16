@@ -8,8 +8,12 @@ package gui;
 import init.HandsInTheAir;
 import init.ReportProduceControl;
 import init.ValidatorManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
@@ -135,8 +139,26 @@ public class CreateAgent extends javax.swing.JPanel {
         
         ValidatorManager valid = new ValidatorManager();
         
-        if (!(valid.isAlpha(jTextField2.getText()) && valid.isAlpha(jTextField3.getText()))){
-            JOptionPane.showMessageDialog(null, "The first/last name field is incorrect");
+        String sql = "SELECT tblAgent.ID FROM tblAgent WHERE (((tblAgent.ID) Like \""+jTextField1.getText()+"\"))";
+        
+        try {
+            ResultSet rs = HandsInTheAir.getDB().query(sql);
+            if (rs!=null && rs.next()){
+                JOptionPane.showMessageDialog(null, "The agent alphanumeric code is already exsist");
+                return;
+            }
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Something wrong. Please try again latter..");
+             return;
+        }
+
+        if (!valid.isAlphaCode(jTextField1.getText())){
+            JOptionPane.showMessageDialog(null, "Please enter only numbers and chars to alpha code field");
+            return;
+        }
+        
+        if (!(valid.isAlpha(jTextField2.getText()) && valid.isAlpha(jTextField3.getText())) || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "The first/last name field is incorrect or empty");
             return;
         }
         
@@ -146,7 +168,12 @@ public class CreateAgent extends javax.swing.JPanel {
         }
         
         if (!(valid.onlyContainsNumbers(jTextField5.getText()))){
-            JOptionPane.showMessageDialog(null, "The phone field is incorrect");
+            JOptionPane.showMessageDialog(null, "The phone field is incorrect.\n Please enter only numbers");
+            return;
+        }
+        
+        if (jTextField5.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "The password field is incorrect or empty");
             return;
         }
         
@@ -156,11 +183,10 @@ public class CreateAgent extends javax.swing.JPanel {
                     
         HandsInTheAir.getDB().insert(qry);
         
+        JOptionPane.showMessageDialog(null, "The agent was added successfuly!");
+        
     }//GEN-LAST:event_jButton1ActionPerformed
         
-    public void setTable() {
-
-    }
     
     private PieDataset createDataset(HashMap<Integer, Double> map) {
         DefaultPieDataset result = new DefaultPieDataset();

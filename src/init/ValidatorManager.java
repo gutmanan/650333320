@@ -5,6 +5,8 @@
  */
 package init;
 
+import java.net.URL;
+
 /**
  *
  * @author Yair Etzion
@@ -41,6 +43,28 @@ public class ValidatorManager {
         }
     } 
     
+    public boolean isAlphaCode(String name) { 
+        char[] chars = name.toCharArray();
+
+            for (char c : chars) {
+                if(!Character.isLetterOrDigit(c)) {
+                    return false;
+                }
+            }
+        return true;
+    }
     
+    public boolean isValidURL(String urlString){
+        
+        try
+        {
+            URL url = new URL(urlString);
+            url.toURI();
+            return true;
+        } catch (Exception exception)
+        {
+            return false;
+        }
+    }
     
 }
