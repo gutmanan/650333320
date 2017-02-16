@@ -31,7 +31,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="genericBtn3">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 1)&#xa;genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/createShowBtn.png&quot;))); // NOI18N">
           <Image iconType="3" name="/imgs/parametersBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
@@ -134,7 +134,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="genericBtn4">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 1)&#xa;genericBtn4.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/viewShowBtn.png&quot;))); // NOI18N">
           <Image iconType="3" name="/imgs/reportProduceBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
@@ -154,7 +154,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="genericBtn2">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/viewPlaceBtn.png&quot;))); // NOI18N">
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/viewPlaceBtn.png&quot;))); // NOI18N&#xa;if (WindowManager.getAuthValue() == 1)&#xa;genericBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/viewArtistBtn.png&quot;))); // NOI18N">
           <Image iconType="3" name="/imgs/viewAgentBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
@@ -174,7 +174,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="genericBtn1">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/createPlaceBtn.png&quot;))); // NOI18N">
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 4)&#xa;genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/createPlaceBtn.png&quot;))); // NOI18N&#xa;if (WindowManager.getAuthValue() == 1)&#xa;genericBtn1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/createArtistBtn.png&quot;))); // NOI18N">
           <Image iconType="3" name="/imgs/createAgentBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
