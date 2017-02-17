@@ -33,17 +33,16 @@ public class DBManager {
     
     public DBManager() {
         try {
-            System.out.println("Trying to load DB...");
             dbFile = (new File("sources/MuzaDataBase.accdb")).getAbsolutePath();
             conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
-            System.out.println("DB was loaded!");
+            HandsInTheAir.getDM().setDatabaseStatus(true);
         } catch (SQLException ex) {
             try{
                 dbFile = (new File("src/sources/MuzaDataBase.accdb")).getAbsolutePath();
                 conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
-                System.out.println("DB was loaded!");
+                HandsInTheAir.getDM().setDatabaseStatus(true);
             } catch (SQLException ex1) {
-                System.out.println("Error loading DB!");
+                HandsInTheAir.getDM().setDatabaseStatus(false);
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }

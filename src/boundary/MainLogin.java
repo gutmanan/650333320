@@ -5,15 +5,26 @@
  */
 package boundary;
 
+import businessLogic.DebugManager;
 import com.itextpdf.tool.xml.svg.tags.UseTag;
 import entity.Agent;
 import entity.User;
 import businessLogic.HandsInTheAir;
 import businessLogic.WindowManager;
+import java.awt.AWTKeyStroke;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeListener;
 import java.io.File;
+import java.io.IOException;
+import java.security.KeyStore;
 import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -21,12 +32,20 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ActionMap;
 import javax.swing.ComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -38,9 +57,10 @@ public class MainLogin extends javax.swing.JFrame {
     /**
      * Creates new form MainLogin
      */
-    public MainLogin() throws SQLException {
+    public MainLogin() {
         initComponents();
         setVisible(true);
+        HandsInTheAir.setDebug(this);
     }
 
     /**
@@ -84,6 +104,7 @@ public class MainLogin extends javax.swing.JFrame {
         wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hands in the air");
         setMaximumSize(new java.awt.Dimension(1200, 700));
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setName("Hands in the air"); // NOI18N
@@ -372,8 +393,7 @@ public class MainLogin extends javax.swing.JFrame {
         Integer birthMonth = Integer.parseInt(String.valueOf(monthBox.getSelectedItem()));
         Integer birthDay = Integer.parseInt(String.valueOf(dayBox.getSelectedItem()));
         Date birthdate = new Date(birthYear-1900, birthMonth, birthDay);
-        System.out.println("id "+username+" birthdate "+birthdate.toString());
-        //HandsInTheAir.getDB().insert("INSERT INTO tblUser (userAlphaCode, firstName, lastName, nickname, birthday, email, image, password) VALUES('"+username+"','"+firstname+"','"+lastname+"','"+nickname+"','#"+birthdate+"#','"+email+"','"+profileLabel+"','"+password+"')");
+        HandsInTheAir.getDB().insert("INSERT INTO tblUser (userAlphaCode, firstName, lastName, nickname, birthday, email, password) VALUES('"+username+"','"+firstname+"','"+lastname+"','"+nickname+"','#"+Date.valueOf(birthMonth+"-"+birthDay+"-"+(birthYear-1900))+"#','"+email+"','"+password+"')");
 
     }//GEN-LAST:event_registerButtonActionPerformed
 
@@ -381,11 +401,28 @@ public class MainLogin extends javax.swing.JFrame {
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(null);
         File chosen = chooser.getSelectedFile();
+        if (chosen == null)
+            return;
         String filename = chosen.getAbsolutePath();
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(chosen);
+        } catch (IOException ex) {
+            Logger.getLogger(MainLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         profileField.setText(filename);
-        profileLabel.setIcon(new ImageIcon(filename));
+        profileLabel.setIcon(new ImageIcon(resize(image,139,131)));
     }//GEN-LAST:event_uploadButtonActionPerformed
-
+    
+    public static BufferedImage resize(BufferedImage image, int width, int height) {
+        BufferedImage bi = new BufferedImage(width, height, BufferedImage.TRANSLUCENT);
+        Graphics2D g2d = (Graphics2D) bi.createGraphics();
+        g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+        g2d.drawImage(image, 0, 0, width, height, null);
+        g2d.dispose();
+        return bi;
+    }
+    
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
@@ -442,6 +479,14 @@ public class MainLogin extends javax.swing.JFrame {
                 "Incorrect username or password",
                 "Login error",
                 JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void extLogin(String username, String password) {
+        if (username == null || password == null) {
+            return;
+        }
+        usernameArea.setText(username);
+        passwordArea.setText(password);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel birthdayLabel;

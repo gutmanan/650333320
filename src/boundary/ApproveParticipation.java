@@ -5,17 +5,9 @@
  */
 package boundary;
 
-import entity.Artist;
 import entity.Show;
 import businessLogic.ApproveParticipationControl;
-import businessLogic.DBManager;
-import businessLogic.HandsInTheAir;
-import businessLogic.WindowManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -137,7 +129,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
         jScrollPane3.setBounds(40, 70, 430, 150);
 
         jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Approve Participation");
         add(jLabel3);
         jLabel3.setBounds(60, 20, 260, 40);

@@ -5,6 +5,7 @@
  */
 package boundary;
 
+import businessLogic.HandsInTheAir;
 import businessLogic.WindowManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,6 +26,7 @@ public class MainGui extends JFrame {
     public MainGui() {
         initComponents();
         setVisible(true);
+        HandsInTheAir.setDebug(this);
     }
 
     /**
@@ -49,6 +51,7 @@ public class MainGui extends JFrame {
         wallpaper = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Hands in the air");
         setMaximumSize(new java.awt.Dimension(1200, 700));
         setMinimumSize(new java.awt.Dimension(1200, 700));
         setName("Main menu"); // NOI18N
@@ -215,11 +218,7 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        try {
-            WindowManager.closeMain();
-        } catch (SQLException ex) {
-            Logger.getLogger(MainGui.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        WindowManager.closeMain();
     }//GEN-LAST:event_logoutBtnActionPerformed
 
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed

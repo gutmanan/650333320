@@ -4,10 +4,8 @@ import entity.Agent;
 import entity.User;
 import boundary.MainGui;
 import boundary.MainLogin;
-import java.awt.Color;
 import java.sql.SQLException;
 import javax.swing.JFrame;
-import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,19 +20,21 @@ public abstract class WindowManager {
     protected static JPanel currentWindow = null;
     protected static JPanel lastWindow = null;
     protected static JFrame mainFrame;
-    protected static JFrame loginFrame;
+    protected static MainLogin loginFrame;
 
     //======================================= Main ==========================================
     public static void openLogin() throws SQLException {
-         loginFrame = new MainLogin();
+        loginFrame = new MainLogin();
     }
     public static void startMain(){
         mainFrame = new MainGui();
+        HandsInTheAir.getDM().setVisible(false);
         setWelcome();
     }
-    public static void closeMain() throws SQLException {
+    public static void closeMain() {
         mainFrame.dispose();
         loginFrame = new MainLogin();
+        HandsInTheAir.getDM().setVisible(false);
     }
     public static void setCurrentWindow(JPanel panel) {
         currentWindow = panel;
@@ -84,6 +84,7 @@ public abstract class WindowManager {
     public static JPanel getLastWindow() {
         return lastWindow;
     }
+    
     public static String getAuthType() {
         String toReturn = null;
         switch (authLogged) {
@@ -149,6 +150,11 @@ public abstract class WindowManager {
     public static void setTmpUser(User tmpUser) {
         WindowManager.tmpUser = tmpUser;
     }
+
+    public static MainLogin getLoginFrame() {
+        return loginFrame;
+    }
+    
     public static void clean() {
         authLogged = 0;
         currentWindow = null;

@@ -1,6 +1,9 @@
 package businessLogic;
 
 import boundary.MainLogin;
+import java.awt.event.ActionEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
@@ -9,24 +12,29 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
 
 public class HandsInTheAir {
 
     private static DBManager DB = null;
     private static PDFManager PDF = null;
     private static XMLManager XML = null;
+    private static DebugManager DM = null;
     private static String fileName = "MuzaMusic";
     private static PrintStream logFile;
-    public static void main(String[] args) {
-        
     
+    public static void main(String[] args) {
         try {
             //Define log file
             //String dateNow = (new SimpleDateFormat("ddM_hhmm")).format(new Date());
             //logFile = new PrintStream(new File(fileName+"_"+dateNow+".log"));
             //System.setErr(logFile);
             //System.setOut(logFile);
-            
+            DM = new DebugManager() {};
             DB = new DBManager();
             PDF = new PDFManager();
             XML = new XMLManager();
@@ -39,8 +47,7 @@ public class HandsInTheAir {
                                   + "WHERE ((Not (tblShow.status)=\"Canceled\"))"));
             XML.export("MuzaMusic_Shows");
         */    
-        MainLogin loginFrame = new MainLogin();  
-            
+        WindowManager.openLogin();
         } catch (SQLException e) {
             e.printStackTrace();
         } /*catch (FileNotFoundException ex) {
@@ -50,6 +57,29 @@ public class HandsInTheAir {
 
     public static void writeLog(String info) {
         //logFile.print("\n"+info);
+    }
+
+    public static XMLManager getXML() {
+        return XML;
+    }
+
+    public static DebugManager getDM() {
+        return DM;
+    }
+    
+    public static void setDebug(JFrame frame) {
+        JRootPane rootPane = frame.getRootPane();
+        rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, InputEvent.CTRL_MASK), "myAction");
+        rootPane.getActionMap().put("myAction", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (DM.isVisible()) {
+                    DM.dispose();
+                    return;
+                }
+                DM.setVisible(true);
+            }
+        });
     }
     
     public static DBManager getDB() {
