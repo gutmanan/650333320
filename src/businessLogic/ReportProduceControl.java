@@ -118,9 +118,9 @@ public class ReportProduceControl {
         HashMap<Integer, Double> profitableShows = new HashMap<>();
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
-        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.ID\n" +
-                                                "FROM tblShow\n" +
-                                                "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber\n" +
+                                                    "FROM tblShow\n" +
+                                                    "WHERE (((tblShow.showDate)>=#"+yearStart+"# And (tblShow.showDate)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
         try {
             while (rs1.next()) {
                 Show tmpShow = getShow(rs1.getInt(1));

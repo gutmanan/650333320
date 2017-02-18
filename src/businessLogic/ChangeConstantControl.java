@@ -16,29 +16,19 @@ import javax.swing.JOptionPane;
  */
 public class ChangeConstantControl {
     
-    public ChangeConstantControl(){
-        
+    public ChangeConstantControl(){   
     }
     
     public ResultSet getConstants(){
-                
         String sql = "SELECT tblConstants.*\n" +
-            "FROM tblConstants\n" +
-            "ORDER BY tblConstants.dateOfChange DESC;";
-
+                     "FROM tblConstants\n" +
+                     "ORDER BY tblConstants.dateOfChange DESC;";
         ResultSet rs = HandsInTheAir.getDB().query(sql);
-        
         return rs;
-
-        
     }
     
     public void saveConstants(String sql){
-                
         HandsInTheAir.getDB().insert(sql);
         JOptionPane.showMessageDialog(null, "The constants was saved!");
-
     }
-    
-    
 }
