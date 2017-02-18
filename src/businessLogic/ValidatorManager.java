@@ -31,6 +31,7 @@ public abstract class ValidatorManager {
     }
     
     public static boolean onlyContainsNumbers(String text) {
+        if (text.length()==0) return false;
         try {
             Long.parseLong(text);
             return true;

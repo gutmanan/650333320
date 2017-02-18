@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -79,8 +80,10 @@ public class CreateAgent extends javax.swing.JPanel {
                 jTextField1ActionPerformed(evt);
             }
         });
+        jTextField1.setText(UUID.randomUUID().toString().substring(0,7));
         add(jTextField1);
         jTextField1.setBounds(130, 60, 170, 30);
+        jTextField1.setEditable(false);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("First Name :");
@@ -124,7 +127,7 @@ public class CreateAgent extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(110, 310, 90, 40);
+        jButton1.setBounds(60, 310, 90, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -141,6 +144,7 @@ public class CreateAgent extends javax.swing.JPanel {
             ResultSet rs = HandsInTheAir.getDB().query(sql);
             if (rs!=null && rs.next()){
                 JOptionPane.showMessageDialog(null, "The agent alphanumeric code is already exsist");
+                jTextField1.setText(UUID.randomUUID().toString().substring(0,7));
                 return;
             }
         } catch (SQLException ex) {

@@ -5,10 +5,18 @@
  */
 package boundary;
 
+import businessLogic.ChangeConstantControl;
+import businessLogic.HandsInTheAir;
 import businessLogic.ReportProduceControl;
+import businessLogic.ValidatorManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
@@ -25,8 +33,9 @@ public class ChangeConstants extends javax.swing.JPanel {
 
     ReportProduceControl rpController = new ReportProduceControl();
     
-    public ChangeConstants() {
+    public ChangeConstants() throws SQLException {
         initComponents();
+        setTable();
     }
 
     /**
@@ -167,7 +176,28 @@ public class ChangeConstants extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
+        if (!ValidatorManager.onlyContainsNumbers(jTextField3.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField4.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField5.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField6.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField7.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField8.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField9.getText()) ||
+                !ValidatorManager.onlyContainsNumbers(jTextField10.getText())){
+            JOptionPane.showMessageDialog(null, "The constant most be numbers except birthday text!");
+            return;
+        }
+        
+        Date today = new Date();
+        Timestamp ts = new Timestamp(today.getTime());
+        String qry = "INSERT INTO tblConstant (dateOfChange, placeExpanse, placeIncome, showDuration, artistIncome, presaleDiscount, maxPresaleTicketsPerUser, regularSaleDays, propasalWaitDays, birthdayText)"
+                                   + "VALUES(\""+ts+"\",'"+jTextField3.getText()+"','"+jTextField4.getText()+"','"+jTextField5.getText()+"',\""+jTextField9.getText()+"\",'"+jTextField8.getText()+"',\""+jTextField7.getText()
+                                      +"',\""+jTextField10.getText()+"',\""+jTextField6.getText()+"',\""+jTextField11.getText()+"')";
+        
+        con.saveConstants(qry);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -177,41 +207,24 @@ public class ChangeConstants extends javax.swing.JPanel {
             jButton1.setEnabled(false);                                  
     }//GEN-LAST:event_jCheckBox1ActionPerformed
         
-    public void setTable() {
-
-    }
-    
-    private PieDataset createDataset(HashMap<Integer, Double> map) {
-        DefaultPieDataset result = new DefaultPieDataset();
-        Double sum = 0.0;
-        for (Double d : map.values()) {
-            sum += d;
+    public void setTable() throws SQLException {
+        ResultSet rs = con.getConstants();
+        
+        while (rs.next()){
+            jTextField2.setText(rs.getDate(1).toString());
+            jTextField3.setText(rs.getString(2));
+            jTextField4.setText(rs.getString(3));
+            jTextField5.setText(rs.getString(4));
+            jTextField6.setText(rs.getString(9));
+            jTextField9.setText(rs.getString(5));
+            jTextField8.setText(rs.getString(6));
+            jTextField7.setText(rs.getString(7));
+            jTextField10.setText(rs.getString(8));
+            jTextField11.setText(rs.getString(10));
+            break;
         }
-        for (Map.Entry<Integer, Double> entry : map.entrySet()) {
-            Integer key = entry.getKey();
-            Double value = entry.getValue();
-            result.setValue("Show"+" "+key, value/sum*100);
-        }
-        return result;
     }
 
-    private JFreeChart createChart(PieDataset dataset, String title) {
-        JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);
-        PiePlot plot = (PiePlot3D)chart.getPlot();
-        ImageIcon img = new ImageIcon(getClass().getResource("/imgs/container2.png"));
-        chart.setBackgroundImage(img.getImage());
-        plot.setStartAngle(0);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.6f);
-        plot.setBackgroundAlpha(0.25f);
-        return chart;
-    }
-    
-    public String formated(double d) {
-        String s = String.valueOf(d);
-        String[] result = s.split("\\.");
-        return result[0]+"."+result[1].charAt(0);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -239,4 +252,5 @@ public class ChangeConstants extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+private ChangeConstantControl con = new ChangeConstantControl();
 }
