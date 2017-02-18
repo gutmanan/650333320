@@ -68,7 +68,7 @@ public class CreatePlace extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Create Place :");
+        jLabel4.setText("Create Place ");
         add(jLabel4);
         jLabel4.setBounds(30, 10, 170, 40);
 

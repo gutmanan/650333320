@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 public abstract class WindowManager {
     //Global parameters
-    private static int authLogged;
+    protected static int authLogged;
     protected static Agent tmpAgent = null;
     protected static User tmpUser = null;
     protected static JLabel welcome = null;

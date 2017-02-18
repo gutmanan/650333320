@@ -277,11 +277,11 @@ public class CreateShow extends javax.swing.JPanel {
         add(jXDatePicker1);
         jXDatePicker1.setBounds(250, 70, 110, 24);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Create New Show");
         add(jLabel3);
-        jLabel3.setBounds(60, 20, 230, 40);
+        jLabel3.setBounds(30, 10, 230, 40);
 
         jLabel2.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));

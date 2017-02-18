@@ -47,7 +47,7 @@ public class ViewShows extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Shows :");
+        jLabel4.setText("View Shows");
         add(jLabel4);
         jLabel4.setBounds(30, 10, 170, 40);
 

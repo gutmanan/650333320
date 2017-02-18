@@ -5,6 +5,7 @@
  */
 package boundary;
 
+import businessLogic.DBManager;
 import businessLogic.DebugManager;
 import com.itextpdf.tool.xml.svg.tags.UseTag;
 import entity.Agent;
@@ -29,7 +30,9 @@ import java.sql.Blob;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Iterator;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -229,15 +232,17 @@ public class MainLogin extends javax.swing.JFrame {
         newAccountFrame.getContentPane().add(passwordLabel);
         passwordLabel.setBounds(250, 60, 90, 16);
 
-        usernameLabel.setText("Username:");
+        usernameLabel.setText("UUID:");
         newAccountFrame.getContentPane().add(usernameLabel);
         usernameLabel.setBounds(250, 30, 90, 16);
 
+        usernameField.setEditable(false);
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
             }
         });
+        usernameField.setText(UUID.randomUUID().toString().substring(0, 7));
         newAccountFrame.getContentPane().add(usernameField);
         usernameField.setBounds(330, 30, 120, 20);
 
@@ -389,12 +394,21 @@ public class MainLogin extends javax.swing.JFrame {
         String lastname = lastnameField.getText();
         String email = emailField.getText();
         String password = passwordField.getText();
-        Integer birthYear = Integer.parseInt(String.valueOf(yearBox.getSelectedItem()));
-        Integer birthMonth = Integer.parseInt(String.valueOf(monthBox.getSelectedItem()));
+        Integer birthYear = Integer.parseInt(String.valueOf(yearBox.getSelectedItem()))-1900;
+        Integer birthMonth = Integer.parseInt(String.valueOf(monthBox.getSelectedItem()))-1;
         Integer birthDay = Integer.parseInt(String.valueOf(dayBox.getSelectedItem()));
-        Date birthdate = new Date(birthYear-1900, birthMonth, birthDay);
-        HandsInTheAir.getDB().insert("INSERT INTO tblUser (userAlphaCode, firstName, lastName, nickname, birthday, email, password) VALUES('"+username+"','"+firstname+"','"+lastname+"','"+nickname+"','#"+Date.valueOf(birthMonth+"-"+birthDay+"-"+(birthYear-1900))+"#','"+email+"','"+password+"')");
-
+        Date birthdate = new Date(birthYear, birthMonth, birthDay);
+        Timestamp ts = new Timestamp(birthdate.getTime());
+        String qry = "INSERT INTO tblUser (userAlphaCode, firstName, lastName, nickname, birthday, email, image, password)"
+                                   + "VALUES('"+username+"','"+firstname+"','"+lastname+"','"+nickname+"',\""+ts+"\",'"+email+"',\""+profileLabel.getIcon()+"\",'"+password+"')";
+        if (DBManager.insert(qry) == -2) {
+            JOptionPane.showMessageDialog(newAccountFrame,
+                "Congratulations your account was created successfully!",
+                "Account was created",
+                JOptionPane.INFORMATION_MESSAGE);
+            clearUserForm();
+            newAccountFrame.setVisible(false);
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed
@@ -487,6 +501,18 @@ public class MainLogin extends javax.swing.JFrame {
         }
         usernameArea.setText(username);
         passwordArea.setText(password);
+    }
+    
+    private void clearUserForm() {
+        usernameField.setText("");
+        nicknameField.setText("");
+        firstnameField.setText("");
+        lastnameField.setText("");
+        emailField.setText("");
+        passwordField.setText("");
+        yearBox.setSelectedIndex(0);
+        monthBox.setSelectedIndex(0);
+        dayBox.setSelectedIndex(0);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel birthdayLabel;

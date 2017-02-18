@@ -11,30 +11,26 @@ import java.net.URL;
  *
  * @author Yair Etzion
  */
-public class ValidatorManager {
+public abstract class ValidatorManager {
     
-    public ValidatorManager(){
-    }
-    
-    public boolean isAlpha(String name) { 
+    public static boolean isAlpha(String name) { 
         char[] chars = name.toCharArray();
-
-            for (char c : chars) {
-                if(!Character.isLetter(c)) {
-                    return false;
-                }
+        for (char c : chars) {
+            if(!Character.isLetter(c)) {
+                return false;
             }
+        }
         return true;
     }
     
-    public boolean isValidEmailAddress(String email) {
-           String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-           java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
-           java.util.regex.Matcher m = p.matcher(email);
-           return m.matches();
+    public static boolean isValidEmailAddress(String email) {
+        String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
     }
     
-    public boolean onlyContainsNumbers(String text) {
+    public static boolean onlyContainsNumbers(String text) {
         try {
             Long.parseLong(text);
             return true;
@@ -43,28 +39,23 @@ public class ValidatorManager {
         }
     } 
     
-    public boolean isAlphaCode(String name) { 
+    public static boolean isAlphaCode(String name) { 
         char[] chars = name.toCharArray();
-
-            for (char c : chars) {
-                if(!Character.isLetterOrDigit(c)) {
-                    return false;
-                }
+        for (char c : chars) {
+            if(!Character.isLetterOrDigit(c)) {
+                return false;
             }
+        }
         return true;
     }
     
-    public boolean isValidURL(String urlString){
-        
-        try
-        {
+    public static boolean isValidURL(String urlString){
+        try {
             URL url = new URL(urlString);
             url.toURI();
             return true;
-        } catch (Exception exception)
-        {
+        } catch (Exception exception) {
             return false;
         }
     }
-    
 }

@@ -138,10 +138,10 @@ public class ReportProduce extends javax.swing.JPanel {
         add(jLabel2);
         jLabel2.setBounds(60, 70, 150, 20);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Yearly Profit Report");
         add(jLabel3);
-        jLabel3.setBounds(60, 20, 260, 40);
+        jLabel3.setBounds(30, 10, 260, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);

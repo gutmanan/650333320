@@ -1,17 +1,10 @@
 package businessLogic;
 
-import boundary.MainLogin;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -37,7 +30,6 @@ public class HandsInTheAir {
             DM = new DebugManager() {};
             DB = new DBManager();
             PDF = new PDFManager();
-            XML = new XMLManager();
             /*XML.create("MuzaMusic_Shows");
             XML.write(getDB().query("SELECT tblShow.mainArtist, tblShow.date\n"
                                   + "FROM tblShow\n"

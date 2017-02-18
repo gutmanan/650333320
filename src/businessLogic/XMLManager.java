@@ -11,15 +11,12 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
-public class XMLManager {
+public abstract class XMLManager {
     
     private static Document doc = null;
     private static Element rootElement = null;
         
-    public XMLManager() {
-        
-    }
-    public void create(String title) {
+    public static void create(String title) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -30,7 +27,7 @@ public class XMLManager {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void write(ResultSet rs) {
+    public static void write(ResultSet rs) {
         try {
             while (rs.next()) {
                 Element show = doc.createElement("Artist");
@@ -48,7 +45,7 @@ public class XMLManager {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void export(String fileName) {
+    public static void export(String fileName) {
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
             factory.setAttribute("indent-number", 2);

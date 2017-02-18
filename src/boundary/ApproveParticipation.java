@@ -128,11 +128,11 @@ public class ApproveParticipation extends javax.swing.JPanel {
         add(jScrollPane3);
         jScrollPane3.setBounds(40, 70, 430, 150);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Approve Participation");
         add(jLabel3);
-        jLabel3.setBounds(60, 20, 260, 40);
+        jLabel3.setBounds(30, 10, 260, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);

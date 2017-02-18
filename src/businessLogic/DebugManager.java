@@ -13,7 +13,7 @@ import java.awt.Color;
  * @author Shai Gutman
  */
 public abstract class DebugManager extends javax.swing.JFrame {
-
+    private static int objects = 0;
     /**
      * Creates new form debugManager
      */
@@ -31,6 +31,8 @@ public abstract class DebugManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        objectsCounterLabel = new javax.swing.JLabel();
+        counterLabel = new javax.swing.JLabel();
         userBtn = new javax.swing.JButton();
         agentBtn = new javax.swing.JButton();
         placeBtn = new javax.swing.JButton();
@@ -47,6 +49,16 @@ public abstract class DebugManager extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(305, 400));
         setResizable(false);
         getContentPane().setLayout(null);
+
+        objectsCounterLabel.setForeground(new java.awt.Color(0, 0, 0));
+        objectsCounterLabel.setText("New objects:");
+        getContentPane().add(objectsCounterLabel);
+        objectsCounterLabel.setBounds(10, 180, 90, 16);
+
+        counterLabel.setText(String.valueOf(objects));
+        counterLabel.setForeground(Color.RED);
+        getContentPane().add(counterLabel);
+        counterLabel.setBounds(90, 180, 150, 16);
 
         userBtn.setText("User");
         userBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +153,7 @@ public abstract class DebugManager extends javax.swing.JFrame {
         WindowManager.getLoginFrame().openMain();
     }//GEN-LAST:event_agentBtnActionPerformed
 
-    public void setDatabaseStatus(Boolean flag) {
+    public static void setDatabaseStatus(Boolean flag) {
         if (flag) {
             statusLabel.setText("connected");
             statusLabel.setForeground(Color.green);
@@ -151,14 +163,21 @@ public abstract class DebugManager extends javax.swing.JFrame {
         statusLabel.setForeground(Color.red);
     }
     
+    public static void objectsPlusPlus() {
+        objects++;
+        counterLabel.setText(String.valueOf(objects));
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adminBtn;
-    private javax.swing.JButton agentBtn;
-    private javax.swing.JLabel databaseLabel;
-    private javax.swing.JButton placeBtn;
-    private javax.swing.JLabel quickLog;
-    private javax.swing.JLabel statusLabel;
-    private javax.swing.JButton userBtn;
-    private javax.swing.JLabel wallpaper;
+    private static javax.swing.JButton adminBtn;
+    private static javax.swing.JButton agentBtn;
+    private static javax.swing.JLabel counterLabel;
+    private static javax.swing.JLabel databaseLabel;
+    private static javax.swing.JLabel objectsCounterLabel;
+    private static javax.swing.JButton placeBtn;
+    private static javax.swing.JLabel quickLog;
+    private static javax.swing.JLabel statusLabel;
+    private static javax.swing.JButton userBtn;
+    private static javax.swing.JLabel wallpaper;
     // End of variables declaration//GEN-END:variables
 }

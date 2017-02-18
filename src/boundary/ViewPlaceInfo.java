@@ -66,9 +66,9 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Place Info :");
+        jLabel4.setText("View Place Info");
         add(jLabel4);
-        jLabel4.setBounds(30, 10, 170, 40);
+        jLabel4.setBounds(30, 10, 200, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Place Name :");

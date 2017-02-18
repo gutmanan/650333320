@@ -57,6 +57,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(null);
 
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Change Artist Details :");
         add(jLabel4);

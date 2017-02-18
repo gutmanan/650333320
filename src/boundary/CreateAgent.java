@@ -136,11 +136,7 @@ public class CreateAgent extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
-        ValidatorManager valid = new ValidatorManager();
-        
-        String sql = "SELECT tblAgent.ID FROM tblAgent WHERE (((tblAgent.ID) Like \""+jTextField1.getText()+"\"))";
-        
+        String sql = "SELECT tblAgent.ID FROM tblAgent WHERE (((tblAgent.ID) Like \""+jTextField1.getText()+"\"))";        
         try {
             ResultSet rs = HandsInTheAir.getDB().query(sql);
             if (rs!=null && rs.next()){
@@ -152,22 +148,22 @@ public class CreateAgent extends javax.swing.JPanel {
              return;
         }
 
-        if (!valid.isAlphaCode(jTextField1.getText())){
+        if (!ValidatorManager.isAlphaCode(jTextField1.getText())){
             JOptionPane.showMessageDialog(null, "Please enter only numbers and chars to alpha code field");
             return;
         }
         
-        if (!(valid.isAlpha(jTextField2.getText()) && valid.isAlpha(jTextField3.getText())) || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty()){
+        if (!(ValidatorManager.isAlpha(jTextField2.getText()) && ValidatorManager.isAlpha(jTextField3.getText())) || jTextField2.getText().isEmpty() || jTextField3.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "The first/last name field is incorrect or empty");
             return;
         }
         
-        if (!(valid.isValidEmailAddress(jTextField4.getText()))){
+        if (!(ValidatorManager.isValidEmailAddress(jTextField4.getText()))){
             JOptionPane.showMessageDialog(null, "The Email field is incorrect");
             return;
         }
         
-        if (!(valid.onlyContainsNumbers(jTextField5.getText()))){
+        if (!(ValidatorManager.onlyContainsNumbers(jTextField5.getText()))){
             JOptionPane.showMessageDialog(null, "The phone field is incorrect.\n Please enter only numbers");
             return;
         }
@@ -182,12 +178,9 @@ public class CreateAgent extends javax.swing.JPanel {
                 +jTextField4.getText()+"','"+jTextField5.getText()+"','"+jTextField6.getText()+"')");
                     
         HandsInTheAir.getDB().insert(qry);
-        
         JOptionPane.showMessageDialog(null, "The agent was added successfuly!");
-        
     }//GEN-LAST:event_jButton1ActionPerformed
         
-    
     private PieDataset createDataset(HashMap<Integer, Double> map) {
         DefaultPieDataset result = new DefaultPieDataset();
         Double sum = 0.0;

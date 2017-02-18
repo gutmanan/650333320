@@ -70,7 +70,7 @@ public class CreateArtist extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Create Artist :");
+        jLabel4.setText("Create Artist ");
         add(jLabel4);
         jLabel4.setBounds(30, 10, 170, 40);
 
@@ -156,9 +156,6 @@ public class CreateArtist extends javax.swing.JPanel {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-        ValidatorManager valid = new ValidatorManager();
-
         try {
             String sql = "SELECT tblArtist.artistAlphaCode FROM tblArtist WHERE (((tblArtist.artistAlphaCode) Like \""+jTextField1.getText()+"\"))";
             ResultSet rs = HandsInTheAir.getDB().query(sql);
@@ -179,22 +176,22 @@ public class CreateArtist extends javax.swing.JPanel {
              return;
         }
 
-        if (!valid.isAlphaCode(jTextField1.getText()) || jTextField1.getText().isEmpty()){
+        if (!ValidatorManager.isAlphaCode(jTextField1.getText()) || jTextField1.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter only numbers and chars to alphanumeric code field");
             return;
         }
         
-        if (!(valid.isAlpha(jTextField2.getText())) || jTextField2.getText().isEmpty()){
+        if (!(ValidatorManager.isAlpha(jTextField2.getText())) || jTextField2.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "The stage name field is incorrect or empty");
             return;
         }
         
-        if (!(valid.isValidEmailAddress(jTextField5.getText()))){
+        if (!(ValidatorManager.isValidEmailAddress(jTextField5.getText()))){
             JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
             return;
         }
         
-        if (!(valid.isValidURL(jTextField4.getText()))){
+        if (!(ValidatorManager.isValidURL(jTextField4.getText()))){
             JOptionPane.showMessageDialog(null, "The facebook field is incorrect or empty. \n Please enter full URL address");
             return;
         }

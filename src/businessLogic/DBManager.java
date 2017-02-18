@@ -5,11 +5,7 @@
  */
 package businessLogic;
 
-import com.itextpdf.text.pdf.PdfGraphics2D;
-import entity.Agent;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -17,10 +13,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import net.ucanaccess.jdbc.UcanaccessDriver;
 
 /**
  *
@@ -35,14 +29,14 @@ public class DBManager {
         try {
             dbFile = (new File("sources/MuzaDataBase.accdb")).getAbsolutePath();
             conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
-            HandsInTheAir.getDM().setDatabaseStatus(true);
+            DebugManager.setDatabaseStatus(true);
         } catch (SQLException ex) {
             try{
                 dbFile = (new File("src/sources/MuzaDataBase.accdb")).getAbsolutePath();
                 conn = DriverManager.getConnection("jdbc:ucanaccess://"+dbFile+";COLUMNORDER=DISPLAY");
-                HandsInTheAir.getDM().setDatabaseStatus(true);
+                DebugManager.setDatabaseStatus(true);
             } catch (SQLException ex1) {
-                HandsInTheAir.getDM().setDatabaseStatus(false);
+                DebugManager.setDatabaseStatus(false);
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
             }
         }
@@ -62,7 +56,6 @@ public class DBManager {
         try {
             PreparedStatement stmt = conn.prepareStatement(qry);
             rs = stmt.executeQuery();
-
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -71,17 +64,19 @@ public class DBManager {
     
     public static int insert(String qry){
         int id = -1;
-        HandsInTheAir.writeLog("Sending UPDATE Query: "+qry);
         try {
             Statement stmt = conn.createStatement();
             stmt.executeUpdate(qry, Statement.RETURN_GENERATED_KEYS);
             ResultSet result = stmt.getGeneratedKeys();
             if(result.next()){
                 id = result.getInt(1);
+                DebugManager.objectsPlusPlus();
+                return id;
             }
+            DebugManager.objectsPlusPlus();
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return id;
+        return --id;
     }
 }
