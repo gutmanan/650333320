@@ -15,6 +15,8 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import org.jfree.chart.ChartFactory;
@@ -207,21 +209,25 @@ public class ChangeConstants extends javax.swing.JPanel {
             jButton1.setEnabled(false);                                  
     }//GEN-LAST:event_jCheckBox1ActionPerformed
         
-    public void setTable() throws SQLException {
+    public void setTable(){
         ResultSet rs = con.getConstants();
         
-        while (rs.next()){
-            jTextField2.setText(rs.getDate(1).toString());
-            jTextField3.setText(rs.getString(2));
-            jTextField4.setText(rs.getString(3));
-            jTextField5.setText(rs.getString(4));
-            jTextField6.setText(rs.getString(9));
-            jTextField9.setText(rs.getString(5));
-            jTextField8.setText(rs.getString(6));
-            jTextField7.setText(rs.getString(7));
-            jTextField10.setText(rs.getString(8));
-            jTextField11.setText(rs.getString(10));
-            break;
+        try {
+            while (rs.next()){
+                jTextField2.setText(rs.getDate(1).toString());
+                jTextField3.setText(rs.getString(2));
+                jTextField4.setText(rs.getString(3));
+                jTextField5.setText(rs.getString(4));
+                jTextField6.setText(rs.getString(9));
+                jTextField9.setText(rs.getString(5));
+                jTextField8.setText(rs.getString(6));
+                jTextField7.setText(rs.getString(7));
+                jTextField10.setText(rs.getString(8));
+                jTextField11.setText(rs.getString(10));
+                break;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeConstants.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
