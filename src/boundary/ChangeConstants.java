@@ -178,10 +178,9 @@ public class ChangeConstants extends javax.swing.JPanel {
         
         Date today = new Date();
         Timestamp ts = new Timestamp(today.getTime());
-        String qry = "INSERT INTO tblConstants (dateOfChange, placeExpanse, placeIncome, showDuration, artistIncome, presaleDiscount, maxPresaleTicketsPerUser, regularSaleDays, propasalWaitDays, birthdayText)"
-                   + "VALUES(\""+ts+"\",'"+placeExpField.getText()+"','"+placeIncField.getText()+"','"+showDurField.getText()+"','"+artistIncField.getText()+"','"+presaleDisField.getText()+"','"+maxTicketsField.getText()+
-                            "','"+regSaleField.getText()+"','"+waitTimeField.getText()+"','"+bDayTextField.getText()+"')";
-        con.saveConstants(qry);
+        
+        con.saveConstants(ts,placeExpField.getText(),placeIncField.getText(),showDurField.getText(),artistIncField.getText(),presaleDisField.getText(),maxTicketsField.getText(),regSaleField.getText(),waitTimeField.getText(),bDayTextField.getText());
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void updateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCheckBoxActionPerformed

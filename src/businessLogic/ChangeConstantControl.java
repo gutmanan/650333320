@@ -27,8 +27,16 @@ public class ChangeConstantControl {
         return rs;
     }
     
-    public void saveConstants(String sql){
+    public void saveConstants(Timestamp ts,String placeExpField,String placeIncField,String showDurField,String artistIncField,String presaleDisField,String maxTicketsField,String regSaleField,String waitTimeField, String bDayTextField){
+        
+        String sql = "INSERT INTO tblConstants (dateOfChange, placeExpanse, placeIncome, showDuration, artistIncome, presaleDiscount, maxPresaleTicketsPerUser, regularSaleDays, propasalWaitDays, birthdayText)"
+                   + "VALUES(\""+ts+"\",'"+placeExpField+"','"+placeIncField+"','"+showDurField+"','"+artistIncField+"','"+presaleDisField+"','"+maxTicketsField+
+                            "','"+regSaleField+"','"+waitTimeField+"','"+bDayTextField+"')";        
+        
         HandsInTheAir.getDB().insert(sql);
         JOptionPane.showMessageDialog(null, "The constants was saved!");
     }
 }
+/*String qry = "INSERT INTO tblConstants (dateOfChange, placeExpanse, placeIncome, showDuration, artistIncome, presaleDiscount, maxPresaleTicketsPerUser, regularSaleDays, propasalWaitDays, birthdayText)"
+                   + "VALUES(\""+ts+"\",'"+placeExpField.getText()+"','"+placeIncField.getText()+"','"+showDurField.getText()+"','"+artistIncField.getText()+"','"+presaleDisField.getText()+"','"+maxTicketsField.getText()+
+                            "','"+regSaleField.getText()+"','"+waitTimeField.getText()+"','"+bDayTextField.getText()+"')";      */

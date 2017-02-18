@@ -6,16 +6,12 @@
 package boundary;
 
 import businessLogic.ReportProduceControl;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.ImageIcon;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
+import businessLogic.ViewAgentControl;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -23,10 +19,19 @@ import org.jfree.util.Rotation;
  */
 public class ViewAgents extends javax.swing.JPanel {
 
-    ReportProduceControl rpController = new ReportProduceControl();
     
     public ViewAgents() {
         initComponents();
+        rs = con.getAgents();
+        if (rs!=null){
+            try {
+                while (rs.next())
+                    jComboBox1.addItem(rs.getString(2)+" "+rs.getString(3));
+                //  jComboBox1.setSelectedIndex(0);
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -40,7 +45,6 @@ public class ViewAgents extends javax.swing.JPanel {
 
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -50,6 +54,7 @@ public class ViewAgents extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -63,15 +68,7 @@ public class ViewAgents extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Represented Artists :");
         add(jLabel2);
-        jLabel2.setBounds(380, 60, 190, 15);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1);
-        jTextField1.setBounds(130, 60, 190, 30);
+        jLabel2.setBounds(30, 240, 190, 15);
         add(jTextField4);
         jTextField4.setBounds(130, 100, 190, 30);
 
@@ -113,54 +110,45 @@ public class ViewAgents extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(380, 90, 370, 180);
+        jScrollPane1.setBounds(30, 270, 370, 180);
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+        add(jComboBox1);
+        jComboBox1.setBounds(130, 60, 190, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 850, 580);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        rs = con.getAgents();
+        int count = jComboBox1.getSelectedIndex()+1;
+        int counter = 1;
+        try {
+            while (rs.next()){
+                if (counter == count){
+                    jTextField4.setText(rs.getString(5));
+                    jTextField5.setText(rs.getString(4));
+                    jTextField6.setText(rs.getString(6));
+
+                    break;
+                }
+                else counter++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
         
-    public void setTable() {
-
-    }
-    
-    private PieDataset createDataset(HashMap<Integer, Double> map) {
-        DefaultPieDataset result = new DefaultPieDataset();
-        Double sum = 0.0;
-        for (Double d : map.values()) {
-            sum += d;
-        }
-        for (Map.Entry<Integer, Double> entry : map.entrySet()) {
-            Integer key = entry.getKey();
-            Double value = entry.getValue();
-            result.setValue("Show"+" "+key, value/sum*100);
-        }
-        return result;
-    }
-
-    private JFreeChart createChart(PieDataset dataset, String title) {
-        JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);
-        PiePlot plot = (PiePlot3D)chart.getPlot();
-        ImageIcon img = new ImageIcon(getClass().getResource("/imgs/container2.png"));
-        chart.setBackgroundImage(img.getImage());
-        plot.setStartAngle(0);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.6f);
-        plot.setBackgroundAlpha(0.25f);
-        return chart;
-    }
-    
-    public String formated(double d) {
-        String s = String.valueOf(d);
-        String[] result = s.split("\\.");
-        return result[0]+"."+result[1].charAt(0);
-    }
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -170,9 +158,10 @@ public class ViewAgents extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
+    private ViewAgentControl con = new ViewAgentControl(); 
+    private ResultSet rs = null;
 }
