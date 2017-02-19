@@ -5,12 +5,12 @@
  */
 package boundary;
 
-import businessLogic.ReportProduceControl;
 import businessLogic.ViewAgentControl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -97,20 +97,12 @@ public class ViewAgents extends javax.swing.JPanel {
         jLabel9.setBounds(30, 70, 90, 15);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
+
         ));
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 270, 370, 180);
+        jScrollPane1.setBounds(30, 270, 720, 180);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,6 +118,8 @@ public class ViewAgents extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        jTable1.setModel(new javax.swing.table.DefaultTableModel());
+
         rs = con.getAgents();
         int count = jComboBox1.getSelectedIndex()+1;
         int counter = 1;
@@ -135,7 +129,7 @@ public class ViewAgents extends javax.swing.JPanel {
                     jTextField4.setText(rs.getString(5));
                     jTextField5.setText(rs.getString(4));
                     jTextField6.setText(rs.getString(6));
-
+                    setTable(rs.getString(1));
                     break;
                 }
                 else counter++;
@@ -143,9 +137,40 @@ public class ViewAgents extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+        
     }//GEN-LAST:event_jComboBox1ActionPerformed
         
-  
+  public void setTable(String agentid){
+        try {
+            // TableModel definition
+            String[] tableColumnsName = {"Stage Name","Email","Facebook","isActive","Activation Date"};
+            DefaultTableModel aModel = (DefaultTableModel) jTable1.getModel();
+            aModel.setColumnIdentifiers(tableColumnsName);
+            
+            ResultSet artists = null;
+            
+            artists = con.getArtists(agentid);
+            
+            
+            // Loop through the ResultSet and transfer in the Model
+            java.sql.ResultSetMetaData rsmd = artists.getMetaData();
+            int colNo = rsmd.getColumnCount();
+            while(artists.next()){
+                Object[] objects = new Object[colNo];
+                // tanks to umit ozkan for the bug fix!
+                for(int i=0;i<colNo;i++){
+                    objects[i]=artists.getObject(i+1);
+                }
+                aModel.addRow(objects);
+            }
+            jTable1.setModel(aModel);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;

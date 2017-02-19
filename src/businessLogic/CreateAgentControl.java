@@ -41,10 +41,16 @@ public class CreateAgentControl {
         }
     }
     
-    public void newAgent(String id){
-        HandsInTheAir.getDB().insert(id);
+    public void newAgent(String id, String firstName, String lastName, String phoneNumber, String email, String password){
+        
+        String qry = ("INSERT INTO tblAgent (ID, firstName, lastName, phoneNumber, email, password) VALUES('"
+                +id+"','"+firstName+"','"+lastName+"','"+phoneNumber+"','"+email+"','"+password+"')");
+                
+        HandsInTheAir.getDB().insert(qry);
+        JOptionPane.showMessageDialog(null, "The agent was added successfuly!");
+        
     }
-    
+  /*  
     public HashMap<Integer, Integer> getPresaleAmonutPerShow(int year) {
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
@@ -203,5 +209,5 @@ public class CreateAgentControl {
             Logger.getLogger(CreateAgentControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         return artists;
-    }
+    }*/
 }

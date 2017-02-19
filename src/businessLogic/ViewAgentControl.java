@@ -34,7 +34,8 @@ public class ViewAgentControl {
     
     public ResultSet getArtists(String id){
         
-        String sql = "SELECT tblArtist.agentID, tblArtist.stageName, tblArtist.email, tblArtist.facebook, tblArtist.IsActive FROM tblArtist WHERE (((tblArtist.agentID) Like \""+id+"\")) ORDER BY tblArtist.stageName";
+        String sql = "SELECT tblArtist.stageName, tblArtist.email, tblArtist.facebook, tblArtist.IsActive, tblArtist.activationDate"
+                        +" FROM tblArtist WHERE (((tblArtist.agentID) Like \""+id+"\")) ORDER BY tblArtist.stageName";
 
         ResultSet rs = HandsInTheAir.getDB().query(sql);
         

@@ -50,10 +50,9 @@ public abstract class DebugManager extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        objectsCounterLabel.setForeground(new java.awt.Color(0, 0, 0));
         objectsCounterLabel.setText("New objects:");
         getContentPane().add(objectsCounterLabel);
-        objectsCounterLabel.setBounds(10, 180, 90, 16);
+        objectsCounterLabel.setBounds(10, 180, 90, 14);
 
         counterLabel.setText(String.valueOf(objects));
         counterLabel.setForeground(Color.RED);
@@ -95,20 +94,16 @@ public abstract class DebugManager extends javax.swing.JFrame {
         });
         getContentPane().add(adminBtn);
         adminBtn.setBounds(10, 130, 70, 20);
-
-        statusLabel.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(statusLabel);
         statusLabel.setBounds(115, 160, 150, 16);
 
-        databaseLabel.setForeground(new java.awt.Color(0, 0, 0));
         databaseLabel.setText("Database status:");
         getContentPane().add(databaseLabel);
-        databaseLabel.setBounds(10, 160, 100, 16);
+        databaseLabel.setBounds(10, 160, 100, 14);
 
-        quickLog.setForeground(new java.awt.Color(0, 0, 0));
         quickLog.setText("Quick login:");
         getContentPane().add(quickLog);
-        quickLog.setBounds(10, 110, 80, 16);
+        quickLog.setBounds(10, 110, 80, 14);
 
         wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/debugContainer.png"))); // NOI18N
         getContentPane().add(wallpaper);
@@ -149,7 +144,7 @@ public abstract class DebugManager extends javax.swing.JFrame {
             return;
         if (WindowManager.getMainFrame() != null)
             WindowManager.closeMain();
-        WindowManager.getLoginFrame().extLogin("http://example.com/pages/", "12d");
+        WindowManager.getLoginFrame().extLogin("kadisha@gmail.com", "123");
         WindowManager.getLoginFrame().openMain();
     }//GEN-LAST:event_agentBtnActionPerformed
 

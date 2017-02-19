@@ -5,6 +5,7 @@
  */
 package boundary;
 
+import businessLogic.CreateAgentControl;
 import businessLogic.HandsInTheAir;
 import businessLogic.ReportProduceControl;
 import businessLogic.ValidatorManager;
@@ -176,13 +177,8 @@ public class CreateAgent extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "The password field is incorrect or empty");
             return;
         }
+        con.newAgent(jTextField1.getText(), jTextField2.getText(), jTextField3.getText(),jTextField5.getText(),jTextField4.getText(),jTextField6.getText());
         
-        String qry = ("INSERT INTO tblAgent (ID, firstName, lastName, phoneNumber, email, password) VALUES('"
-                +jTextField1.getText()+"','"+jTextField2.getText()+"','"+jTextField3.getText()+"','"
-                +jTextField4.getText()+"','"+jTextField5.getText()+"','"+jTextField6.getText()+"')");
-                    
-        HandsInTheAir.getDB().insert(qry);
-        JOptionPane.showMessageDialog(null, "The agent was added successfuly!");
     }//GEN-LAST:event_jButton1ActionPerformed
         
     private PieDataset createDataset(HashMap<Integer, Double> map) {
@@ -234,4 +230,5 @@ public class CreateAgent extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
+    private CreateAgentControl con = new CreateAgentControl();
 }
