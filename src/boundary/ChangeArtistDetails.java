@@ -221,6 +221,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
 
             while(artists.next()){
                 if (artistId.equals(artists.getString(1))) continue;
+                
                  model.addRow(new Object[]{false,artists.getString(1),artists.getString(2),artists.getString(3)
                  ,artists.getString(4),artists.getString(5)});
             }

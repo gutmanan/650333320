@@ -17,7 +17,7 @@ public class ChangeArtistDetailsControl {
         
     }
     
-        public ResultSet getArtistsPerAgent(){
+    public ResultSet getArtistsPerAgent(){
         
             String sql = "SELECT tblArtist.*, tblArtist.stageName\n" +
                             "FROM tblArtist\n" +
@@ -29,8 +29,8 @@ public class ChangeArtistDetailsControl {
         return rs;
         
         }
-        
-        public ResultSet getAllArtists(){
+    
+    public ResultSet getAllArtists(){
         
         String sql = "SELECT tblArtist.stageName, tblArtist.email, tblArtist.facebook, tblArtist.IsActive, tblArtist.activationDate\n" +
                     "FROM tblArtist\n" +
@@ -41,5 +41,6 @@ public class ChangeArtistDetailsControl {
         return rs;
         
         }
+        
     
 }
