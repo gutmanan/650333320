@@ -5,18 +5,9 @@
  */
 package boundary;
 
+import businessLogic.CreatePlaceControl;
 import businessLogic.ReportProduceControl;
 import entity.E_CITIES;
-import java.util.HashMap;
-import java.util.Map;
-import javax.swing.ImageIcon;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
 
 /**
  *
@@ -40,8 +31,6 @@ public class CreatePlace extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -49,9 +38,7 @@ public class CreatePlace extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jTextField7 = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -60,8 +47,19 @@ public class CreatePlace extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jTextField10 = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox2 = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jComboBox3 = new javax.swing.JComboBox<>();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -72,50 +70,31 @@ public class CreatePlace extends javax.swing.JPanel {
         add(jLabel4);
         jLabel4.setBounds(30, 10, 170, 40);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel2.setText("Place Number :");
-        add(jLabel2);
-        jLabel2.setBounds(30, 70, 90, 15);
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        add(jTextField1);
-        jTextField1.setBounds(130, 60, 150, 30);
-        jTextField1.setEditable(false);
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Place Name :");
         add(jLabel3);
-        jLabel3.setBounds(30, 110, 90, 15);
+        jLabel3.setBounds(30, 70, 90, 15);
         add(jTextField2);
-        jTextField2.setBounds(130, 100, 150, 30);
+        jTextField2.setBounds(130, 60, 150, 30);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("City :");
         add(jLabel5);
-        jLabel5.setBounds(30, 190, 90, 15);
+        jLabel5.setBounds(30, 110, 90, 15);
         add(jTextField4);
-        jTextField4.setBounds(130, 220, 150, 30);
+        jTextField4.setBounds(130, 140, 150, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Street :");
         add(jLabel6);
-        jLabel6.setBounds(30, 230, 110, 15);
+        jLabel6.setBounds(30, 150, 110, 15);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("House Number :");
         add(jLabel7);
-        jLabel7.setBounds(30, 270, 100, 15);
+        jLabel7.setBounds(30, 190, 100, 15);
         add(jTextField5);
-        jTextField5.setBounds(130, 260, 150, 30);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel8.setText("Country :");
-        add(jLabel8);
-        jLabel8.setBounds(30, 150, 100, 15);
+        jTextField5.setBounds(130, 180, 150, 30);
 
         jButton1.setText("Save");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,16 +103,7 @@ public class CreatePlace extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(240, 330, 90, 40);
-
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        add(jButton2);
-        jButton2.setBounds(370, 330, 90, 40);
+        jButton1.setBounds(580, 500, 160, 40);
         add(jTextField7);
         jTextField7.setBounds(440, 140, 150, 30);
 
@@ -163,89 +133,109 @@ public class CreatePlace extends javax.swing.JPanel {
         add(jLabel12);
         jLabel12.setBounds(340, 190, 100, 15);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        add(jComboBox2);
+        jComboBox2.setBounds(130, 100, 150, 30);
+        jComboBox2.removeAllItems();
+        for (E_CITIES e : con.ListOfCity("Israel"))
+        jComboBox2.addItem(e.toString());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(null);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Toilets :");
+        jPanel1.add(jLabel8);
+        jLabel8.setBounds(10, 180, 90, 15);
+
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "None", "Partial", "Full" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboBox3ActionPerformed(evt);
             }
         });
-        for (E_CITIES i : E_CITIES.values())
-        jComboBox1.addItem(i.toString());
-        add(jComboBox1);
-        jComboBox1.setBounds(130, 140, 150, 30);
+        jPanel1.add(jComboBox3);
+        jComboBox3.setBounds(110, 10, 150, 30);
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox2);
-        jComboBox2.setBounds(130, 180, 150, 30);
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setText("Cover :");
+        jPanel1.add(jLabel13);
+        jLabel13.setBounds(10, 20, 90, 15);
+
+        jLabel14.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel14.setText("Seats :");
+        jPanel1.add(jLabel14);
+        jLabel14.setBounds(10, 60, 90, 15);
+
+        jLabel15.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel15.setText("Platform:");
+        jPanel1.add(jLabel15);
+        jLabel15.setBounds(10, 100, 90, 15);
+
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Gear :");
+        jPanel1.add(jLabel16);
+        jLabel16.setBounds(10, 140, 90, 15);
+        jPanel1.add(jCheckBox2);
+        jCheckBox2.setBounds(110, 50, 20, 21);
+        jPanel1.add(jCheckBox3);
+        jCheckBox3.setBounds(110, 90, 21, 21);
+        jPanel1.add(jCheckBox4);
+        jCheckBox4.setBounds(110, 130, 21, 21);
+        jPanel1.add(jCheckBox5);
+        jCheckBox5.setBounds(110, 170, 21, 21);
+
+        add(jPanel1);
+        jPanel1.setBounds(30, 270, 690, 220);
+        jPanel1.setVisible(false);
+
+        jCheckBox1.setText("Check if you an open place");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        add(jCheckBox1);
+        jCheckBox1.setBounds(30, 230, 190, 23);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
         jLabel1.setBounds(0, 0, 850, 580);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        con.newPlace(jTextField2.getText(), jTextField4.getText(), jTextField5.getText(), jComboBox2.getSelectedItem().toString(), jTextField9.getText(), jTextField8.getText(), jTextField7.getText(), jTextField10.getText(),
+                jCheckBox1.isSelected(),jComboBox3.getSelectedItem().toString(),jCheckBox2.isSelected(),jCheckBox3.isSelected(),jCheckBox4.isSelected(),jCheckBox5.isSelected());
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if (jCheckBox1.isSelected())
+            jPanel1.setVisible(true);
+        else 
+            jPanel1.setVisible(false);   
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
-
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBox3ActionPerformed
         
-    public void setTable() {
-
-    }
-    
-    private PieDataset createDataset(HashMap<Integer, Double> map) {
-        DefaultPieDataset result = new DefaultPieDataset();
-        Double sum = 0.0;
-        for (Double d : map.values()) {
-            sum += d;
-        }
-        for (Map.Entry<Integer, Double> entry : map.entrySet()) {
-            Integer key = entry.getKey();
-            Double value = entry.getValue();
-            result.setValue("Show"+" "+key, value/sum*100);
-        }
-        return result;
-    }
-
-    private JFreeChart createChart(PieDataset dataset, String title) {
-        JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);
-        PiePlot plot = (PiePlot3D)chart.getPlot();
-        ImageIcon img = new ImageIcon(getClass().getResource("/imgs/container2.png"));
-        chart.setBackgroundImage(img.getImage());
-        plot.setStartAngle(0);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.6f);
-        plot.setBackgroundAlpha(0.25f);
-        return chart;
-    }
-    
-    public String formated(double d) {
-        String s = String.valueOf(d);
-        String[] result = s.split("\\.");
-        return result[0]+"."+result[1].charAt(0);
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -253,7 +243,7 @@ public class CreatePlace extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField10;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField4;
@@ -262,4 +252,5 @@ public class CreatePlace extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+    private CreatePlaceControl con = new CreatePlaceControl();
 }

@@ -5,10 +5,18 @@
  */
 package boundary;
 
+import businessLogic.ChangeArtistDetailsControl;
 import businessLogic.ReportProduceControl;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
@@ -27,6 +35,16 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     
     public ChangeArtistDetails() {
         initComponents();
+        rs = con.getArtistsPerAgent();
+        if (rs!=null){
+            try {
+                while (rs.next())
+                    jComboBox1.addItem(rs.getString(2));
+                //  jComboBox1.setSelectedIndex(0);
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -47,11 +65,34 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         jTextField9 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField6 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable() {
+            @Override
+            public Class getColumnClass(int column) {
+                switch (column) {
+                    case 0:
+                    return Boolean.class;
+                    case 1:
+                    return String.class;
+                    case 2:
+                    return String.class;
+                    case 3:
+                    return String.class;
+                    case 4:
+                    return String.class;
+                    case 5:
+                    return String.class;
+                    default:
+                    return Boolean.class;
+                }
+            }
+        }
+        ;
+        jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -96,31 +137,37 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(240, 300, 90, 40);
+        jButton1.setBounds(660, 490, 90, 40);
 
-        jButton2.setText("Clear");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
-        add(jButton2);
-        jButton2.setBounds(370, 300, 90, 40);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(jComboBox1);
         jComboBox1.setBounds(140, 60, 150, 30);
         add(jTextField6);
         jTextField6.setBounds(140, 180, 150, 30);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Activation Date :");
+        jLabel7.setText("Appreciate :");
         add(jLabel7);
-        jLabel7.setBounds(30, 190, 110, 15);
+        jLabel7.setBounds(30, 260, 110, 15);
 
         jLabel3.setText("* Fill date the artist will be active again.  If you want the artist to be active now - leave the field empty    ");
         add(jLabel3);
-        jLabel3.setBounds(30, 210, 540, 40);
+        jLabel3.setBounds(30, 210, 580, 40);
+
+        jTable1.setModel(new DefaultTableModel());
+        jScrollPane1.setViewportView(jTable1);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(30, 290, 720, 170);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Activation Date :");
+        add(jLabel8);
+        jLabel8.setBounds(30, 190, 110, 15);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -128,52 +175,63 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         
-    public void setTable() {
 
-    }
-    
-    private PieDataset createDataset(HashMap<Integer, Double> map) {
-        DefaultPieDataset result = new DefaultPieDataset();
-        Double sum = 0.0;
-        for (Double d : map.values()) {
-            sum += d;
+        rs = con.getArtistsPerAgent();
+        int count = jComboBox1.getSelectedIndex()+1;
+        int counter = 1;
+        try {
+            while (rs.next()){
+                if (counter == count){
+                    jTextField9.setText(rs.getString(3));
+                    jTextField5.setText(rs.getString(4));
+                    jTextField4.setText(rs.getString(5));
+                    jTextField6.setText(rs.getString(9));
+                    setTable(rs.getString(2));
+                    break;
+                }
+                else counter++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
         }
-        for (Map.Entry<Integer, Double> entry : map.entrySet()) {
-            Integer key = entry.getKey();
-            Double value = entry.getValue();
-            result.setValue("Show"+" "+key, value/sum*100);
-        }
-        return result;
-    }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+          
+     public void setTable(String artistId){
+        try {
+        DefaultTableModel model = new DefaultTableModel();
+        jTable1.setModel(model);
+        model.addColumn("Appreciate"); 
+        model.addColumn("Stage Name");
+        model.addColumn("Email"); 
+        model.addColumn("Facebook"); 
+        model.addColumn("isActive"); 
+        model.addColumn("Activation Date");
+        TableColumn tc = jTable1.getColumnModel().getColumn(0);
+        tc.setCellEditor(jTable1.getDefaultEditor(Boolean.class));
+        tc.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
 
-    private JFreeChart createChart(PieDataset dataset, String title) {
-        JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);
-        PiePlot plot = (PiePlot3D)chart.getPlot();
-        ImageIcon img = new ImageIcon(getClass().getResource("/imgs/container2.png"));
-        chart.setBackgroundImage(img.getImage());
-        plot.setStartAngle(0);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.6f);
-        plot.setBackgroundAlpha(0.25f);
-        return chart;
-    }
-    
-    public String formated(double d) {
-        String s = String.valueOf(d);
-        String[] result = s.split("\\.");
-        return result[0]+"."+result[1].charAt(0);
-    }
+        ResultSet artists = null;
+            
+            artists = con.getAllArtists();
+
+            while(artists.next()){
+                if (artistId.equals(artists.getString(1))) continue;
+                 model.addRow(new Object[]{false,artists.getString(1),artists.getString(2),artists.getString(3)
+                 ,artists.getString(4),artists.getString(5)});
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+        }
+  }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -183,9 +241,14 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+    private ChangeArtistDetailsControl con = new ChangeArtistDetailsControl();
+    private ResultSet rs = null;
 }
