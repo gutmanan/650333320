@@ -6,9 +6,17 @@
 package boundary;
 
 import businessLogic.ReportProduceControl;
+import businessLogic.ViewArtistsControl;
+import businessLogic.WindowManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JList;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot;
@@ -27,6 +35,16 @@ public class ViewArtists extends javax.swing.JPanel {
     
     public ViewArtists() {
         initComponents();
+        ResultSet rs = con.getArtists();
+        if (rs!=null){
+            try {
+                while (rs.next())
+                    jComboBox1.addItem(rs.getString(2));
+
+            } catch (SQLException ex) {
+                Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     /**
@@ -41,14 +59,15 @@ public class ViewArtists extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new JList<String>(new DefaultListModel<String>());
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -60,32 +79,25 @@ public class ViewArtists extends javax.swing.JPanel {
         jLabel4.setBounds(30, 10, 170, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setText("Stage Name :");
+        jLabel3.setText("Artists you fan of :");
         add(jLabel3);
-        jLabel3.setBounds(30, 70, 90, 15);
+        jLabel3.setBounds(510, 70, 190, 15);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("FaceBook :");
         add(jLabel5);
         jLabel5.setBounds(30, 110, 90, 15);
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel6.setText("Email :");
-        add(jLabel6);
-        jLabel6.setBounds(30, 150, 110, 15);
-
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel11.setText("Biography :");
         add(jLabel11);
-        jLabel11.setBounds(340, 70, 110, 15);
-        add(jTextField2);
-        jTextField2.setBounds(130, 60, 150, 30);
+        jLabel11.setBounds(30, 160, 110, 15);
         add(jTextField4);
-        jTextField4.setBounds(130, 100, 150, 30);
+        jTextField4.setBounds(130, 100, 260, 30);
+        jTextField4.setEditable(false);
         add(jTextField9);
-        jTextField9.setBounds(420, 60, 350, 150);
-        add(jTextField5);
-        jTextField5.setBounds(130, 140, 150, 30);
+        jTextField9.setBounds(130, 160, 350, 150);
+        jTextField9.setEditable(false);
 
         jButton1.setText("Become Fan");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -94,16 +106,31 @@ public class ViewArtists extends javax.swing.JPanel {
             }
         });
         add(jButton1);
-        jButton1.setBounds(680, 340, 90, 40);
+        jButton1.setBounds(590, 350, 190, 40);
 
-        jCheckBox1.setText("Your are a fan of this artist ");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jLabel2.setText("* You can be a fan of 10 artists");
+        add(jLabel2);
+        jLabel2.setBounds(600, 400, 170, 20);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel6.setText("Stage Name :");
+        add(jLabel6);
+        jLabel6.setBounds(30, 70, 90, 15);
+
+        jScrollPane1.setViewportView(jList1);
+        jList1.setEnabled(false);
+        setList();
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(640, 70, 170, 200);
+
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jComboBox1ActionPerformed(evt);
             }
         });
-        add(jCheckBox1);
-        jCheckBox1.setBounds(30, 190, 190, 24);
+        add(jComboBox1);
+        jComboBox1.setBounds(130, 60, 260, 30);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -111,61 +138,52 @@ public class ViewArtists extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+            if (con.becomeFan(artistSelected))
+                setList();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+
+        ResultSet rs = con.getArtists();
+        int count = jComboBox1.getSelectedIndex()+1;
+        int counter = 1;
+        try {
+            while (rs.next()){
+                if (counter == count){
+                    artistSelected = rs.getString(1);
+                    jTextField4.setText(rs.getString(5));
+                    jTextField9.setText(rs.getString(3));
+                    break;
+                }
+                else counter++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
         
-    public void setTable() {
-
-    }
-    
-    private PieDataset createDataset(HashMap<Integer, Double> map) {
-        DefaultPieDataset result = new DefaultPieDataset();
-        Double sum = 0.0;
-        for (Double d : map.values()) {
-            sum += d;
-        }
-        for (Map.Entry<Integer, Double> entry : map.entrySet()) {
-            Integer key = entry.getKey();
-            Double value = entry.getValue();
-            result.setValue("Show"+" "+key, value/sum*100);
-        }
-        return result;
-    }
-
-    private JFreeChart createChart(PieDataset dataset, String title) {
-        JFreeChart chart = ChartFactory.createPieChart3D(title, dataset, true, true, false);
-        PiePlot plot = (PiePlot3D)chart.getPlot();
-        ImageIcon img = new ImageIcon(getClass().getResource("/imgs/container2.png"));
-        chart.setBackgroundImage(img.getImage());
-        plot.setStartAngle(0);
-        plot.setDirection(Rotation.CLOCKWISE);
-        plot.setForegroundAlpha(0.6f);
-        plot.setBackgroundAlpha(0.25f);
-        return chart;
-    }
-    
-    public String formated(double d) {
-        String s = String.valueOf(d);
-        String[] result = s.split("\\.");
-        return result[0]+"."+result[1].charAt(0);
+    public void setList(){
+        ((DefaultListModel)jList1.getModel()).removeAllElements();
+        
+        for (String s : con.getFans())
+             ((DefaultListModel)jList1.getModel()).addElement(s);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
+    private ViewArtistsControl con = new ViewArtistsControl();
+    private String artistSelected = null;
 }

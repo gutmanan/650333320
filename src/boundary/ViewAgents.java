@@ -118,6 +118,7 @@ public class ViewAgents extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        
         jTable1.setModel(new javax.swing.table.DefaultTableModel());
 
         rs = con.getAgents();
@@ -137,8 +138,6 @@ public class ViewAgents extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
         

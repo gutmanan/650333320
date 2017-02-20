@@ -46,8 +46,8 @@ public class CreateArtistControl {
              return;
         }
         
-        if (!(ValidatorManager.isAlpha(stageName)) || stageName.length()==0){
-            JOptionPane.showMessageDialog(null, "The stage name field is incorrect or empty");
+        if (stageName.length()==0){
+            JOptionPane.showMessageDialog(null, "The stage name field is empty");
             return;
         }
         

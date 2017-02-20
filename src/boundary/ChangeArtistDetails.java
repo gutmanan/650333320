@@ -9,11 +9,14 @@ import businessLogic.ChangeArtistDetailsControl;
 import businessLogic.ReportProduceControl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -94,6 +97,9 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         }
         ;
         jLabel8 = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -131,14 +137,14 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         add(jTextField5);
         jTextField5.setBounds(140, 140, 150, 30);
 
-        jButton1.setText("Save");
+        jButton1.setText("Save details");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         add(jButton1);
-        jButton1.setBounds(660, 490, 90, 40);
+        jButton1.setBounds(580, 250, 180, 40);
 
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,7 +159,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Appreciate :");
         add(jLabel7);
-        jLabel7.setBounds(30, 260, 110, 15);
+        jLabel7.setBounds(30, 280, 110, 15);
 
         jLabel3.setText("* Fill date the artist will be active again.  If you want the artist to be active now - leave the field empty    ");
         add(jLabel3);
@@ -163,12 +169,34 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 290, 720, 170);
+        jScrollPane1.setBounds(30, 320, 720, 170);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel8.setText("Activation Date :");
         add(jLabel8);
         jLabel8.setBounds(30, 190, 110, 15);
+
+        jButton2.setText("Set appreciate");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(200, 510, 150, 50);
+
+        jButton3.setText("Delete appreciate");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        add(jButton3);
+        jButton3.setBounds(400, 510, 150, 50);
+
+        jLabel9.setText("* Choose row and push the button you want");
+        add(jLabel9);
+        jLabel9.setBounds(30, 300, 300, 14);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -176,7 +204,16 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+        /*List<String> artistsToApp = new ArrayList<String>();
         
+        for (int i=0;i<jTable1.getModel().getRowCount();i++){
+            if ((boolean)jTable1.getModel().getValueAt(i, 0))
+                artistsToApp.add((String)jTable1.getModel().getValueAt(i, 1));
+        }*/
+        
+        con.updateDetails(artistIdSelected, jTextField4.getText(), jTextField5.getText(), jTextField6.getText(), jTextField9.getText());
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -202,10 +239,39 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
             Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jTable1.getSelectedRow()<0) return;
+
+        boolean flg = con.newApp(artistIdSelected, (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1),
+                (boolean) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+        
+        if (flg)
+            jComboBox1ActionPerformed(null);
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       
+        boolean flg = con.deleteApp(artistIdSelected, (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1),
+                (boolean) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
+        
+        if (flg)
+            jComboBox1ActionPerformed(null);
+    }//GEN-LAST:event_jButton3ActionPerformed
           
      public void setTable(String artistId){
         try {
-        DefaultTableModel model = new DefaultTableModel();
+
+        DefaultTableModel model = new DefaultTableModel(){
+
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };
+        
         jTable1.setModel(model);
         model.addColumn("Appreciate"); 
         model.addColumn("Stage Name");
@@ -224,8 +290,18 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
             while(artists.next()){
                 if (artistId.equals(artists.getString(2))) continue;
                 
+                ResultSet ra = con.checkAppreciate(artistIdSelected, artists.getString(1));
+                        
+                if (ra!=null && ra.next()){
+                 model.addRow(new Object[]{true,artists.getString(2),artists.getString(3),artists.getString(4)
+                 ,artists.getString(5),artists.getString(6)});
+                }
+                
+                else{
                  model.addRow(new Object[]{false,artists.getString(2),artists.getString(3),artists.getString(4)
                  ,artists.getString(5),artists.getString(6)});
+                }
+                
             }
             
         } catch (SQLException ex) {
@@ -235,6 +311,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -245,6 +323,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField4;
