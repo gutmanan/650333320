@@ -32,7 +32,7 @@ public class ChangeArtistDetailsControl {
     
     public ResultSet getAllArtists(){
         
-        String sql = "SELECT tblArtist.stageName, tblArtist.email, tblArtist.facebook, tblArtist.IsActive, tblArtist.activationDate\n" +
+        String sql = "SELECT  tblArtist.artistAlphaCode, tblArtist.stageName, tblArtist.email, tblArtist.facebook, tblArtist.IsActive, tblArtist.activationDate\n" +
                     "FROM tblArtist\n" +
                     "ORDER BY tblArtist.stageName";    
 
@@ -42,5 +42,7 @@ public class ChangeArtistDetailsControl {
         
         }
         
-    
+   /* public ResultSet checkAppreciate(String name){
+        
+    }*/
 }

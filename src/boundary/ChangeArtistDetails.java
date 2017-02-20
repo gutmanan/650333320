@@ -15,6 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.jfree.chart.ChartFactory;
@@ -179,7 +180,6 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        
 
         rs = con.getArtistsPerAgent();
         int count = jComboBox1.getSelectedIndex()+1;
@@ -187,6 +187,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         try {
             while (rs.next()){
                 if (counter == count){
+                    artistIdSelected = rs.getString(1);
+                    // JOptionPane.showMessageDialog(null, artistIdSelected);
                     jTextField9.setText(rs.getString(3));
                     jTextField5.setText(rs.getString(4));
                     jTextField4.setText(rs.getString(5));
@@ -217,13 +219,13 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
 
         ResultSet artists = null;
             
-            artists = con.getAllArtists();
+        artists = con.getAllArtists();
 
             while(artists.next()){
-                if (artistId.equals(artists.getString(1))) continue;
+                if (artistId.equals(artists.getString(2))) continue;
                 
-                 model.addRow(new Object[]{false,artists.getString(1),artists.getString(2),artists.getString(3)
-                 ,artists.getString(4),artists.getString(5)});
+                 model.addRow(new Object[]{false,artists.getString(2),artists.getString(3),artists.getString(4)
+                 ,artists.getString(5),artists.getString(6)});
             }
             
         } catch (SQLException ex) {
@@ -252,4 +254,5 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private ChangeArtistDetailsControl con = new ChangeArtistDetailsControl();
     private ResultSet rs = null;
+    private String artistIdSelected =  null;
 }
