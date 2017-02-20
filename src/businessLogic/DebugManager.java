@@ -31,6 +31,8 @@ public abstract class DebugManager extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        xmlLabel = new javax.swing.JLabel();
+        xmlstatusLabel = new javax.swing.JLabel();
         objectsCounterLabel = new javax.swing.JLabel();
         counterLabel = new javax.swing.JLabel();
         userBtn = new javax.swing.JButton();
@@ -50,14 +52,26 @@ public abstract class DebugManager extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
+        xmlLabel.setForeground(new java.awt.Color(0, 0, 0));
+        xmlLabel.setText("XML status:");
+        getContentPane().add(xmlLabel);
+        xmlLabel.setBounds(10, 180, 100, 16);
+
+        xmlstatusLabel.setText("not exported");
+        xmlstatusLabel.setForeground(Color.red);
+        xmlstatusLabel.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(xmlstatusLabel);
+        xmlstatusLabel.setBounds(90, 180, 150, 16);
+
+        objectsCounterLabel.setForeground(new java.awt.Color(0, 0, 0));
         objectsCounterLabel.setText("New objects:");
         getContentPane().add(objectsCounterLabel);
-        objectsCounterLabel.setBounds(10, 180, 90, 14);
+        objectsCounterLabel.setBounds(10, 200, 90, 16);
 
         counterLabel.setText(String.valueOf(objects));
         counterLabel.setForeground(Color.RED);
         getContentPane().add(counterLabel);
-        counterLabel.setBounds(90, 180, 150, 16);
+        counterLabel.setBounds(90, 200, 150, 16);
 
         userBtn.setText("User");
         userBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -97,13 +111,14 @@ public abstract class DebugManager extends javax.swing.JFrame {
         getContentPane().add(statusLabel);
         statusLabel.setBounds(115, 160, 150, 16);
 
+        databaseLabel.setForeground(new java.awt.Color(0, 0, 0));
         databaseLabel.setText("Database status:");
         getContentPane().add(databaseLabel);
-        databaseLabel.setBounds(10, 160, 100, 14);
+        databaseLabel.setBounds(10, 160, 100, 16);
 
         quickLog.setText("Quick login:");
         getContentPane().add(quickLog);
-        quickLog.setBounds(10, 110, 80, 14);
+        quickLog.setBounds(10, 110, 80, 16);
 
         wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/debugContainer.png"))); // NOI18N
         getContentPane().add(wallpaper);
@@ -158,6 +173,16 @@ public abstract class DebugManager extends javax.swing.JFrame {
         statusLabel.setForeground(Color.red);
     }
     
+    public static void setXMLStatus(Boolean flag) {
+        if (flag) {
+            xmlstatusLabel.setText("exported");
+            xmlstatusLabel.setForeground(Color.green);
+            return;
+        }
+        xmlstatusLabel.setText("not exported");
+        xmlstatusLabel.setForeground(Color.red);
+    }
+    
     public static void objectsPlusPlus() {
         objects++;
         counterLabel.setText(String.valueOf(objects));
@@ -174,5 +199,7 @@ public abstract class DebugManager extends javax.swing.JFrame {
     private static javax.swing.JLabel statusLabel;
     private static javax.swing.JButton userBtn;
     private static javax.swing.JLabel wallpaper;
+    private static javax.swing.JLabel xmlLabel;
+    private static javax.swing.JLabel xmlstatusLabel;
     // End of variables declaration//GEN-END:variables
 }

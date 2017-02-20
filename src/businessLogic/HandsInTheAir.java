@@ -1,10 +1,17 @@
 package businessLogic;
 
+import entity.Artist;
 import java.awt.event.ActionEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.io.PrintStream;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -30,15 +37,9 @@ public class HandsInTheAir {
             DM = new DebugManager() {};
             DB = new DBManager();
             PDF = new PDFManager();
-            /*XML.create("MuzaMusic_Shows");
-            XML.write(getDB().query("SELECT tblShow.mainArtist, tblShow.date\n"
-                                  + "FROM tblShow\n"
-                                  + "WHERE ((Not (tblShow.status)=\"Canceled\"));"));
-            XML.write(getDB().query("SELECT tblPerformance.artistID, tblShow.date\n"
-                                  + "FROM tblShow INNER JOIN tblPerformance ON tblShow.ID = tblPerformance.showID\n"
-                                  + "WHERE ((Not (tblShow.status)=\"Canceled\"))"));
+            XML.create("MuzaMusic_Shows");
+            XML.write(getDB().query("SELECT tblArtist.*\n" + "FROM tblArtist;"), getArtistShows());
             XML.export("MuzaMusic_Shows");
-        */    
         WindowManager.openLogin();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -89,5 +90,31 @@ public class HandsInTheAir {
     public static void setPDF(PDFManager PDF) {
         HandsInTheAir.PDF = PDF;
     }
-
+    
+    public static HashMap<String, ArrayList<Timestamp>> getArtistShows() {
+        HashMap<String, ArrayList<Timestamp>> artistShows = new HashMap<>();
+        ResultSet rs1 = getDB().query("SELECT tblShow.mainArtist, tblShow.showDate\n"
+                                  + "FROM tblShow\n"
+                                  + "WHERE ((Not (tblShow.status)=\"Canceled\"))");
+        ResultSet rs2 = getDB().query("SELECT tblShowInvitation.artistID, tblShow.showDate\n"
+                                  + "FROM tblShow INNER JOIN tblShowInvitation ON tblShow.showNumber = tblShowInvitation.showID\n"
+                                  + "WHERE ((Not (tblShow.status)=\"Canceled\"))");
+        try {
+            while (rs1.next()) {
+                artistShows.put(rs1.getString(1), new ArrayList<Timestamp>());
+                artistShows.get(rs1.getString(1)).add(rs1.getTimestamp(2));
+            }
+            while (rs2.next()) {
+                if (artistShows.containsKey(rs2.getString(1))) {
+                    artistShows.get(rs2.getString(1)).add(rs2.getTimestamp(2));
+                } else {
+                    artistShows.put(rs2.getString(1), new ArrayList<Timestamp>());
+                    artistShows.get(rs2.getString(1)).add(rs2.getTimestamp(2));
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(HandsInTheAir.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return artistShows;
+    }
 }

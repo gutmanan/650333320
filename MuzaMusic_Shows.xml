@@ -1,42 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MuzaMusic_Shows>
-  <Artist ID="1e23">
-    <ShowDate>2017-01-20 00:00:00.000000</ShowDate>
+  <Artist id="2eba414">
+    <stageName>wwe</stageName>
+    <email>abceds@gmail.com</email>
+    <isActive>true</isActive>
+    <activationDate>null</activationDate>
+    <agentID>6876729</agentID>
   </Artist>
-  <Artist ID="ab11">
-    <ShowDate>2017-01-28 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="bb23">
-    <ShowDate>2016-12-20 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="t5t3">
-    <ShowDate>2017-01-12 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="er34">
-    <ShowDate>2017-01-28 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="er34">
-    <ShowDate>2017-01-17 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="ab11">
-    <ShowDate>2017-01-24 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="t5t3">
-    <ShowDate>2017-01-13 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="t5t3">
-    <ShowDate>2017-01-20 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="1e23">
-    <ShowDate>2017-01-28 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="t5t3">
-    <ShowDate>2016-12-20 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="ab11">
-    <ShowDate>2017-01-12 00:00:00.000000</ShowDate>
-  </Artist>
-  <Artist ID="er34">
-    <ShowDate>2017-01-12 00:00:00.000000</ShowDate>
+  <Show date="2017-02-23 00:00:00.0"/>
+  <Artist id="4edd098">
+    <stageName>mm</stageName>
+    <email>asd@gmail.com</email>
+    <isActive>true</isActive>
+    <activationDate>null</activationDate>
+    <agentID>6876729</agentID>
   </Artist>
 </MuzaMusic_Shows>
