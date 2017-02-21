@@ -34,6 +34,8 @@ public class ViewArtists extends javax.swing.JPanel {
     ReportProduceControl rpController = new ReportProduceControl();
     
     public ViewArtists() {
+        if (WindowManager.getTmpUser()==null)
+            return;
         initComponents();
         ResultSet rs = con.getArtists();
         if (rs!=null){
@@ -138,7 +140,7 @@ public class ViewArtists extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            if (con.becomeFan(artistSelected))
+            if (con.becomeFan(artistSelected,artistSelectedName))
                 setList();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -151,6 +153,7 @@ public class ViewArtists extends javax.swing.JPanel {
             while (rs.next()){
                 if (counter == count){
                     artistSelected = rs.getString(1);
+                    artistSelectedName = rs.getString(2);
                     jTextField4.setText(rs.getString(5));
                     jTextField9.setText(rs.getString(3));
                     break;
@@ -186,4 +189,5 @@ public class ViewArtists extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private ViewArtistsControl con = new ViewArtistsControl();
     private String artistSelected = null;
+    private String artistSelectedName = null;
 }

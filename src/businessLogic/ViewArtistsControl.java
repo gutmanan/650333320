@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class ViewArtistsControl {
     
+
     public ResultSet getArtists(){
         
        String sql = "SELECT tblArtist.*\n" +
@@ -49,14 +50,22 @@ public class ViewArtistsControl {
         return arr;
     }
     
-    public boolean becomeFan(String artistCode){
+    public boolean becomeFan(String artistCode, String artistSelectedName){
         
         ArrayList<String> arr = getFans();
         
-        if (arr.contains(artistCode)){
-            JOptionPane.showMessageDialog(null, "You are already a fan of this artist");
+        if (arr.size()==10){
+            JOptionPane.showMessageDialog(null, "You can't become a fan of more then 10 artists");
             return false;
         }
+            
+        for (String s : arr){
+            if (s.equals(artistSelectedName)){
+            JOptionPane.showMessageDialog(null, "You are already a fan of this artist");
+            return false;
+            }
+        }
+        
         
         String qry = ("INSERT INTO tblFanOf (userID, artistID) VALUES('"
                 +WindowManager.getTmpUser().getUserAlphaCode()+"','"+artistCode+"')");

@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,5 +81,23 @@ public class DBManager {
         return --id;
     }
     
-    
+    public void updateActive(){
+        
+        try {
+            String sql = "SELECT tblArtist.artistAlphaCode, tblArtist.IsActive, tblArtist.activationDate\n" +
+                    "FROM tblArtist";
+            ResultSet rs = HandsInTheAir.getDB().query(sql);
+            
+            while(rs.next()){
+                if (rs.getBoolean(2)) continue;
+                if (rs.getDate(3)==null || rs.getDate(3).before(new Date())){
+                    sql = "UPDATE tblArtist SET IsActive = "+true+", activationDate = "+null+
+                            " WHERE artistAlphaCode = '"+rs.getString(1)+"'";
+                            }  
+            }
+        } catch (SQLException ex) {                
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
 }

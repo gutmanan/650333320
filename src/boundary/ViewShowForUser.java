@@ -6,16 +6,14 @@
 package boundary;
 
 import businessLogic.ReportProduceControl;
-import businessLogic.ViewPlaceInfoControl;
+import businessLogic.ViewShowsForUserControl;
 import businessLogic.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.plaf.basic.BasicListUI;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -23,11 +21,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Shai Gutman
  */
-public class ViewPlaceInfo extends javax.swing.JPanel {
+public class ViewShowForUser extends javax.swing.JPanel {
 
     ReportProduceControl rpController = new ReportProduceControl();
     
-    public ViewPlaceInfo() {
+    public ViewShowForUser() {
         if (WindowManager.getAuthValue()!=4)
             return;
         initComponents();
@@ -54,20 +52,20 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
         setLayout(null);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Place Info");
+        jLabel4.setText("View Shows Info");
         add(jLabel4);
         jLabel4.setBounds(30, 10, 200, 40);
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel7.setText("Shows Details:");
+        jLabel7.setText("Artist participate in show :");
         add(jLabel7);
-        jLabel7.setBounds(30, 270, 100, 15);
+        jLabel7.setBounds(30, 290, 200, 15);
 
         jTable1.setModel(new DefaultTableModel());
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 300, 730, 230);
+        jScrollPane1.setBounds(30, 320, 730, 230);
 
         jTable2.setModel(new DefaultTableModel());
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +77,7 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
         setTable2();
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(30, 50, 730, 190);
+        jScrollPane2.setBounds(30, 50, 730, 210);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -102,7 +100,7 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
             });
             
             // TableModel definition
-            String[] tableColumnsName = {"Place Name","Full Address","Email","Phone"};
+            String[] tableColumnsName = {"Show Date","Main Artist","Place Name","Address","Ticket Price","Minimum Age","Has Presale","Tickets Left"};
             DefaultTableModel aModel = (DefaultTableModel) jTable2.getModel();
             aModel.setColumnIdentifiers(tableColumnsName);
             jTable2.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
@@ -114,20 +112,21 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
                 }
             });
             
-            ResultSet places = null;
+            ResultSet shows = null;
             
-            places = con.getPlaces();
+            shows = con.getShows();
             
             
             // Loop through the ResultSet and transfer in the Model
-            java.sql.ResultSetMetaData rsmd = places.getMetaData();
-            int colNo = rsmd.getColumnCount();
-            while(places.next()){
+            java.sql.ResultSetMetaData rsmd = shows.getMetaData();
+            int colNo = rsmd.getColumnCount()-2;
+            while(shows.next()){
                 Object[] objects = new Object[colNo];
                 // tanks to umit ozkan for the bug fix!
                 for(int i=0;i<colNo;i++){
-                    objects[i]=places.getObject(i+1);
+                    objects[i]=shows.getObject(i+1);
                 }
+                
                 aModel.addRow(objects);
             }
             jTable2.setModel(aModel);
@@ -184,5 +183,5 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     // End of variables declaration//GEN-END:variables
-    private ViewPlaceInfoControl con = new ViewPlaceInfoControl();
+    private ViewShowsForUserControl con = new ViewShowsForUserControl();
 }

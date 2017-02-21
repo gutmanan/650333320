@@ -7,6 +7,7 @@ package boundary;
 
 import businessLogic.ChangeArtistDetailsControl;
 import businessLogic.ReportProduceControl;
+import businessLogic.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,6 +39,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     ReportProduceControl rpController = new ReportProduceControl();
     
     public ChangeArtistDetails() {
+        if (WindowManager.getTmpAgent()==null)
+            return;
         initComponents();
         rs = con.getArtistsPerAgent();
         if (rs!=null){

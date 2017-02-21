@@ -230,11 +230,11 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void genericBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn2ActionPerformed
-        setWindows(new ChangeArtistDetails(), new ViewAgents(), new ViewShows(), new ViewPlaceInfo());
+        setWindows(new ChangeArtistDetails(), new ViewAgents(), new ViewShowForUser(), new ViewPlaceInfo());
     }//GEN-LAST:event_genericBtn2ActionPerformed
 
     private void genericBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn4ActionPerformed
-        setWindows(new ViewShows(), new ReportProduce(), null, null);
+        setWindows(new ViewShowForUser(), new ReportProduce(), null, null);
     }//GEN-LAST:event_genericBtn4ActionPerformed
 
     private void genericBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn3ActionPerformed
