@@ -50,12 +50,12 @@ public class CreateArtistControl {
             JOptionPane.showMessageDialog(null, "The stage name field is empty");
             return;
         }
-        
+
         if (!(ValidatorManager.isValidEmailAddress(email))){
             JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
             return;
         }
-        
+
         if (!(ValidatorManager.isValidURL(facebook))){
             JOptionPane.showMessageDialog(null, "The facebook field is incorrect or empty. \n Please enter full URL address");
             return;

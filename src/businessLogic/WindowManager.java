@@ -34,6 +34,7 @@ public abstract class WindowManager {
     public static void closeMain() {
         mainFrame.dispose();
         loginFrame = new MainLogin();
+        clean();
         HandsInTheAir.getDM().setVisible(false);
     }
     public static void setCurrentWindow(JPanel panel) {

@@ -8,6 +8,9 @@ package boundary;
 import businessLogic.ReportProduceControl;
 import businessLogic.ViewArtistsControl;
 import businessLogic.WindowManager;
+import static com.itextpdf.text.pdf.PdfFileSpecification.url;
+import java.awt.Desktop;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -58,6 +61,7 @@ public class ViewArtists extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -74,6 +78,15 @@ public class ViewArtists extends javax.swing.JPanel {
 
         setOpaque(false);
         setLayout(null);
+
+        jButton2.setText("Click Here !");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(130, 100, 260, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("View Artists");
@@ -97,6 +110,7 @@ public class ViewArtists extends javax.swing.JPanel {
         add(jTextField4);
         jTextField4.setBounds(130, 100, 260, 30);
         jTextField4.setEditable(false);
+        jTextField4.setVisible(false);
         add(jTextField9);
         jTextField9.setBounds(130, 160, 350, 150);
         jTextField9.setEditable(false);
@@ -164,6 +178,16 @@ public class ViewArtists extends javax.swing.JPanel {
             Logger.getLogger(ViewAgents.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+            try {
+                Desktop.getDesktop().browse(new URL(jTextField4.getText()).toURI());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            
+    }//GEN-LAST:event_jButton2ActionPerformed
         
     public void setList(){
         ((DefaultListModel)jList1.getModel()).removeAllElements();
@@ -174,6 +198,7 @@ public class ViewArtists extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -190,4 +215,5 @@ public class ViewArtists extends javax.swing.JPanel {
     private ViewArtistsControl con = new ViewArtistsControl();
     private String artistSelected = null;
     private String artistSelectedName = null;
+    
 }

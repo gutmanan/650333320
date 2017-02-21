@@ -59,4 +59,13 @@ public abstract class ValidatorManager {
             return false;
         }
     }
+    
+    public boolean checkFacebook(String s){
+        return (s.contains("facebook"));
+    }
+    
+    public boolean checkGoogle(String s){
+        return (s.contains("google.co.il/maps"));
+    }
+    
 }
