@@ -5,8 +5,12 @@
  */
 package businessLogic;
 
+import java.awt.Desktop;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -58,10 +62,50 @@ public class ChangeArtistDetailsControl {
 
     }
     
-    public void updateDetails(String artistId , String Facebook,String eMail,String date,String bio){
+    public void updateDetails(String artistId , String facebook,String eMail,String date,String bio){
+        Date checkedDate = null;
+        String  qry = null;
         
+        if (!(ValidatorManager.isValidEmailAddress(eMail))){
+            JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
+            return;
+        }
+
+        if (!(ValidatorManager.isValidURL(facebook)) || !(ValidatorManager.checkFacebook(facebook))){
+            JOptionPane.showMessageDialog(null, "The facebook field is incorrect or empty. \n Please enter full URL address");
+            return;
+        }
+                
+        if (bio.length()==0){
+            JOptionPane.showMessageDialog(null, "The biography field is empty");
+            return;
+        }
         
+        if (date==null || date.isEmpty()){
+            Timestamp ts = new Timestamp(new Date().getTime());
+            qry = "UPDATE tblArtist SET biography = '"+bio+"',email = '"
+                        +eMail+"',facebook = '"
+                        +facebook+"', IsActive = '"+true+"', activationDate = '"+ts+"' WHERE artistAlphaCode=\'"+artistId+"\'";
+            activateSql(qry);
+            return;
+        }
         
+        checkedDate = ValidatorManager.isValidDate(date);
+        
+        if (checkedDate!=null && checkedDate.after(new Date())){
+            Timestamp ts = new Timestamp(checkedDate.getTime());
+            qry = "UPDATE tblArtist SET biography = '"+bio+"',email = '"+eMail+"',facebook = '"+facebook+"', IsActive = '"+false+"', activationDate = '"+ts+"' WHERE artistAlphaCode=\'"+artistId+"\'"; 
+                 
+                        
+                    
+
+            activateSql(qry);
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "The Activation Date is already past or incorrect.\n  Date example : dd/MM/yyyy");
+        }
+   
     }
     
     public boolean newApp(String artistId, String artistToAppStageName, boolean flg){
@@ -134,4 +178,19 @@ public class ChangeArtistDetailsControl {
         return true;
     }
     
+    public void viewUrl(String url){
+          try {
+                Desktop.getDesktop().browse(new URL(url).toURI());          
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+    }
+    
+    public void activateSql(String sql){
+        
+        HandsInTheAir.getDB().insert(sql);
+        
+        JOptionPane.showMessageDialog(null, "The artist details was changed successfuly!");
+        
+    }
 }

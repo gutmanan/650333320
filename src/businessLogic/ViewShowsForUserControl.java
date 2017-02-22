@@ -189,7 +189,7 @@ public class ViewShowsForUserControl {
             
             if (text.equals("Presale :")){
                 qry = "UPDATE tblTicketOrder SET numOfRegularTickets = "+num1+",numOfPresaleTickets = "
-                        +(num2+numOfTickets)+" WHERE showID="+showNum+" AND userID="+WindowManager.getTmpUser().getUserAlphaCode();
+                        +(num2+numOfTickets)+" WHERE showID="+showNum+" AND userID=\""+WindowManager.getTmpUser().getUserAlphaCode()+"\"";
             }
             
             else{

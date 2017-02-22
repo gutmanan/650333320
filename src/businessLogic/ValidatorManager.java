@@ -6,6 +6,10 @@
 package businessLogic;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -60,11 +64,23 @@ public abstract class ValidatorManager {
         }
     }
     
-    public boolean checkFacebook(String s){
+    public static Date isValidDate(String inDate) {
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        dateFormat.setLenient(false);
+        try {
+          date = dateFormat.parse(inDate.trim());
+        } catch (ParseException pe) {
+          return date;
+        }
+    return date;
+    
+  }
+    public static boolean checkFacebook(String s){
         return (s.contains("facebook"));
     }
     
-    public boolean checkGoogle(String s){
+    public static boolean checkGoogle(String s){
         return (s.contains("google.co.il/maps"));
     }
     

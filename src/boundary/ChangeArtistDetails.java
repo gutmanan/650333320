@@ -10,25 +10,10 @@ import businessLogic.ReportProduceControl;
 import businessLogic.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
 
 /**
  *
@@ -63,6 +48,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        facebookButton = new javax.swing.JButton();
+        facebookButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -108,6 +95,24 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         setOpaque(false);
         setLayout(null);
 
+        facebookButton.setText("Change");
+        facebookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facebookButtonActionPerformed(evt);
+            }
+        });
+        add(facebookButton);
+        facebookButton.setBounds(210, 100, 80, 30);
+
+        facebookButton1.setText("View");
+        facebookButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facebookButton1ActionPerformed(evt);
+            }
+        });
+        add(facebookButton1);
+        facebookButton1.setBounds(140, 100, 70, 30);
+
         jLabel4.setBackground(new java.awt.Color(0, 0, 0));
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Change Artist Details :");
@@ -135,6 +140,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         jLabel11.setBounds(340, 70, 110, 15);
         add(jTextField4);
         jTextField4.setBounds(140, 100, 150, 30);
+        jTextField4.setVisible(false);
         add(jTextField9);
         jTextField9.setBounds(430, 60, 350, 150);
         add(jTextField5);
@@ -220,7 +226,9 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-
+        jTextField4.setVisible(false);
+        facebookButton.setVisible(true);
+        facebookButton1.setVisible(true);
         rs = con.getArtistsPerAgent();
         int count = jComboBox1.getSelectedIndex()+1;
         int counter = 1;
@@ -232,7 +240,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
                     jTextField9.setText(rs.getString(3));
                     jTextField5.setText(rs.getString(4));
                     jTextField4.setText(rs.getString(5));
-                    jTextField6.setText(rs.getString(9));
+                    if (!rs.getBoolean(6))
+                      jTextField6.setText(rs.getString(9));
                     setTable(rs.getString(2));
                     break;
                 }
@@ -262,6 +271,16 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         if (flg)
             jComboBox1ActionPerformed(null);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void facebookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facebookButtonActionPerformed
+        jTextField4.setVisible(true);
+        facebookButton.setVisible(false);
+        facebookButton1.setVisible(false);
+    }//GEN-LAST:event_facebookButtonActionPerformed
+
+    private void facebookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facebookButton1ActionPerformed
+        con.viewUrl(jTextField4.getText());
+    }//GEN-LAST:event_facebookButton1ActionPerformed
           
      public void setTable(String artistId){
         try {
@@ -281,7 +300,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         model.addColumn("Email"); 
         model.addColumn("Facebook"); 
         model.addColumn("isActive"); 
-        model.addColumn("Activation Date");
+        
         TableColumn tc = jTable1.getColumnModel().getColumn(0);
         tc.setCellEditor(jTable1.getDefaultEditor(Boolean.class));
         tc.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
@@ -297,12 +316,12 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
                         
                 if (ra!=null && ra.next()){
                  model.addRow(new Object[]{true,artists.getString(2),artists.getString(3),artists.getString(4)
-                 ,artists.getString(5),artists.getString(6)});
+                 ,artists.getString(5)});
                 }
                 
                 else{
                  model.addRow(new Object[]{false,artists.getString(2),artists.getString(3),artists.getString(4)
-                 ,artists.getString(5),artists.getString(6)});
+                 ,artists.getString(5)});
                 }
                 
             }
@@ -313,6 +332,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
   }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton facebookButton;
+    private javax.swing.JButton facebookButton1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;

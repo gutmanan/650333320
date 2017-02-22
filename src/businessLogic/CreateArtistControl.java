@@ -56,7 +56,7 @@ public class CreateArtistControl {
             return;
         }
 
-        if (!(ValidatorManager.isValidURL(facebook))){
+        if (!(ValidatorManager.isValidURL(facebook)) || !(ValidatorManager.checkFacebook(facebook))){
             JOptionPane.showMessageDialog(null, "The facebook field is incorrect or empty. \n Please enter full URL address");
             return;
         }
