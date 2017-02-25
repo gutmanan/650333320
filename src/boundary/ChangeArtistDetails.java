@@ -50,7 +50,6 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
 
         facebookButton = new javax.swing.JButton();
         facebookButton1 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -90,6 +89,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -112,12 +112,6 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         });
         add(facebookButton1);
         facebookButton1.setBounds(140, 100, 70, 30);
-
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Change Artist Details :");
-        add(jLabel4);
-        jLabel4.setBounds(30, 10, 250, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Artist Name :");
@@ -205,7 +199,14 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
 
         jLabel9.setText("* Choose row and push the button you want");
         add(jLabel9);
-        jLabel9.setBounds(30, 300, 300, 14);
+        jLabel9.setBounds(30, 300, 300, 16);
+
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Change Artist Details");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -342,7 +343,6 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -354,6 +354,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ChangeArtistDetailsControl con = new ChangeArtistDetailsControl();
     private ResultSet rs = null;

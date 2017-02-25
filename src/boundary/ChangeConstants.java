@@ -35,7 +35,6 @@ public class ChangeConstants extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        titleLabel = new javax.swing.JLabel();
         placeExpLabel = new javax.swing.JLabel();
         lastUpdateField = new javax.swing.JTextField();
         placeIncField = new javax.swing.JTextField();
@@ -58,15 +57,11 @@ public class ChangeConstants extends javax.swing.JPanel {
         waitTimeLabel = new javax.swing.JLabel();
         placeExpField = new javax.swing.JTextField();
         updateCheckBox = new javax.swing.JCheckBox();
+        titleLabel = new javax.swing.JLabel();
         wallpaper = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
-
-        titleLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        titleLabel.setText("Change Constants ");
-        add(titleLabel);
-        titleLabel.setBounds(30, 10, 210, 40);
 
         placeExpLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         placeExpLabel.setText("Place Expanse (%) :");
@@ -157,6 +152,13 @@ public class ChangeConstants extends javax.swing.JPanel {
         });
         add(updateCheckBox);
         updateCheckBox.setBounds(30, 330, 210, 24);
+
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Change Constants");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
 
         wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(wallpaper);

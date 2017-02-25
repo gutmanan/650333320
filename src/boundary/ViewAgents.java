@@ -43,7 +43,6 @@ public class ViewAgents extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -55,15 +54,11 @@ public class ViewAgents extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
+        titleLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Agents ");
-        add(jLabel4);
-        jLabel4.setBounds(30, 10, 170, 40);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setText("Represented Artists :");
@@ -111,6 +106,13 @@ public class ViewAgents extends javax.swing.JPanel {
         });
         add(jComboBox1);
         jComboBox1.setBounds(130, 60, 190, 30);
+
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("View Agents");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -175,7 +177,6 @@ public class ViewAgents extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
@@ -185,6 +186,7 @@ public class ViewAgents extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ViewAgentControl con = new ViewAgentControl(); 
     private ResultSet rs = null;

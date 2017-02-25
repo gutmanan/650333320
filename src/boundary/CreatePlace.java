@@ -30,7 +30,6 @@ public class CreatePlace extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -60,15 +59,11 @@ public class CreatePlace extends javax.swing.JPanel {
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
         jCheckBox1 = new javax.swing.JCheckBox();
+        titleLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Create Place ");
-        add(jLabel4);
-        jLabel4.setBounds(30, 10, 170, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Place Name :");
@@ -195,7 +190,14 @@ public class CreatePlace extends javax.swing.JPanel {
             }
         });
         add(jCheckBox1);
-        jCheckBox1.setBounds(30, 230, 190, 23);
+        jCheckBox1.setBounds(30, 230, 190, 24);
+
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Create Place");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -237,7 +239,6 @@ public class CreatePlace extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -251,6 +252,7 @@ public class CreatePlace extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private CreatePlaceControl con = new CreatePlaceControl();
 }

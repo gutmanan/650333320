@@ -179,12 +179,12 @@ public abstract class WindowManager {
         welcome.setFont(new java.awt.Font("Dialog", 0, 36));
         welcome.setForeground(new java.awt.Color(255, 255, 255));
         mainFrame.getContentPane().add(welcome, mainFrame.getContentPane().countComponents()-1);
-        welcome.setBounds(400, 30, 500, 50);
+        welcome.setBounds(190, 30, 500, 50);
         if (getTmpAgent()!= null)
             welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
-        if (getTmpUser()!= null)
+        else if (getTmpUser()!= null)
             welcome.setText("Welcome "+getTmpUser().getFirstName()+" "+getTmpUser().getLastName());
-        else if (getTmpAgent() == null || getTmpUser() == null)
+        else 
             welcome.setText("Welcome "+getAuthType());
     }
 }

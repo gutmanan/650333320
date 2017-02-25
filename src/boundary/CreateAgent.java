@@ -47,7 +47,6 @@ public class CreateAgent extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -59,15 +58,12 @@ public class CreateAgent extends javax.swing.JPanel {
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        titleLabel = new javax.swing.JLabel();
         wallPaper = new javax.swing.JLabel();
 
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(780, 580));
         setLayout(null);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Create Agent :");
-        add(jLabel1);
-        jLabel1.setBounds(30, 10, 170, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("First Name :");
@@ -113,9 +109,16 @@ public class CreateAgent extends javax.swing.JPanel {
         add(jButton1);
         jButton1.setBounds(90, 280, 90, 40);
 
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Create Agent");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
+
         wallPaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(wallPaper);
-        wallPaper.setBounds(0, 0, 780, 580);
+        wallPaper.setBounds(0, 0, 850, 580);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -129,7 +132,6 @@ public class CreateAgent extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -140,6 +142,7 @@ public class CreateAgent extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel wallPaper;
     // End of variables declaration//GEN-END:variables
     private CreateAgentControl con = new CreateAgentControl();

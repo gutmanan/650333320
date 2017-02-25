@@ -42,32 +42,27 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        titleLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
         setLayout(null);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Place Info");
-        add(jLabel4);
-        jLabel4.setBounds(30, 10, 200, 40);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Shows Details:");
         add(jLabel7);
-        jLabel7.setBounds(30, 270, 100, 15);
+        jLabel7.setBounds(30, 300, 100, 15);
 
         jTable1.setModel(new DefaultTableModel());
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 300, 730, 230);
+        jScrollPane1.setBounds(30, 320, 710, 230);
 
         jTable2.setModel(new DefaultTableModel());
         jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +74,14 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
         setTable2();
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(30, 50, 730, 190);
+        jScrollPane2.setBounds(30, 80, 710, 190);
+
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("View Places");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -177,12 +179,12 @@ public class ViewPlaceInfo extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ViewPlaceInfoControl con = new ViewPlaceInfoControl();
 }

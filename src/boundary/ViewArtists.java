@@ -62,7 +62,6 @@ public class ViewArtists extends javax.swing.JPanel {
     private void initComponents() {
 
         jButton2 = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -74,6 +73,7 @@ public class ViewArtists extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new JList<String>(new DefaultListModel<String>());
         jComboBox1 = new javax.swing.JComboBox<>();
+        titleLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -87,11 +87,6 @@ public class ViewArtists extends javax.swing.JPanel {
         });
         add(jButton2);
         jButton2.setBounds(130, 100, 260, 30);
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Artists");
-        add(jLabel4);
-        jLabel4.setBounds(30, 10, 170, 40);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setText("Artists you fan of :");
@@ -147,6 +142,13 @@ public class ViewArtists extends javax.swing.JPanel {
         });
         add(jComboBox1);
         jComboBox1.setBounds(130, 60, 260, 30);
+
+        titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("View Artists");
+        add(titleLabel);
+        titleLabel.setBounds(0, 10, 850, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
         add(jLabel1);
@@ -204,13 +206,13 @@ public class ViewArtists extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ViewArtistsControl con = new ViewArtistsControl();
     private String artistSelected = null;

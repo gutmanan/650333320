@@ -61,7 +61,6 @@ public class ViewShowForUser extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         internalWallpaper = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -71,6 +70,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -86,19 +86,19 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         birthdayLabel.setText("Total Price :");
         newAccountFrame.getContentPane().add(birthdayLabel);
-        birthdayLabel.setBounds(80, 190, 100, 14);
+        birthdayLabel.setBounds(80, 190, 100, 16);
 
         nicknameLabel.setText("Number of Tickets To Buy :");
         newAccountFrame.getContentPane().add(nicknameLabel);
-        nicknameLabel.setBounds(80, 110, 150, 14);
+        nicknameLabel.setBounds(80, 110, 150, 16);
 
         lastnameLabel.setText(WindowManager.getTmpUser().getFirstName() +" "+WindowManager.getTmpUser().getLastName());
         newAccountFrame.getContentPane().add(lastnameLabel);
-        lastnameLabel.setBounds(240, 70, 90, 14);
+        lastnameLabel.setBounds(240, 70, 90, 16);
 
         firstnameLabel.setText("Ticket Price :");
         newAccountFrame.getContentPane().add(firstnameLabel);
-        firstnameLabel.setBounds(80, 150, 110, 14);
+        firstnameLabel.setBounds(80, 150, 110, 16);
 
         usernameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         usernameLabel.setText("Label :");
@@ -107,15 +107,15 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         jLabel2.setText("0");
         newAccountFrame.getContentPane().add(jLabel2);
-        jLabel2.setBounds(260, 190, 70, 14);
+        jLabel2.setBounds(260, 190, 70, 16);
 
         jLabel3.setText("User Name : ");
         newAccountFrame.getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 70, 70, 14);
+        jLabel3.setBounds(80, 70, 70, 16);
 
         ticketPrice.setText("price");
         newAccountFrame.getContentPane().add(ticketPrice);
-        ticketPrice.setBounds(260, 150, 90, 14);
+        ticketPrice.setBounds(260, 150, 90, 16);
 
         jButton1.setText("Buy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +124,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
             }
         });
         newAccountFrame.getContentPane().add(jButton1);
-        jButton1.setBounds(310, 290, 80, 23);
+        jButton1.setBounds(310, 290, 80, 26);
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +133,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
             }
         });
         newAccountFrame.getContentPane().add(jButton2);
-        jButton2.setBounds(400, 290, 90, 23);
+        jButton2.setBounds(400, 290, 90, 26);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,15 +142,15 @@ public class ViewShowForUser extends javax.swing.JPanel {
             }
         });
         newAccountFrame.getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(250, 100, 50, 20);
+        jComboBox1.setBounds(250, 100, 50, 25);
 
         jLabel6.setText("Total tickets you bought :");
         newAccountFrame.getContentPane().add(jLabel6);
-        jLabel6.setBounds(80, 230, 180, 14);
+        jLabel6.setBounds(80, 230, 180, 16);
 
         jLabel10.setText("jLabel10");
         newAccountFrame.getContentPane().add(jLabel10);
-        jLabel10.setBounds(260, 230, 40, 14);
+        jLabel10.setBounds(260, 230, 38, 16);
 
         internalWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container2.png"))); // NOI18N
         internalWallpaper.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -167,21 +167,16 @@ public class ViewShowForUser extends javax.swing.JPanel {
         add(newAccountFrame);
         newAccountFrame.setBounds(160, 50, 545, 370);
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("View Shows Info");
-        add(jLabel4);
-        jLabel4.setBounds(30, 10, 200, 40);
-
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel7.setText("Show location (Google Maps) :");
         add(jLabel7);
-        jLabel7.setBounds(350, 290, 260, 15);
+        jLabel7.setBounds(350, 310, 260, 15);
 
         jTable1.setModel(new DefaultTableModel());
         jScrollPane1.setViewportView(jTable1);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 320, 220, 140);
+        jScrollPane1.setBounds(30, 330, 220, 140);
 
         jTable2.setModel(new DefaultTableModel(){
 
@@ -201,12 +196,12 @@ public class ViewShowForUser extends javax.swing.JPanel {
     setTable2();
 
     add(jScrollPane2);
-    jScrollPane2.setBounds(30, 50, 730, 210);
+    jScrollPane2.setBounds(30, 70, 730, 210);
 
     jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     jLabel8.setText("Artist participate in selected show :");
     add(jLabel8);
-    jLabel8.setBounds(30, 290, 260, 15);
+    jLabel8.setBounds(30, 310, 260, 15);
 
     jButton3.setText("Buy Tickets For This Show");
     jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +219,13 @@ public class ViewShowForUser extends javax.swing.JPanel {
     add(emailLabel);
     emailLabel.setBounds(40, 540, 390, 20);
     emailLabel.setVisible(false);
+
+    titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+    titleLabel.setForeground(new java.awt.Color(0, 0, 0));
+    titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+    titleLabel.setText("View Shows");
+    add(titleLabel);
+    titleLabel.setBounds(0, 10, 850, 40);
 
     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
     add(jLabel1);
@@ -414,7 +416,6 @@ public class ViewShowForUser extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -427,6 +428,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
     private javax.swing.JInternalFrame newAccountFrame;
     private javax.swing.JLabel nicknameLabel;
     private javax.swing.JLabel ticketPrice;
+    private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
     private ViewShowsForUserControl con = new ViewShowsForUserControl();
