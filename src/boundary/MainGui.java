@@ -234,7 +234,7 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_genericBtn2ActionPerformed
 
     private void genericBtn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn4ActionPerformed
-        setWindows(new ViewShowForUser(), new ReportProduce(), null, null);
+        setWindows(new ViewShowForAgent(), new ReportProduce(), null, null);
     }//GEN-LAST:event_genericBtn4ActionPerformed
 
     private void genericBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn3ActionPerformed
@@ -242,7 +242,7 @@ public class MainGui extends JFrame {
     }//GEN-LAST:event_genericBtn3ActionPerformed
 
     private void genericBtn5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn5ActionPerformed
-        setWindows(new ViewPlaceInfo(), null, null, null);
+        setWindows(new ViewPlaceInfoForAgent(), null, null, new ViewPlaceInfo());
     }//GEN-LAST:event_genericBtn5ActionPerformed
 
     private void genericBtn6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genericBtn6ActionPerformed

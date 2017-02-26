@@ -47,6 +47,18 @@ public class ViewShowsForUserControl {
             Logger.getLogger(ViewShowsForUserControl.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        sql = "SELECT tblShow.showNumber, tblPlace.maxCapacity\n" +
+                "FROM tblPlace INNER JOIN tblShow ON tblPlace.placeNumber = tblShow.place;";
+        
+        rs = HandsInTheAir.getDB().query(sql);
+        
+        try {
+            while (rs.next())
+                return rs.getInt(2);
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewShowsForAgentControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         return 0;
     }
         
