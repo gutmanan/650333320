@@ -27,7 +27,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         if (WindowManager.getTmpAgent()==null)
             return;
         initComponents();
-        rs = con.getArtistsPerAgent();
+        ResultSet rs = con.getArtistsPerAgent();
         if (rs!=null){
             try {
                 while (rs.next())
@@ -222,7 +222,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
                 artistsToApp.add((String)jTable1.getModel().getValueAt(i, 1));
         }*/
         
-        con.updateDetails(artistIdSelected, jTextField4.getText(), jTextField5.getText(), jTextField6.getText(), jTextField9.getText());
+        con.updateDetails((String) jComboBox1.getSelectedItem(), jTextField4.getText(), jTextField5.getText(), jTextField6.getText(), jTextField9.getText());
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -230,13 +230,13 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         jTextField4.setVisible(false);
         facebookButton.setVisible(true);
         facebookButton1.setVisible(true);
-        rs = con.getArtistsPerAgent();
+        ResultSet rs = con.getArtistsPerAgent();
         int count = jComboBox1.getSelectedIndex()+1;
         int counter = 1;
         try {
             while (rs.next()){
                 if (counter == count){
-                    artistIdSelected = rs.getString(1);
+                    //artistIdSelected = rs.getString(1);
                     // JOptionPane.showMessageDialog(null, artistIdSelected);
                     jTextField9.setText(rs.getString(3));
                     jTextField5.setText(rs.getString(4));
@@ -255,7 +255,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jTable1.getSelectedRow()<0) return;
-
+        String artistIdSelected = con.getArtistId(jComboBox1.getSelectedItem().toString());
         boolean flg = con.newApp(artistIdSelected, (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1),
                 (boolean) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
         
@@ -265,7 +265,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
+        String artistIdSelected = con.getArtistId(jComboBox1.getSelectedItem().toString());
         boolean flg = con.deleteApp(artistIdSelected, (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1),
                 (boolean) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
         
@@ -307,7 +307,8 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
         tc.setCellRenderer(jTable1.getDefaultRenderer(Boolean.class));
 
         ResultSet artists = null;
-            
+        String artistIdSelected = con.getArtistId(jComboBox1.getSelectedItem().toString());
+        
         artists = con.getAllArtists();
 
             while(artists.next()){
@@ -357,6 +358,6 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ChangeArtistDetailsControl con = new ChangeArtistDetailsControl();
-    private ResultSet rs = null;
-    private String artistIdSelected =  null;
+    //private ResultSet rs = null;
+    //private String artistIdSelected =  null;
 }

@@ -22,7 +22,7 @@ public class ViewAgents extends javax.swing.JPanel {
     
     public ViewAgents() {
         initComponents();
-        rs = con.getAgents();
+        ResultSet rs = con.getAgents();
         if (rs!=null){
             try {
                 while (rs.next())
@@ -123,7 +123,7 @@ public class ViewAgents extends javax.swing.JPanel {
         
         jTable1.setModel(new javax.swing.table.DefaultTableModel());
 
-        rs = con.getAgents();
+        ResultSet rs = con.getAgents();
         int count = jComboBox1.getSelectedIndex()+1;
         int counter = 1;
         try {
@@ -189,5 +189,5 @@ public class ViewAgents extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ViewAgentControl con = new ViewAgentControl(); 
-    private ResultSet rs = null;
+    
 }

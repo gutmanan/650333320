@@ -8,25 +8,14 @@ package boundary;
 import businessLogic.ReportProduceControl;
 import businessLogic.ViewArtistsControl;
 import businessLogic.WindowManager;
-import static com.itextpdf.text.pdf.PdfFileSpecification.url;
 import java.awt.Desktop;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JList;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
 
 /**
  *
@@ -156,7 +145,8 @@ public class ViewArtists extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-            if (con.becomeFan(artistSelected,artistSelectedName))
+        String artistSelected = con.getArtistId(jComboBox1.getSelectedItem().toString());
+        if (con.becomeFan(artistSelected,jComboBox1.getSelectedItem().toString()))
                 setList();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -168,8 +158,8 @@ public class ViewArtists extends javax.swing.JPanel {
         try {
             while (rs.next()){
                 if (counter == count){
-                    artistSelected = rs.getString(1);
-                    artistSelectedName = rs.getString(2);
+                    //artistSelected = rs.getString(1);
+                    //artistSelectedName = rs.getString(2);
                     jTextField4.setText(rs.getString(5));
                     jTextField9.setText(rs.getString(3));
                     break;
@@ -215,7 +205,7 @@ public class ViewArtists extends javax.swing.JPanel {
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
     private ViewArtistsControl con = new ViewArtistsControl();
-    private String artistSelected = null;
-    private String artistSelectedName = null;
+    //private String artistSelected = null;
+    //private String artistSelectedName = null;
     
 }

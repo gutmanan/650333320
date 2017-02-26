@@ -62,9 +62,11 @@ public class ChangeArtistDetailsControl {
 
     }
     
-    public void updateDetails(String artistId , String facebook,String eMail,String date,String bio){
+    public void updateDetails(String stageName , String facebook,String eMail,String date,String bio){
+        
         Date checkedDate = null;
         String  qry = null;
+        String artistId = getArtistId(stageName);
         
         if (!(ValidatorManager.isValidEmailAddress(eMail))){
             JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
@@ -95,9 +97,6 @@ public class ChangeArtistDetailsControl {
         if (checkedDate!=null && checkedDate.after(new Date())){
             Timestamp ts = new Timestamp(checkedDate.getTime());
             qry = "UPDATE tblArtist SET biography = '"+bio+"',email = '"+eMail+"',facebook = '"+facebook+"', IsActive = '"+false+"', activationDate = '"+ts+"' WHERE artistAlphaCode=\'"+artistId+"\'"; 
-                 
-                        
-                    
 
             activateSql(qry);
         }
@@ -192,5 +191,23 @@ public class ChangeArtistDetailsControl {
         
         JOptionPane.showMessageDialog(null, "The artist details was changed successfuly!");
         
+    }
+    
+    public String getArtistId(String stageName){
+        
+        String sql = "SELECT tblArtist.artistAlphaCode, tblArtist.stageName\n" +
+            "FROM tblArtist\n" +
+            "WHERE (((tblArtist.stageName) Like \""+stageName+"\"));";
+        
+        ResultSet rs = HandsInTheAir.getDB().query(sql);
+        
+        try {
+            while(rs.next())
+                return rs.getString(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeArtistDetailsControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";
     }
 }

@@ -77,5 +77,23 @@ public class ViewArtistsControl {
         return true;
     }
     
+    public String getArtistId(String stageName){
+        
+        String sql = "SELECT tblArtist.artistAlphaCode, tblArtist.stageName\n" +
+            "FROM tblArtist\n" +
+            "WHERE (((tblArtist.stageName) Like \""+stageName+"\"));";
+        
+        ResultSet rs = HandsInTheAir.getDB().query(sql);
+        
+        try {
+            while(rs.next())
+                return rs.getString(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(ChangeArtistDetailsControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "";
+    }
+    
 }
 

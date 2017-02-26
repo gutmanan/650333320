@@ -6,27 +6,13 @@
 package boundary;
 
 import businessLogic.CreateArtistControl;
-import businessLogic.HandsInTheAir;
 import businessLogic.ReportProduceControl;
-import businessLogic.ValidatorManager;
 import businessLogic.WindowManager;
 import java.io.File;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PiePlot;
-import org.jfree.chart.plot.PiePlot3D;
-import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
-import org.jfree.util.Rotation;
 
 /**
  *
