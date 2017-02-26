@@ -14,19 +14,34 @@ import businessLogic.DBManager;
 import businessLogic.HandsInTheAir;
 import businessLogic.WindowManager;
 import java.awt.Checkbox;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.font.TextAttribute;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListCellRenderer;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPopupMenu;
 import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
+import javax.swing.JViewport;
 import javax.swing.SpinnerDateModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -77,7 +92,6 @@ public class CreateShow extends javax.swing.JPanel {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -92,6 +106,7 @@ public class CreateShow extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jXDatePicker1 = new org.jdesktop.swingx.JXDatePicker();
@@ -148,18 +163,6 @@ public class CreateShow extends javax.swing.JPanel {
 
         add(jPanel1);
         jPanel1.setBounds(25, 305, 650, 260);
-
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/btnInvite.png"))); // NOI18N
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setContentAreaFilled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1);
-        jButton1.setBounds(40, 250, 150, 40);
 
         jLabel15.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(0, 0, 0));
@@ -239,6 +242,7 @@ public class CreateShow extends javax.swing.JPanel {
         add(jTextField1);
         jTextField1.setBounds(250, 160, 140, 25);
 
+        jComboBox2.setModel(new DefaultComboBoxModel<String>());
         jComboBox2.addItem("Select Place");
         jComboBox2.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -256,6 +260,15 @@ public class CreateShow extends javax.swing.JPanel {
         });
         add(jComboBox1);
         jComboBox1.setBounds(250, 100, 140, 25);
+
+        jButton2.setText("Invite Artists");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+        add(jButton2);
+        jButton2.setBounds(60, 240, 130, 30);
 
         jLabel5.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
@@ -306,7 +319,12 @@ public class CreateShow extends javax.swing.JPanel {
         for (String s : csController.getAvailableMainArtistForDate(selectedDate)) {
             jComboBox1.addItem(s);
         }
+
         for (String s : csController.getAvailablePlacesForDate(selectedDate)) {
+            jComboBox2.addItem(s);
+        }
+        jComboBox2.addItem("---------------------");
+        for (String s : csController.getPlacesExcluding(selectedDate, csController.getAvailablePlacesForDate(selectedDate))) {
             jComboBox2.addItem(s);
         }
     }//GEN-LAST:event_jXDatePicker1ActionPerformed
@@ -347,7 +365,7 @@ public class CreateShow extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jComboBox1ItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jXDatePicker1.getDate() == null) {
             return;
         }
@@ -383,11 +401,10 @@ public class CreateShow extends javax.swing.JPanel {
                     }                
                 }
             });
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;

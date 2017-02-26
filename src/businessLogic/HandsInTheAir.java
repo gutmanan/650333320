@@ -52,15 +52,12 @@ public class HandsInTheAir {
     public static void writeLog(String info) {
         //logFile.print("\n"+info);
     }
-
     public static XMLManager getXML() {
         return XML;
     }
-
     public static DebugManager getDM() {
         return DM;
     }
-    
     public static void setDebug(JFrame frame) {
         JRootPane rootPane = frame.getRootPane();
         rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, InputEvent.CTRL_MASK), "myAction");
@@ -75,23 +72,18 @@ public class HandsInTheAir {
             }
         });
     }
-    
     public static DBManager getDB() {
         return DB;
     }
-
     public static void setDB(DBManager DB) {
         HandsInTheAir.DB = DB;
     }
-    
     public static PDFManager getPDF() {
         return PDF;
     }
-
     public static void setPDF(PDFManager PDF) {
         HandsInTheAir.PDF = PDF;
     }
-    
     public static HashMap<String, ArrayList<Timestamp>> getArtistShows() {
         HashMap<String, ArrayList<Timestamp>> artistShows = new HashMap<>();
         ResultSet rs1 = getDB().query("SELECT tblShow.mainArtist, tblShow.showDate\n"
@@ -102,8 +94,12 @@ public class HandsInTheAir {
                                   + "WHERE ((Not (tblShow.status)=\"Canceled\"))");
         try {
             while (rs1.next()) {
-                artistShows.put(rs1.getString(1), new ArrayList<Timestamp>());
-                artistShows.get(rs1.getString(1)).add(rs1.getTimestamp(2));
+                if (artistShows.containsKey(rs1.getString(1))) {
+                    artistShows.get(rs1.getString(1)).add(rs1.getTimestamp(2));
+                } else {
+                    artistShows.put(rs1.getString(1), new ArrayList<Timestamp>());
+                    artistShows.get(rs1.getString(1)).add(rs1.getTimestamp(2));
+                }
             }
             while (rs2.next()) {
                 if (artistShows.containsKey(rs2.getString(1))) {

@@ -6,8 +6,10 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-02-23 00:00:00.0"/>
+    <Show date="2017-02-21 00:00:00.0"/>
+    <Show date="2017-03-15 00:00:00.0"/>
   </Artist>
-  <Show date="2017-02-23 00:00:00.0"/>
   <Artist id="4edd098">
     <stageName>mm</stageName>
     <email>asd@gmail.com</email>

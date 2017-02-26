@@ -24,9 +24,9 @@ public class ApproveParticipationControl {
     }
     
     public HashMap<String, String> getArtistsWaitingForApproval() {
-        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblPerformance.showID,  tblArtist.*\n" +
-                                               "FROM tblArtist INNER JOIN tblPerformance ON tblArtist.ID = tblPerformance.artistID\n" +
-                                               "WHERE (((tblPerformance.approvel)=\"Waiting\") AND ((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblShowInvitation.showID,  tblArtist.*\n" +
+                                               "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
+                                               "WHERE (((tblShowInvitation.approvel)=\"Waiting\") AND ((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
         HashMap<String, String> artistsWaitingForApproval = new HashMap<>();
         try {
             while (rs.next()) {
@@ -41,7 +41,7 @@ public class ApproveParticipationControl {
         Show tmp = null;
         ResultSet rs4 = DBManager.query("SELECT tblShow.*\n" +
                                         "FROM tblShow " +
-                                        "WHERE tblShow.ID=\""+showID+"\"");
+                                        "WHERE tblShow.showNumber=\""+showID+"\"");
         try {
             while (rs4.next()) {
                 tmp = new Show(rs4.getInt(1), new Artist(rs4.getString(2)), rs4.getDate(3), new Place(rs4.getInt(4)), 

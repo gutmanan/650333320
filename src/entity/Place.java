@@ -1,8 +1,5 @@
 package entity;
 
-import java.net.URL;
-import java.util.ArrayList;
-
 public class Place {
 	
 	private int placeNumber;
@@ -10,10 +7,10 @@ public class Place {
 	private Address address;
 	private String email;
 	private String phoneNumber;
-	private URL location;
+	private String location;
 	private int maxCapacity;
 	
-	public Place(int id, String name, Address address, String email, String phoneNumber, URL location, int maxCapacity) {
+	public Place(int id, String name, Address address, String email, String phoneNumber, String location, int maxCapacity) {
 		super();
 		this.placeNumber = id;
 		this.name = name;
@@ -57,10 +54,6 @@ public class Place {
 		return email;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getPhoneNumber() {
 		return phoneNumber;
 	}
@@ -69,13 +62,9 @@ public class Place {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public URL getLocation() {
-		return location;
-	}
-
-	public void setLocation(URL location) {
-		this.location = location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
 	public int getMaxCapacity() {
 		return maxCapacity;

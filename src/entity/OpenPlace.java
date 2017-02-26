@@ -11,7 +11,7 @@ public class OpenPlace extends Place{
 	private boolean withGear;
 	private boolean withToilet;
 
-        public OpenPlace(E_COVERS cover, boolean withSeats, boolean withPlatform, boolean withAmplification, boolean withToilet, int id, String name, Address address, String email, String phoneNumber, URL location, int maxCapacity) {
+        public OpenPlace(E_COVERS cover, boolean withSeats, boolean withPlatform, boolean withAmplification, boolean withToilet, int id, String name, Address address, String email, String phoneNumber, String location, int maxCapacity) {
             super(id, name, address, email, phoneNumber, location, maxCapacity);
             this.cover = cover;
             this.withSeats = withSeats;

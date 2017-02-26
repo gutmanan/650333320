@@ -45,6 +45,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable() {
             @Override
@@ -97,7 +98,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
         jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setText("Selected show info:");
         add(jLabel18);
-        jLabel18.setBounds(50, 260, 190, 20);
+        jLabel18.setBounds(50, 270, 190, 20);
 
         jLabel20.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(0, 0, 0));
@@ -123,10 +124,14 @@ public class ApproveParticipation extends javax.swing.JPanel {
         add(jLabel16);
         jLabel16.setBounds(50, 350, 560, 20);
 
+        jButton1.setText("Update");
+        add(jButton1);
+        jButton1.setBounds(460, 470, 150, 40);
+
         jScrollPane3.setViewportView(jTable3);
 
         add(jScrollPane3);
-        jScrollPane3.setBounds(40, 70, 430, 150);
+        jScrollPane3.setBounds(40, 70, 640, 180);
 
         titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         titleLabel.setForeground(new java.awt.Color(0, 0, 0));
@@ -182,6 +187,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;

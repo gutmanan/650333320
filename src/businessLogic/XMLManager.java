@@ -17,7 +17,6 @@ public abstract class XMLManager {
     
     private static Document doc = null;
     private static Element rootElement = null;
-        
     public static void create(String title) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -35,9 +34,14 @@ public abstract class XMLManager {
                 // append child elements to root element
                 rootElement.appendChild(getArtist(doc, rs.getString(1), rs.getString(2), rs.getString(4)
                                                   , rs.getBoolean(6), rs.getTimestamp(9), rs.getString(8)));
-                if (artistShows.containsKey(rs.getString(1))) {
-                    for (Timestamp date : artistShows.get(rs.getString(1))) {
-                        rootElement.appendChild(getShow(doc, date));
+            }
+            NodeList nl = rootElement.getChildNodes();
+            for (int i = 0; i < nl.getLength(); i++) {
+                NamedNodeMap nnm = nl.item(i).getAttributes();
+                String artist = nnm.item(0).getNodeValue();
+                if (artistShows.containsKey(artist)) {
+                    for (Timestamp date : artistShows.get(artist)) {
+                        nl.item(i).appendChild(getShow(doc, date));
                     }
                 }
             }
@@ -45,7 +49,6 @@ public abstract class XMLManager {
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
     private static Node getArtist(Document doc, String id, String stageName, String email
                                                , Boolean isActive, Timestamp activation, String agent) {
         Element artist = doc.createElement("Artist");
@@ -57,20 +60,16 @@ public abstract class XMLManager {
         artist.appendChild(getArtistElements(doc, artist, "agentID", agent));
         return artist;
     }
-    
-        private static Node getShow(Document doc, Timestamp date) {
+    private static Node getShow(Document doc, Timestamp date) {
         Element show = doc.createElement("Show");
         show.setAttribute("date", String.valueOf(date));
         return show;
     }
- 
-    // utility method to create text node
     private static Node getArtistElements(Document doc, Element element, String name, String value) {
         Element node = doc.createElement(name);
         node.appendChild(doc.createTextNode(value));
         return node;
     }
-    
     public static void export(String fileName) {
         try {
             TransformerFactory factory = TransformerFactory.newInstance();
