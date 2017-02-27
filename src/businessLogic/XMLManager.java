@@ -1,6 +1,7 @@
 
 package businessLogic;
 
+import entity.Artist;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,11 +13,71 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
-public abstract class XMLManager {
+public class XMLManager {
     
     private static Document doc = null;
     private static Element rootElement = null;
+    private static String fileName;
+    private static HashMap<String, ArrayList<java.util.Date>> occupied;
+    
+    public XMLManager(String filename) {  
+        this.fileName = filename;
+        this.occupied = new HashMap<String, ArrayList<java.util.Date>>();
+    }
+    public void importXML() {
+        try {
+            File file = new File(fileName+".xml");
+            DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+            Document doc = dBuilder.parse(file);
+            DebugManager.setXMLStatus(true);
+            if (doc.hasChildNodes()) {
+                printNote(doc.getChildNodes());
+            } 
+        } catch (ParserConfigurationException ex) {     
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            try {
+                File file = new File(fileName+".xml");
+                DocumentBuilder dBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+                Document doc = dBuilder.parse(file);
+                DebugManager.setXMLStatus(true);
+                if (doc.hasChildNodes()) {
+                    printNote(doc.getChildNodes());
+                }
+            } catch (Exception e) {
+                DebugManager.setXMLStatus(false);
+                System.out.println(e.getMessage());
+            }
+            Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private static void printNote(NodeList nodeList) {
+    for (int count = 0; count < nodeList.getLength(); count++) {
+	Node tempNode = nodeList.item(count);
+	if (tempNode.getNodeType() == Node.ELEMENT_NODE) {
+            if (tempNode.hasAttributes()) {
+                NamedNodeMap nodeMap = tempNode.getAttributes();
+                for (int i = 0; i < nodeMap.getLength(); i++) {
+                    Node node = nodeMap.item(i);
+                    String string = node.getNodeValue();
+                    String lastArtist = null;
+                    if (!occupied.containsKey(string) && ValidatorManager.isAlphaCode(string)) {
+                        occupied.put(string, new ArrayList<java.util.Date>());
+                        lastArtist = string;
+                    } else if (lastArtist != null)
+                        occupied.get(lastArtist).add(new java.util.Date(Long.valueOf(string)));
+                }
+            }
+            if (tempNode.hasChildNodes()) {
+                printNote(tempNode.getChildNodes());
+            }
+	}
+    }
+  }
     public static void create(String title) {
         try {
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
