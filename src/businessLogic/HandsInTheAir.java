@@ -37,6 +37,8 @@ public class HandsInTheAir {
             DM = new DebugManager() {};
             DB = new DBManager();
             PDF = new PDFManager();
+            XML = new XMLManager("MuzaMusic_Sessions");
+            XML.importXML();
             XML.create("MuzaMusic_Shows");
             XML.write(getDB().query("SELECT tblArtist.*\n" + "FROM tblArtist;"), getArtistShows());
             XML.export("MuzaMusic_Shows");
