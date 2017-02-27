@@ -10,6 +10,8 @@ import businessLogic.ReportProduceControl;
 import businessLogic.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -227,6 +229,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        jTextField6.setText("");
         jTextField4.setVisible(false);
         facebookButton.setVisible(true);
         facebookButton1.setVisible(true);
@@ -241,8 +244,10 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
                     jTextField9.setText(rs.getString(3));
                     jTextField5.setText(rs.getString(4));
                     jTextField4.setText(rs.getString(5));
-                    if (!rs.getBoolean(6))
-                      jTextField6.setText(rs.getString(9));
+                    if (!rs.getBoolean(6)){
+                        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                      jTextField6.setText(dateFormat.format(rs.getDate(9)).toString());
+                    }
                     setTable(rs.getString(2));
                     break;
                 }
@@ -265,6 +270,7 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (jTable1.getSelectedRow()<0) return;
         String artistIdSelected = con.getArtistId(jComboBox1.getSelectedItem().toString());
         boolean flg = con.deleteApp(artistIdSelected, (String) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 1),
                 (boolean) jTable1.getModel().getValueAt(jTable1.getSelectedRow(), 0));
@@ -274,16 +280,19 @@ public class ChangeArtistDetails extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void facebookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facebookButtonActionPerformed
+        if (jComboBox1.getSelectedIndex()<0) return;
         jTextField4.setVisible(true);
         facebookButton.setVisible(false);
         facebookButton1.setVisible(false);
     }//GEN-LAST:event_facebookButtonActionPerformed
 
     private void facebookButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facebookButton1ActionPerformed
+        if (jComboBox1.getSelectedIndex()<0) return;
         con.viewUrl(jTextField4.getText());
     }//GEN-LAST:event_facebookButton1ActionPerformed
           
      public void setTable(String artistId){
+
         try {
 
         DefaultTableModel model = new DefaultTableModel(){

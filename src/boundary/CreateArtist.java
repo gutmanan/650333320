@@ -136,8 +136,9 @@ public class CreateArtist extends javax.swing.JPanel {
         }
         messageBodyPart.setDataHandler(new DataHandler(source));*/
         
-       con.newArtist(jTextField2.getText(),jTextField9.getText(),jTextField5.getText(),jTextField4.getText(),true,source, WindowManager.getTmpAgent().getId());
-        
+       boolean a = con.newArtist(jTextField2.getText(),jTextField9.getText(),jTextField5.getText(),jTextField4.getText(),true,source, WindowManager.getTmpAgent().getId());
+       if (a)
+           jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void uploadButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uploadButtonActionPerformed

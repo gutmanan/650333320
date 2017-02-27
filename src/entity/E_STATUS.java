@@ -1,6 +1,6 @@
 package entity;
 
 
-public enum E_STATUS {waiting, approved,approval, canceled
+public enum E_STATUS {Awaiting, Approved,Approval, Canceled
 
 }

@@ -11,6 +11,7 @@ import com.itextpdf.tool.xml.svg.tags.UseTag;
 import entity.Agent;
 import entity.User;
 import businessLogic.HandsInTheAir;
+import businessLogic.MainLoginControl;
 import businessLogic.WindowManager;
 import java.awt.AWTKeyStroke;
 import java.awt.Graphics2D;
@@ -388,24 +389,13 @@ public class MainLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        String username = usernameField.getText();
-        String nickname = nicknameField.getText();
-        String firstname = firstnameField.getText();
-        String lastname = lastnameField.getText();
-        String email = emailField.getText();
-        String password = passwordField.getText();
         Integer birthYear = Integer.parseInt(String.valueOf(yearBox.getSelectedItem()))-1900;
         Integer birthMonth = Integer.parseInt(String.valueOf(monthBox.getSelectedItem()))-1;
         Integer birthDay = Integer.parseInt(String.valueOf(dayBox.getSelectedItem()));
         Date birthdate = new Date(birthYear, birthMonth, birthDay);
-        Timestamp ts = new Timestamp(birthdate.getTime());
-        String qry = "INSERT INTO tblUser (userAlphaCode, firstName, lastName, nickname, birthday, email, image, password)"
-                                   + "VALUES('"+username+"','"+firstname+"','"+lastname+"','"+nickname+"',\""+ts+"\",'"+email+"',\""+profileLabel.getIcon()+"\",'"+password+"')";
-        if (DBManager.insert(qry) == -2) {
-            JOptionPane.showMessageDialog(newAccountFrame,
-                "Congratulations your account was created successfully!",
-                "Account was created",
-                JOptionPane.INFORMATION_MESSAGE);
+        
+        if (con.newUser(usernameField.getText(),nicknameField.getText(),firstnameField.getText(),lastnameField.getText(),emailField.getText(),passwordField.getText(),birthdate,profileLabel.getIcon()))
+        {
             clearUserForm();
             newAccountFrame.setVisible(false);
         }
@@ -546,4 +536,5 @@ public class MainLogin extends javax.swing.JFrame {
     private javax.swing.JLabel wallpaper;
     private javax.swing.JComboBox<String> yearBox;
     // End of variables declaration//GEN-END:variables
+    private MainLoginControl con = new MainLoginControl();
 }

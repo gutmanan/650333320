@@ -189,7 +189,7 @@ public class ChangeArtistDetailsControl {
         
         HandsInTheAir.getDB().insert(sql);
         
-        JOptionPane.showMessageDialog(null, "The artist details was changed successfuly!");
+        JOptionPane.showMessageDialog(null, "The artist details were changed successfuly!");
         
     }
     
@@ -210,4 +210,6 @@ public class ChangeArtistDetailsControl {
         
         return "";
     }
+    
+    
 }

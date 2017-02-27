@@ -182,7 +182,7 @@ public class ChangeConstants extends javax.swing.JPanel {
         Timestamp ts = new Timestamp(today.getTime());
         
         con.saveConstants(ts,placeExpField.getText(),placeIncField.getText(),showDurField.getText(),artistIncField.getText(),presaleDisField.getText(),maxTicketsField.getText(),regSaleField.getText(),waitTimeField.getText(),bDayTextField.getText());
-        
+        jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void updateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCheckBoxActionPerformed

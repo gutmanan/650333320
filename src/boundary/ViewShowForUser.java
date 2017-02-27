@@ -86,19 +86,19 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         birthdayLabel.setText("Total Price :");
         newAccountFrame.getContentPane().add(birthdayLabel);
-        birthdayLabel.setBounds(80, 190, 100, 16);
+        birthdayLabel.setBounds(80, 190, 100, 14);
 
         nicknameLabel.setText("Number of Tickets To Buy :");
         newAccountFrame.getContentPane().add(nicknameLabel);
-        nicknameLabel.setBounds(80, 110, 150, 16);
+        nicknameLabel.setBounds(80, 110, 150, 14);
 
         lastnameLabel.setText(WindowManager.getTmpUser().getFirstName() +" "+WindowManager.getTmpUser().getLastName());
         newAccountFrame.getContentPane().add(lastnameLabel);
-        lastnameLabel.setBounds(240, 70, 90, 16);
+        lastnameLabel.setBounds(240, 70, 90, 14);
 
         firstnameLabel.setText("Ticket Price :");
         newAccountFrame.getContentPane().add(firstnameLabel);
-        firstnameLabel.setBounds(80, 150, 110, 16);
+        firstnameLabel.setBounds(80, 150, 110, 14);
 
         usernameLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         usernameLabel.setText("Label :");
@@ -107,15 +107,15 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         jLabel2.setText("0");
         newAccountFrame.getContentPane().add(jLabel2);
-        jLabel2.setBounds(260, 190, 70, 16);
+        jLabel2.setBounds(260, 190, 70, 14);
 
         jLabel3.setText("User Name : ");
         newAccountFrame.getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 70, 70, 16);
+        jLabel3.setBounds(80, 70, 70, 14);
 
         ticketPrice.setText("price");
         newAccountFrame.getContentPane().add(ticketPrice);
-        ticketPrice.setBounds(260, 150, 90, 16);
+        ticketPrice.setBounds(260, 150, 90, 14);
 
         jButton1.setText("Buy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +124,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
             }
         });
         newAccountFrame.getContentPane().add(jButton1);
-        jButton1.setBounds(310, 290, 80, 26);
+        jButton1.setBounds(310, 290, 80, 23);
 
         jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -133,7 +133,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
             }
         });
         newAccountFrame.getContentPane().add(jButton2);
-        jButton2.setBounds(400, 290, 90, 26);
+        jButton2.setBounds(400, 290, 90, 23);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -142,15 +142,15 @@ public class ViewShowForUser extends javax.swing.JPanel {
             }
         });
         newAccountFrame.getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(250, 100, 50, 25);
+        jComboBox1.setBounds(250, 100, 50, 20);
 
         jLabel6.setText("Total tickets you bought :");
         newAccountFrame.getContentPane().add(jLabel6);
-        jLabel6.setBounds(80, 230, 180, 16);
+        jLabel6.setBounds(80, 230, 180, 14);
 
         jLabel10.setText("jLabel10");
         newAccountFrame.getContentPane().add(jLabel10);
-        jLabel10.setBounds(260, 230, 38, 16);
+        jLabel10.setBounds(260, 230, 40, 14);
 
         internalWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container2.png"))); // NOI18N
         internalWallpaper.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -221,7 +221,6 @@ public class ViewShowForUser extends javax.swing.JPanel {
     emailLabel.setVisible(false);
 
     titleLabel.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-    titleLabel.setForeground(new java.awt.Color(0, 0, 0));
     titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     titleLabel.setText("View Shows");
     add(titleLabel);
@@ -318,6 +317,9 @@ public class ViewShowForUser extends javax.swing.JPanel {
                             case 3:
                                 jButton3.setEnabled(false);
                                 jLabel5.setText("* The regular sale will open soon");
+                            case 4:
+                                jButton3.setEnabled(false);
+                                jLabel5.setText("* You under the age");
 
                             default:
                                 jButton3.setEnabled(false);
@@ -326,7 +328,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
                                 break;
                         }
                         
-                        }
+                    }
                 }
             });
             

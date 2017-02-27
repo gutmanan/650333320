@@ -104,7 +104,7 @@ public class ViewShowsForUserControl {
     public int isAbleToBuy(String userId,int showNum,String presale,int numOfTicketsLeft){
         
         if (numOfTicketsLeft==0) return 0;
-        
+        if (!checkAge(showNum)) return 4;
         if (presale!=null && buyPresale(userId, showNum, presale))
             return 1;
         
@@ -200,6 +200,11 @@ public class ViewShowsForUserControl {
             }
             
             if (text.equals("Presale :")){
+                if (num2+numOfTickets > maxTicketsPresale()){
+                    JOptionPane.showMessageDialog(null, "You bought "+num2+" at presale. You cant by more then "+maxTicketsPresale()+"");
+                    return;
+                }
+                    
                 qry = "UPDATE tblTicketOrder SET numOfRegularTickets = "+num1+",numOfPresaleTickets = "
                         +(num2+numOfTickets)+" WHERE showID="+showNum+" AND userID=\""+WindowManager.getTmpUser().getUserAlphaCode()+"\"";
             }
@@ -229,6 +234,49 @@ public class ViewShowsForUserControl {
  
     }
     
+    public boolean checkAge(int showNum){
+        
+        try {
+            
+            String sql = "SELECT tblShow.minAge\n" +
+                        "FROM tblShow\n" +
+                        "WHERE (((tblShow.showNumber) Like \""+showNum+"\"));";
+            
+            ResultSet rs = HandsInTheAir.getDB().query(sql);
+            
+            while(rs.next()){
+                Date date = new Date();
+                date.setYear(date.getYear()-rs.getInt(1));
+                if (!WindowManager.getTmpUser().getBirthday().before(date))
+                    return false;
+            }
 
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewShowsForUserControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return true;
+    }
+    
+    public int maxTicketsPresale(){
+        
+        try {
+            
+            String sql = "SELECT tblConstants.dateOfChange, tblConstants.maxPresaleTicketsPerUser\n" +
+                            "FROM tblConstants\n" +
+                            "ORDER BY tblConstants.dateOfChange DESC;";
+            
+            ResultSet rs = HandsInTheAir.getDB().query(sql);
+            
+            while(rs.next()){
+                return rs.getInt(2);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ViewShowsForUserControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return 0;
+    }
     
 }

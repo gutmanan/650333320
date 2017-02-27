@@ -31,7 +31,7 @@ import javax.swing.table.DefaultTableModel;
 public class ViewShowForAgent extends javax.swing.JPanel {
     
     public ViewShowForAgent() {
-        
+        if (WindowManager.getTmpAgent()==null) return;
         initComponents();
         setTable2();
         

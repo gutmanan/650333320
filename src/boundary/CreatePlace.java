@@ -205,8 +205,9 @@ public class CreatePlace extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        con.newPlace(jTextField2.getText(), jTextField4.getText(), jTextField5.getText(), jComboBox2.getSelectedItem().toString(), jTextField9.getText(), jTextField8.getText(), jTextField7.getText(), jTextField10.getText(),
-                jCheckBox1.isSelected(),jComboBox3.getSelectedItem().toString(),jCheckBox2.isSelected(),jCheckBox3.isSelected(),jCheckBox4.isSelected(),jCheckBox5.isSelected());
+        if(con.newPlace(jTextField2.getText(), jTextField4.getText(), jTextField5.getText(), jComboBox2.getSelectedItem().toString(), jTextField9.getText(), jTextField8.getText(), jTextField7.getText(), jTextField10.getText(),
+                jCheckBox1.isSelected(),jComboBox3.getSelectedItem().toString(),jCheckBox2.isSelected(),jCheckBox3.isSelected(),jCheckBox4.isSelected(),jCheckBox5.isSelected()))
+            jButton1.setEnabled(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed

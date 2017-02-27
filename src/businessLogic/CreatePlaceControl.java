@@ -25,39 +25,39 @@ public class CreatePlaceControl {
         
     }
     
-    public void newPlace(String name, String street, String houseNumber, String city, String email,
+    public boolean newPlace(String name, String street, String houseNumber, String city, String email,
             String phoneNumber, String location, String maxCapacity, boolean check,String cover,
             boolean seats,boolean platform,boolean gear,boolean toilets){
         
         if (!checkExsist(name))
-            return;
+            return false;
         if (!(ValidatorManager.isAlpha(name)) || name.length()==0){
             JOptionPane.showMessageDialog(null, "The name field is incorrect or empty");
-            return;
+            return false;
         }
         if (!(ValidatorManager.isAlpha(street)) || street.length()==0){
             JOptionPane.showMessageDialog(null, "The street field is incorrect or empty");
-            return;
+            return false;
         }
         if (!(ValidatorManager.onlyContainsNumbers(houseNumber)) || houseNumber.length()==0){
             JOptionPane.showMessageDialog(null, "The houseNumber field is incorrect or empty.\n Please enter only numbers");
-            return;
+            return false;
         }
         if (!(ValidatorManager.isValidEmailAddress(email))){
             JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
-            return;
+            return false;
         }
         if (!(ValidatorManager.onlyContainsNumbers(phoneNumber)) || phoneNumber.length()==0){
             JOptionPane.showMessageDialog(null, "The phoneNumber field is incorrect or empty. Please enter only numbers");
-            return;
+            return false;
         }
         if (!(ValidatorManager.isValidURL(location))){
             JOptionPane.showMessageDialog(null, "The location field is incorrect or empty. \n Please enter full URL address from google maps");
-            return;
+            return false;
         }
         if (!(ValidatorManager.onlyContainsNumbers(maxCapacity)) || maxCapacity.length()==0){
             JOptionPane.showMessageDialog(null, "The maxCapacity field is incorrect or empty. Please enter only numbers");
-            return;
+            return false;
         }
 
         String sql = ("INSERT INTO tblPlace (name, street, houseNumber, city, country, email, phoneNumber, location, maxCapacity) VALUES('"
@@ -70,6 +70,7 @@ public class CreatePlaceControl {
         
         else newOpenPlace(cover, seats, platform, gear, toilets);
         
+        return true;
     }
     
     public boolean checkExsist(String name){

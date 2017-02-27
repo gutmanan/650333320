@@ -23,7 +23,7 @@ public class CreateArtistControl {
     }
     
     
-    public void newArtist(String stageName, String biography, String email, String facebook, boolean isActive, DataSource source, String agentID){
+    public boolean newArtist(String stageName, String biography, String email, String facebook, boolean isActive, DataSource source, String agentID){
         
         String id = UUID.randomUUID().toString().substring(0,7);
         
@@ -38,32 +38,32 @@ public class CreateArtistControl {
             rs = HandsInTheAir.getDB().query(sql);
             if (rs!=null && rs.next()){
                 JOptionPane.showMessageDialog(null, "The artist stage name is already exsist");
-                return;
+                return false;
             }
             
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Something wrong. Please try again latter..");
-             return;
+             return false;
         }
         
         if (stageName.length()==0){
             JOptionPane.showMessageDialog(null, "The stage name field is empty");
-            return;
+            return false;
         }
 
         if (!(ValidatorManager.isValidEmailAddress(email))){
             JOptionPane.showMessageDialog(null, "The Email field is incorrect. \n Example : abc@def.com");
-            return;
+            return false;
         }
 
         if (!(ValidatorManager.isValidURL(facebook)) || !(ValidatorManager.checkFacebook(facebook))){
             JOptionPane.showMessageDialog(null, "The facebook field is incorrect or empty. \n Please enter full URL address");
-            return;
+            return false;
         }
                 
         if (biography.length()==0){
             JOptionPane.showMessageDialog(null, "The biography field is empty");
-            return;
+            return false;
         }
         
         String qry = ("INSERT INTO tblArtist (artistAlphaCode, stageName, biography, email, facebook, IsActive, Signature, agentID) VALUES('"
@@ -74,5 +74,6 @@ public class CreateArtistControl {
         
         JOptionPane.showMessageDialog(null, "The artist was added successfuly!");
 
+        return true;
     }
 }
