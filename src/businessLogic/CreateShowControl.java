@@ -192,12 +192,14 @@ public class CreateShowControl {
         boolean flg = true;
         try{
         while (rs.next()){
-            flg = false;
+            
             if (rs.getString(3).equals(WindowManager.getTmpAgent().getId())){
             String sql = "UPDATE tblShowInvitation SET approval = 'approved' WHERE showID = '"+showID+"'  AND artistID ='"+rs.getString(2)+"'";
           
             HandsInTheAir.getDB().insert(sql);
             }
+            
+            else flg = false;
         }
 
         if (flg){

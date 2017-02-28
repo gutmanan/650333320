@@ -13,6 +13,7 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-04-18 12:00:00.0"/>
   </Artist>
   <Artist id="4edd098">
     <stageName>mm</stageName>
@@ -20,6 +21,7 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-04-18 12:00:00.0"/>
   </Artist>
   <Artist id="6861ab3">
     <stageName>BigDaddy</stageName>
@@ -34,5 +36,6 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-04-26 12:00:00.0"/>
   </Artist>
 </MuzaMusic_Shows>
