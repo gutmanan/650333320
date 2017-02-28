@@ -166,23 +166,13 @@ public class ChangeConstants extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if (!ValidatorManager.onlyContainsNumbers(placeExpField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(placeIncField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(showDurField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(waitTimeField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(maxTicketsField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(presaleDisField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(artistIncField.getText()) ||
-                !ValidatorManager.onlyContainsNumbers(regSaleField.getText())){
-            JOptionPane.showMessageDialog(null, "The constant must be numbers except birthday text!");
-            return;
-        }
         
         Date today = new Date();
         Timestamp ts = new Timestamp(today.getTime());
         
-        con.saveConstants(ts,placeExpField.getText(),placeIncField.getText(),showDurField.getText(),artistIncField.getText(),presaleDisField.getText(),maxTicketsField.getText(),regSaleField.getText(),waitTimeField.getText(),bDayTextField.getText());
-        jButton1.setEnabled(false);
+        con.saveConstants(placeExpField.getText(),placeIncField.getText(),showDurField.getText(),artistIncField.getText(),presaleDisField.getText(),maxTicketsField.getText(),
+           regSaleField.getText(),waitTimeField.getText(),bDayTextField.getText()) ;
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void updateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateCheckBoxActionPerformed

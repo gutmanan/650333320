@@ -32,15 +32,15 @@ public class ReportProduceControl {
     public HashMap<Integer, Integer> getPresaleAmonutPerShow(int year) {
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
-        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.ID\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber\n" +
                                                 "FROM tblShow\n" +
-                                                "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
-        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
-                                                "FROM (tblTicketOrder INNER JOIN tblFanOf ON tblTicketOrder.userID = tblFanOf.userID) INNER JOIN tblShow ON (tblTicketOrder.showID = tblShow.ID) AND (tblFanOf.artistID = tblShow.mainArtist)\n" +
-                                                "WHERE ((DateDiff(\"d\",[createDate],[date])>21) AND (DateDiff(\"d\",[purchaseDate],[date])>14))");
-        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
-                                                "FROM tblShow INNER JOIN ((tblTicketOrder INNER JOIN tblFanOf ON tblTicketOrder.userID = tblFanOf.userID) INNER JOIN tblPerformance ON (tblFanOf.artistID = tblPerformance.artistID) AND (tblTicketOrder.showID = tblPerformance.showID)) ON (tblShow.ID = tblTicketOrder.showID) AND (tblShow.ID = tblPerformance.showID)\n" +
-                                                "WHERE ((DateDiff(\"d\",[createDate],[date])>21) AND (DateDiff(\"d\",[purchaseDate],[date])>14))");
+                                                "WHERE (((tblShow.showDate)>=#"+yearStart+"# And (tblShow.showDate)<=#"+yearEnd+"#) AND ((tblShow.status)=\"Approved\"));");
+        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber, tblTicketOrder.numOfPresaleTickets\n" +
+                                                "FROM (tblTicketOrder INNER JOIN tblFanOf ON tblTicketOrder.userID = tblFanOf.userID) INNER JOIN tblShow ON (tblTicketOrder.showID = tblShow.showNumber) AND (tblFanOf.artistID = tblShow.mainArtist)\n");
+                                                
+        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber, tblTicketOrder.numOfPresaleTickets\n" +
+                                                "FROM tblShow INNER JOIN ((tblTicketOrder INNER JOIN tblFanOf ON tblTicketOrder.userID = tblFanOf.userID) INNER JOIN tblShowInvitation ON (tblFanOf.artistID = tblShowInvitation.artistID) AND (tblTicketOrder.showID = tblShowInvitation.showID)) ON (tblShow.showNumber = tblTicketOrder.showID) AND (tblShow.showNumber = tblShowInvitation.showID)\n");
+                                               
         HashMap<Integer,Integer> presaleAmonutPerShow = new HashMap<>();
         try {
             while (rs1.next()) {            
@@ -64,15 +64,13 @@ public class ReportProduceControl {
     public HashMap<Integer, Integer> getRegularAmonutPerShow(int year) {
         Date yearStart = new Date(year-1900, 0, 1);
         Date yearEnd = new Date(year-1900, 11, 31);
-        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.ID\n" +
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber\n" +
                                                 "FROM tblShow\n" +
-                                                "WHERE (((tblShow.date)>=#"+yearStart+"# And (tblShow.date)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
-        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
-                                                "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.ID = tblTicketOrder.showID\n" +
-                                                "WHERE ((DateDiff(\"d\",[purchaseDate],[date])<=14))");
-        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblShow.ID, tblTicketOrder.numOfTickets\n" +
-                                                "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.ID = tblTicketOrder.showID\n" +
-                                                "WHERE ((DateDiff(\"d\",[createDate],[date])<=21))");
+                                                "WHERE (((tblShow.showDate)>=#"+yearStart+"# And (tblShow.showDate)<=#"+yearEnd+"#) AND ((tblShow.status)=\"Approved\"));");
+        ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber, tblTicketOrder.numOfRegularTickets\n" +
+                                                "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.showNumber = tblTicketOrder.showID\n");
+        ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber, tblTicketOrder.numOfRegularTickets\n" +
+                                                "FROM tblShow INNER JOIN tblTicketOrder ON tblShow.showNumber = tblTicketOrder.showID\n");
         
         HashMap<Integer,Integer> regularAmonutPerShow = new HashMap<>();
         try {
@@ -120,7 +118,7 @@ public class ReportProduceControl {
         Date yearEnd = new Date(year-1900, 11, 31);
         ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblShow.showNumber\n" +
                                                     "FROM tblShow\n" +
-                                                    "WHERE (((tblShow.showDate)>=#"+yearStart+"# And (tblShow.showDate)<=#"+yearEnd+"#) AND ((tblShow.status)=\"approved\"));");
+                                                    "WHERE (((tblShow.showDate)>=#"+yearStart+"# And (tblShow.showDate)<=#"+yearEnd+"#) AND ((tblShow.status)=\"Approved\"));");
         try {
             while (rs1.next()) {
                 Show tmpShow = getShow(rs1.getInt(1));
@@ -139,7 +137,7 @@ public class ReportProduceControl {
         Show tmp = null;
         ResultSet rs4 = DBManager.query("SELECT tblShow.*\n" +
                                         "FROM tblShow " +
-                                        "WHERE tblShow.ID=\""+showID+"\"");
+                                        "WHERE tblShow.showNumber=\""+showID+"\"");
         try {
             while (rs4.next()) {
                 tmp = new Show(rs4.getInt(1), new Artist(rs4.getString(2)), rs4.getDate(3), new Place(rs4.getInt(4)), 
@@ -175,9 +173,9 @@ public class ReportProduceControl {
 		return sortedCrunchifyMap;
 	}
     public ArrayList<String> getParticipatedArtists(int showID) {
-        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblArtist.ID\n" +
-                                                "FROM tblArtist INNER JOIN tblPerformance ON tblArtist.ID = tblPerformance.artistID\n" +
-                                                "WHERE (((tblPerformance.showID)="+showID+"))");
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblArtist.artistAlphaCode\n" +
+                                                "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
+                                                "WHERE (((tblShowInvitation.showID)="+showID+"))");
         ArrayList<String> artists = new ArrayList<>();
         try {
             while (rs.next()) {

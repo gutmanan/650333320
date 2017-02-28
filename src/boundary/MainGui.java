@@ -63,8 +63,8 @@ public class MainGui extends JFrame {
         genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/createShowBtn.png"))); // NOI18N
         if (WindowManager.getAuthValue() == 2)
         genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/parametersBtn.png"))); // NOI18N
-        if (WindowManager.getAuthValue() == 3)
-        genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/ticketOrderBtn.png"))); // NOI18N
+        /*if (WindowManager.getAuthValue() == 3)
+        genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/ticketOrderBtn.png"))); // NOI18N*/
         genericBtn3.setBorderPainted(false);
         genericBtn3.setContentAreaFilled(false);
         genericBtn3.addActionListener(new java.awt.event.ActionListener() {

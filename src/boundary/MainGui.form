@@ -39,7 +39,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="genericBtn3">
       <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="if (WindowManager.getAuthValue() == 3)&#xa;genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/ticketOrderBtn.png&quot;))); // NOI18N">
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor" postCode="/*if (WindowManager.getAuthValue() == 3)&#xa;genericBtn3.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/imgs/ticketOrderBtn.png&quot;))); // NOI18N*/">
           <Image iconType="3" name="/imgs/parametersBtn.png"/>
         </Property>
         <Property name="borderPainted" type="boolean" value="false"/>

@@ -8,16 +8,12 @@ package boundary;
 import businessLogic.ReportProduceControl;
 import businessLogic.ViewShowsForUserControl;
 import businessLogic.WindowManager;
-import static java.awt.image.ImageObserver.SOMEBITS;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.JComponent.TOOL_TIP_TEXT_KEY;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -71,6 +67,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         emailLabel = new javax.swing.JLabel();
         titleLabel = new javax.swing.JLabel();
+        viewGoogle = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setOpaque(false);
@@ -90,11 +87,11 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         nicknameLabel.setText("Number of Tickets To Buy :");
         newAccountFrame.getContentPane().add(nicknameLabel);
-        nicknameLabel.setBounds(80, 110, 150, 14);
+        nicknameLabel.setBounds(80, 110, 200, 14);
 
         lastnameLabel.setText(WindowManager.getTmpUser().getFirstName() +" "+WindowManager.getTmpUser().getLastName());
         newAccountFrame.getContentPane().add(lastnameLabel);
-        lastnameLabel.setBounds(240, 70, 90, 14);
+        lastnameLabel.setBounds(310, 70, 90, 14);
 
         firstnameLabel.setText("Ticket Price :");
         newAccountFrame.getContentPane().add(firstnameLabel);
@@ -107,15 +104,15 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         jLabel2.setText("0");
         newAccountFrame.getContentPane().add(jLabel2);
-        jLabel2.setBounds(260, 190, 70, 14);
+        jLabel2.setBounds(330, 190, 70, 14);
 
         jLabel3.setText("User Name : ");
         newAccountFrame.getContentPane().add(jLabel3);
-        jLabel3.setBounds(80, 70, 70, 14);
+        jLabel3.setBounds(80, 70, 180, 14);
 
         ticketPrice.setText("price");
         newAccountFrame.getContentPane().add(ticketPrice);
-        ticketPrice.setBounds(260, 150, 90, 14);
+        ticketPrice.setBounds(330, 150, 90, 14);
 
         jButton1.setText("Buy");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -135,14 +132,14 @@ public class ViewShowForUser extends javax.swing.JPanel {
         newAccountFrame.getContentPane().add(jButton2);
         jButton2.setBounds(400, 290, 90, 23);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
         newAccountFrame.getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(250, 100, 50, 20);
+        jComboBox1.setBounds(320, 100, 50, 20);
 
         jLabel6.setText("Total tickets you bought :");
         newAccountFrame.getContentPane().add(jLabel6);
@@ -150,7 +147,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
 
         jLabel10.setText("jLabel10");
         newAccountFrame.getContentPane().add(jLabel10);
-        jLabel10.setBounds(260, 230, 40, 14);
+        jLabel10.setBounds(330, 230, 40, 14);
 
         internalWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container2.png"))); // NOI18N
         internalWallpaper.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -226,6 +223,15 @@ public class ViewShowForUser extends javax.swing.JPanel {
     add(titleLabel);
     titleLabel.setBounds(0, 10, 850, 40);
 
+    viewGoogle.setText("Click Here !");
+    viewGoogle.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            viewGoogleActionPerformed(evt);
+        }
+    });
+    add(viewGoogle);
+    viewGoogle.setBounds(350, 340, 190, 30);
+
     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N
     add(jLabel1);
     jLabel1.setBounds(0, 0, 850, 580);
@@ -236,7 +242,8 @@ public class ViewShowForUser extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        con.buyTickets(jComboBox1.getSelectedIndex()+1,showsList.get(jTable2.getSelectedRow()),usernameLabel.getText());
+        if (con.buyTickets(jComboBox1.getSelectedIndex(),showsList.get(jTable2.getSelectedRow()),usernameLabel.getText()))
+            WindowManager.openWin(new ViewShowForUser());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -270,7 +277,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
     }//GEN-LAST:event_internalWallpaperMousePressed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        int i = jComboBox1.getSelectedIndex()+1;
+        int i = jComboBox1.getSelectedIndex();
                    
         discount = con.getDiscount();
         if (usernameLabel.getText().equals("Presale :"))
@@ -280,6 +287,11 @@ public class ViewShowForUser extends javax.swing.JPanel {
             jLabel2.setText(String.valueOf(price*i));
        
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void viewGoogleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewGoogleActionPerformed
+       if (jTable2.getSelectedRow()<0) return;
+        con.viewUrl((String) jTable2.getValueAt(jTable2.getSelectedRow(), 2));
+    }//GEN-LAST:event_viewGoogleActionPerformed
         
     public void setTable2(){
         try {
@@ -348,9 +360,9 @@ public class ViewShowForUser extends javax.swing.JPanel {
                     objects[i]=shows.getObject(i+3);
                 }
                 
-                Date presale = shows.getDate(2);
-                presale.setDate(presale.getDate()+21);
-                if (shows.getDate(3).before(presale))
+                Date presale = shows.getDate(3);
+                presale.setDate(presale.getDate()-21);
+                if (new Date().before(presale))
                    objects[6] = "Yes";
                 objects[7] = con.getNumOfTicketsLeft(shows.getInt(1));
                 showsList.add(shows.getInt(1));
@@ -432,6 +444,7 @@ public class ViewShowForUser extends javax.swing.JPanel {
     private javax.swing.JLabel ticketPrice;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JLabel usernameLabel;
+    private javax.swing.JButton viewGoogle;
     // End of variables declaration//GEN-END:variables
     private ViewShowsForUserControl con = new ViewShowsForUserControl();
     private ArrayList<Integer> showsList = new ArrayList<Integer>();

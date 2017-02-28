@@ -7,8 +7,6 @@ import entity.Artist;
 import entity.Place;
 import boundary.CreateShow;
 import entity.E_STATUS;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -91,8 +89,8 @@ public class CreateShowControl {
                                             "FROM tblShow INNER JOIN tblShowInvitation ON tblShow.showNumber = tblShowInvitation.showID\n" +
                                             "WHERE (((tblShowInvitation.showID)=[tblShow].[showNumber]) AND ((tblShow.showDate)=#"+selectedDate+"#))");
         ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblAppreciation.appreciatedArtistID\n" +
-"FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.artistAlphaCode = tblAppreciation.artistID\n" +
-"WHERE (((tblArtist.IsActive)=Yes) AND ((tblAppreciation.artistID)=\""+mainArtistID+"\") AND ((tblAppreciation_1.appreciatedArtistID)=\""+mainArtistID+"\"))");
+                                            "FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.artistAlphaCode = tblAppreciation.artistID\n" +
+                                            "WHERE (((tblArtist.IsActive)=Yes) AND ((tblAppreciation.artistID)=\""+mainArtistID+"\") AND ((tblAppreciation_1.appreciatedArtistID)=\""+mainArtistID+"\"))");
         ArrayList<String> availableAdditionalArtists = new ArrayList<>();
         try {
             while (rs1.next()) {
@@ -150,17 +148,24 @@ public class CreateShowControl {
         return tmp;
     }
     public int newShow(String artist, String agent, Timestamp showDate, String start, int place, String ticketPrice, String minAge) {
-        if (!(ValidatorManager.onlyContainsNumbers(start))){
-            JOptionPane.showMessageDialog(null, "The Start time field must be a number.");
+        
+        if (!checkOpenPlace(showDate, place)){
+            JOptionPane.showMessageDialog(null, "You choose open place. You cant creat show during monthes January, February, December");
+            return -1;
+        }
+
+        
+        if (start.length()==0 || !(ValidatorManager.onlyContainsNumbers(start)) || !checkShowTime(start)){
+            JOptionPane.showMessageDialog(null, "The Start time field must be a number between 0-23.");
             return -1;
         }
         
-        if (!(ValidatorManager.onlyContainsNumbers(ticketPrice))){
+        if (ticketPrice.length()==0 || !(ValidatorManager.onlyContainsNumbers(ticketPrice))){
             JOptionPane.showMessageDialog(null, "The Ticket price field must be a number.");
             return -1;
         }
         
-        if (!(ValidatorManager.onlyContainsNumbers(minAge))){
+        if (minAge.length()==0 || !(ValidatorManager.onlyContainsNumbers(minAge))){
             JOptionPane.showMessageDialog(null, "The Minimum age field must be a number.");
             return -1;
         }
@@ -180,7 +185,7 @@ public class CreateShowControl {
     }
  
     public void approveParticipation(int showID){
-        System.out.println(showID);
+
         ResultSet rs = HandsInTheAir.getDB().query("SELECT tblShowInvitation.showID, tblShowInvitation.artistID, tblArtist.agentID\n" +
                         "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
                         "WHERE (((tblShowInvitation.showID) Like '"+showID+"'));");
@@ -204,6 +209,37 @@ public class CreateShowControl {
         } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Something wrong. Please try again latter..");
         }
+
+    }
+    
+    public boolean checkOpenPlace(Timestamp showDate, int place){
+                String sql = "SELECT tblOpenPlace.ID\n" +
+                        "FROM tblOpenPlace\n" +
+                        "WHERE (((tblOpenPlace.ID) Like '"+place+"'));";
+                
+                ResultSet rs = HandsInTheAir.getDB().query(sql);
+                
+        try {
+            while(rs.next())
+                if (showDate.getMonth()==11 || showDate.getMonth()==0 ||showDate.getMonth()==1)
+                    return false;
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateShowControl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+                return true;
+    }
+    
+    public boolean checkShowTime(String s){
+
+        try {
+            Long i = Long.parseLong(s);
+            if (i>23 || i<0)
+            return false;
+        } catch (NumberFormatException ex) {
+            return false;
+        }
+        return true;
 
     }
 }

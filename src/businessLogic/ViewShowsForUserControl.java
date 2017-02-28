@@ -5,6 +5,8 @@
  */
 package businessLogic;
 
+import java.awt.Desktop;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -23,7 +25,7 @@ public class ViewShowsForUserControl {
         
        String sql = "SELECT tblShow.showNumber, tblShow.createDate, tblShow.showDate, tblArtist.stageName, tblPlace.name, tblPlace.city, tblShow.ticketPrice, tblShow.minAge\n" +
                     "FROM tblArtist INNER JOIN (tblPlace INNER JOIN tblShow ON tblPlace.placeNumber = tblShow.place) ON tblArtist.artistAlphaCode = tblShow.mainArtist\n" +
-                    "WHERE (((tblShow.status)='Approval'))\n" +
+                    "WHERE (((tblShow.status)='Approved'))\n" +
                     "ORDER BY tblShow.showDate";
        
         ResultSet rs = HandsInTheAir.getDB().query(sql);
@@ -183,10 +185,10 @@ public class ViewShowsForUserControl {
         return rs;
     }
 
-    public void buyTickets(int numOfTickets, Integer showNum, String text) {
+    public boolean buyTickets(int numOfTickets, Integer showNum, String text) {
         if (getNumOfTicketsLeft(showNum)-numOfTickets < 0){
             JOptionPane.showMessageDialog(null, "Not enough tickets left");
-            return;
+            return false;
         }
         try {
             String qry = null;
@@ -202,8 +204,8 @@ public class ViewShowsForUserControl {
             if (text.equals("Presale :")){
                 if (num2+numOfTickets > maxTicketsPresale()){
                     JOptionPane.showMessageDialog(null, "You bought "+num2+" at presale. You cant by more then "+maxTicketsPresale()+"");
-                    return;
-                }
+                    return false;
+                } 
                     
                 qry = "UPDATE tblTicketOrder SET numOfRegularTickets = "+num1+",numOfPresaleTickets = "
                         +(num2+numOfTickets)+" WHERE showID="+showNum+" AND userID=\""+WindowManager.getTmpUser().getUserAlphaCode()+"\"";
@@ -216,11 +218,11 @@ public class ViewShowsForUserControl {
             
             if (num1==0 && num2==0){
                 if(text.equals("Presale :"))
-                    qry =("INSERT INTO tblPlace (showID, userID, numOfRegularTickets, numOfPresaleTickets) VALUES('"
+                    qry =("INSERT INTO tblTicketOrder (showID, userID, numOfRegularTickets, numOfPresaleTickets) VALUES('"
                         +showNum+"','"+WindowManager.getTmpUser().getUserAlphaCode()+"','"+num1+"','"
                         +num2+numOfTickets+"')");
                 else
-                    qry =("INSERT INTO tblPlace (showID, userID, numOfRegularTickets, numOfPresaleTickets) VALUES('"
+                    qry =("INSERT INTO tblTicketOrder (showID, userID, numOfRegularTickets, numOfPresaleTickets) VALUES('"
                         +showNum+"','"+WindowManager.getTmpUser().getUserAlphaCode()+"','"+num1+numOfTickets+"','"
                         +num2+"')");
             }
@@ -228,10 +230,11 @@ public class ViewShowsForUserControl {
             HandsInTheAir.getDB().insert(qry);
             
             JOptionPane.showMessageDialog(null, "You bought the tickets  successfuly!");
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(ViewShowsForUserControl.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+        return false;
     }
     
     public boolean checkAge(int showNum){
@@ -279,4 +282,25 @@ public class ViewShowsForUserControl {
         return 0;
     }
     
+    public void viewUrl(String placeName){
+        
+          try {
+              
+              String sql ="SELECT tblPlace.name, tblPlace.location\n" +
+                      "FROM tblPlace\n" +
+                      "WHERE (((tblPlace.name) Like \""+placeName+"\"));";
+              
+              ResultSet rs = HandsInTheAir.getDB().query(sql);
+              String url = null;
+              while (rs.next())
+                  url = rs.getString(2);
+              try {
+                  Desktop.getDesktop().browse(new URL(url).toURI());
+              } catch (Exception e) {
+                  e.printStackTrace();
+              }
+          } catch (SQLException ex) {
+                Logger.getLogger(ViewShowsForUserControl.class.getName()).log(Level.SEVERE, null, ex);
+            }
+    }
 }

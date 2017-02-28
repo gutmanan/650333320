@@ -27,7 +27,22 @@ public class ChangeConstantControl {
         return rs;
     }
     
-    public void saveConstants(Timestamp ts,String placeExpField,String placeIncField,String showDurField,String artistIncField,String presaleDisField,String maxTicketsField,String regSaleField,String waitTimeField, String bDayTextField){
+    public void saveConstants(String placeExpField,String placeIncField,String showDurField,String artistIncField,String presaleDisField,String maxTicketsField,String regSaleField,String waitTimeField, String bDayTextField){
+           
+        if (!ValidatorManager.onlyContainsNumbers(placeExpField) ||
+                !ValidatorManager.onlyContainsNumbers(placeIncField) ||
+                !ValidatorManager.onlyContainsNumbers(showDurField) ||
+                !ValidatorManager.onlyContainsNumbers(waitTimeField) ||
+                !ValidatorManager.onlyContainsNumbers(maxTicketsField) ||
+                !ValidatorManager.onlyContainsNumbers(presaleDisField) ||
+                !ValidatorManager.onlyContainsNumbers(artistIncField) ||
+                !ValidatorManager.onlyContainsNumbers(regSaleField)){
+            JOptionPane.showMessageDialog(null, "The constant must be numbers except birthday text!");
+            return;
+        }
+        
+        Date today = new Date();
+        Timestamp ts = new Timestamp(today.getTime());
         
         String sql = "INSERT INTO tblConstants (dateOfChange, placeExpanse, placeIncome, showDuration, artistIncome, presaleDiscount, maxPresaleTicketsPerUser, regularSaleDays, propasalWaitDays, birthdayText)"
                    + "VALUES(\""+ts+"\",'"+placeExpField+"','"+placeIncField+"','"+showDurField+"','"+artistIncField+"','"+presaleDisField+"','"+maxTicketsField+
