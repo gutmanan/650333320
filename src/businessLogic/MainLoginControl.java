@@ -75,6 +75,16 @@ public class MainLoginControl {
                 JOptionPane.showMessageDialog(null, "The email is already exsist");
                 return false;
             }
+            
+            sql = "SELECT tblAgent.email\n" +
+                        "FROM tblAgent\n" +
+                        "WHERE (((tblAgent.email) Like \""+email+"\"));";
+            
+            rs = HandsInTheAir.getDB().query(sql);
+            if (rs!=null && rs.next()){
+                JOptionPane.showMessageDialog(null, "The email is already exsist");
+                return false;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(CreatePlaceControl.class.getName()).log(Level.SEVERE, null, ex);
         }

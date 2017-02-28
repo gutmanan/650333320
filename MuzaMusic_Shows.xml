@@ -6,6 +6,7 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-03-23 12:00:00.0"/>
   </Artist>
   <Artist id="2eba414">
     <stageName>wwe</stageName>
@@ -21,6 +22,7 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-03-23 12:00:00.0"/>
     <Show date="2017-04-18 12:00:00.0"/>
   </Artist>
   <Artist id="6861ab3">
