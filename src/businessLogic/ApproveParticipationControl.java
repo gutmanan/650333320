@@ -23,7 +23,7 @@ public class ApproveParticipationControl {
         
        String sql = "SELECT tblArtist.stageName, tblShowInvitation.showID, tblArtist.agentID\n" +
                     "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
-                    "WHERE (((tblArtist.agentID) Like \""+WindowManager.getTmpAgent().getId()+"\") AND ((tblShowInvitation.approvel) Like \"waiting\"));";
+                    "WHERE (((tblArtist.agentID) Like \""+WindowManager.getTmpAgent().getId()+"\") AND ((tblShowInvitation.approval) Like \"Awaiting\"));";
        
         ResultSet rs = HandsInTheAir.getDB().query(sql);
         
@@ -44,7 +44,7 @@ public class ApproveParticipationControl {
                   
     public ResultSet getArtistForShow(int showNum){
        
-       String sql = "SELECT tblArtist.stageName, tblShowInvitation.approvel\n" +
+       String sql = "SELECT tblArtist.stageName, tblShowInvitation.approval\n" +
                     "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
                     "WHERE (((tblShowInvitation.showID) Like \""+showNum+"\"));";
        
@@ -57,7 +57,7 @@ public class ApproveParticipationControl {
         
         String artistId = getArtistId(stageName);
         
-        String sql = "UPDATE tblShowInvitation SET approvel = 'approved' WHERE showID ='"+showNumber+"' AND artistID ='"+artistId+"'";
+        String sql = "UPDATE tblShowInvitation SET approval = 'approved' WHERE showID ='"+showNumber+"' AND artistID ='"+artistId+"'";
             
         HandsInTheAir.getDB().insert(sql);
         
@@ -70,7 +70,7 @@ public class ApproveParticipationControl {
         
         String artistId = getArtistId(stageName);
         
-        String sql = "UPDATE tblShowInvitation SET approvel = 'waiting' WHERE showID ='"+showNumber+"' AND artistID ='"+artistId+"'";
+        String sql = "UPDATE tblShowInvitation SET approval = 'Awaiting' WHERE showID ='"+showNumber+"' AND artistID ='"+artistId+"'";
             
         HandsInTheAir.getDB().insert(sql);
         
@@ -125,7 +125,7 @@ public class ApproveParticipationControl {
             
             sql ="SELECT tblShow.showDate, tblShow.mainArtist, tblArtist.stageName\n" +
                     "FROM (tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID) INNER JOIN tblShow ON (tblShow.showNumber = tblShowInvitation.showID) AND (tblArtist.artistAlphaCode = tblShow.mainArtist)\n" +
-                    "WHERE (((tblShowInvitation.artistID) Like \""+getArtistId(stageName)+"\") AND ((tblShowInvitation.approvel) Like 'approved'));";
+                    "WHERE (((tblShowInvitation.artistID) Like \""+getArtistId(stageName)+"\") AND ((tblShowInvitation.approval) Like 'approved'));";
             
             rs = HandsInTheAir.getDB().query(sql);
             
@@ -142,9 +142,9 @@ public class ApproveParticipationControl {
     public void approveShow(int showNumber){
         
         try {
-            String sql = "SELECT tblShowInvitation.showID, tblShowInvitation.approvel\n" +
+            String sql = "SELECT tblShowInvitation.showID, tblShowInvitation.approval\n" +
                     "FROM tblShowInvitation\n" +
-                    "WHERE (((tblShowInvitation.showID) Like \""+showNumber+"\") AND ((tblShowInvitation.approvel) Like 'waiting'));";
+                    "WHERE (((tblShowInvitation.showID) Like \""+showNumber+"\") AND ((tblShowInvitation.approval) Like 'Awaiting'));";
             
             ResultSet rs = HandsInTheAir.getDB().query(sql);
             
@@ -152,7 +152,7 @@ public class ApproveParticipationControl {
                 return;
             }
             
-            sql = "UPDATE tblShow SET status = 'Approved' WHERE showID ='"+showNumber+"'";
+            sql = "UPDATE tblShow SET status = 'Approved' WHERE showNumber ='"+showNumber+"'";
             
             HandsInTheAir.getDB().insert(sql);
         } catch (SQLException ex) {
@@ -167,7 +167,7 @@ public class ApproveParticipationControl {
             
             HandsInTheAir.getDB().insert(sql);
 
-            sql = "UPDATE tblShow SET approvel = 'not agreed' WHERE showID ='"+showNumber+"'";
+            sql = "UPDATE tblShowInvitation SET approval = 'not agreed' WHERE showID ='"+showNumber+"'";
             
             HandsInTheAir.getDB().insert(sql);
 

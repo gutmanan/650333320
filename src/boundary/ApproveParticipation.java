@@ -6,17 +6,14 @@
 package boundary;
 
 import businessLogic.ApproveParticipationControl;
+import businessLogic.WindowManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.JComponent.TOOL_TIP_TEXT_KEY;
-import javax.swing.JOptionPane;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -193,35 +190,35 @@ public class ApproveParticipation extends javax.swing.JPanel {
 
     jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel11);
-    jLabel11.setBounds(180, 240, 110, 20);
+    jLabel11.setBounds(200, 260, 110, 20);
 
     jLabel12.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel12);
-    jLabel12.setBounds(180, 270, 110, 20);
+    jLabel12.setBounds(200, 290, 110, 20);
 
     jLabel18.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel18);
-    jLabel18.setBounds(180, 300, 110, 20);
+    jLabel18.setBounds(200, 320, 110, 20);
 
     jLabel19.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel19);
-    jLabel19.setBounds(180, 330, 110, 20);
+    jLabel19.setBounds(200, 350, 110, 20);
 
     jLabel20.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel20);
-    jLabel20.setBounds(180, 360, 110, 20);
+    jLabel20.setBounds(200, 380, 110, 20);
 
     jLabel21.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel21);
-    jLabel21.setBounds(180, 390, 110, 20);
+    jLabel21.setBounds(200, 410, 110, 20);
 
     jLabel22.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel22);
-    jLabel22.setBounds(180, 420, 110, 20);
+    jLabel22.setBounds(200, 440, 110, 20);
 
     jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel23);
-    jLabel23.setBounds(180, 450, 140, 20);
+    jLabel23.setBounds(200, 470, 140, 20);
 
     jButton1.setText("Approve");
     jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -255,11 +252,13 @@ public class ApproveParticipation extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         con.approveParticipation((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0),(int) jTable2.getValueAt(jTable2.getSelectedRow(), 1));
         setTable2();
+        WindowManager.openWin(new ApproveParticipation());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         con.cancelParticipation((String) jTable2.getValueAt(jTable2.getSelectedRow(), 0),(int) jTable2.getValueAt(jTable2.getSelectedRow(), 1));
         setTable2();
+        WindowManager.openWin(new ApproveParticipation());
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked

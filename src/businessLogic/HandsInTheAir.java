@@ -43,6 +43,7 @@ public class HandsInTheAir {
             XML.write(getDB().query("SELECT tblArtist.*\n" + "FROM tblArtist;"), getArtistShows());
             XML.export("MuzaMusic_Shows");
             DB.updateActive();
+            DB.cancelShowsAfterWaiting();
         WindowManager.openLogin();
         } catch (SQLException e) {
             e.printStackTrace();

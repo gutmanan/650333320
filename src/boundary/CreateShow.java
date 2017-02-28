@@ -377,7 +377,9 @@ public class CreateShow extends javax.swing.JPanel {
         Place selectedPlace = csController.getPlaceDetails(placeComboBox.getSelectedItem().toString());
         if (selectedPlace != null) {
             jLabel9.setText(jLabel9.getText()+" "+selectedPlace.getName());
-            jLabel10.setText(jLabel10.getText()+" "+selectedPlace.getEmail());
+            String s = selectedPlace.getEmail();
+            int x = s.indexOf('#');
+            jLabel10.setText(jLabel10.getText()+" "+s.substring(0, x));
             jLabel14.setText(jLabel14.getText()+" "+selectedPlace.getPhoneNumber());
             jLabel15.setText(jLabel15.getText()+" "+selectedPlace.getAddress().toString());
             jLabel12.setText(jLabel12.getText()+" "+selectedPlace.getLocation());
@@ -418,8 +420,10 @@ public class CreateShow extends javax.swing.JPanel {
         Artist tmpArtist = null;
         for (String a : csController.getAvailableAdditionalArtists(selectedDate, artistIDOf.get(String.valueOf(artistComboBox.getSelectedItem())))) {
             tmpArtist = csController.getArtistDetails(a);
-            if (tmpArtist != null)
+            if (tmpArtist != null) {
                 model.addRow(new Object[]{tmpArtist.getStageName(), false});
+                artistIDOf.put(tmpArtist.getStageName(),tmpArtist.getArtistAlphaCode());
+            }
         }
         jTable3.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -430,6 +434,7 @@ public class CreateShow extends javax.swing.JPanel {
                     jLabel19.setText("Facebook:");
                     jLabel16.setText("Biography:");
                     Artist tmp = csController.getArtistDetails(artistIDOf.get(String.valueOf(jTable3.getValueAt(jTable3.getSelectedRow(),0))));
+                    
                     if (tmp != null) {
                         jLabel20.setText(jLabel20.getText()+" "+tmp.getAgent().getId());
                         jLabel21.setText(jLabel21.getText()+" "+tmp.getEmail());
@@ -465,10 +470,12 @@ public class CreateShow extends javax.swing.JPanel {
             }
         }
         if (showID > -1 && counter == anotherCounter) {
+            csController.approveParticipation(showID);
             JOptionPane.showMessageDialog(null,
                 "Show was created successfully!",
                 "Setup complete",
                 JOptionPane.INFORMATION_MESSAGE);
+            WindowManager.openWin(new CreateShow());
             return;
         }
     }//GEN-LAST:event_jButton3ActionPerformed

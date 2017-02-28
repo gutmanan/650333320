@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -91,9 +92,54 @@ public class DBManager {
             while(rs.next()){
                 if (rs.getBoolean(2)) continue;
                 if (rs.getDate(3)==null || rs.getDate(3).before(new Date())){
-                    sql = "UPDATE tblArtist SET IsActive = "+true+", activationDate = "+null+
+                    Timestamp ts = new Timestamp(new Date().getTime());
+                    sql = "UPDATE tblArtist SET IsActive = "+true+", activationDate = "+ts+
                             " WHERE artistAlphaCode = '"+rs.getString(1)+"'";
-                            }  
+                    
+                    HandsInTheAir.getDB().insert(sql);
+                            } 
+                
+            }
+        } catch (SQLException ex) {                
+            Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+    }
+    
+    public void cancelShowsAfterWaiting(){
+        
+        try {
+            String sql = "SELECT tblShow.showNumber, tblShow.status, tblShow.createDate\n" +
+                            "FROM tblShow\n" +
+                            "WHERE (((tblShow.status) Like \"Awaiting\"));";
+            
+            String sql2 = "SELECT tblConstants.dateOfChange, tblConstants.propasalWaitDays\n" +
+                            "FROM tblConstants\n" +
+                            "ORDER BY tblConstants.dateOfChange DESC;";
+            
+            ResultSet rs = HandsInTheAir.getDB().query(sql);
+
+            ResultSet rs2 = HandsInTheAir.getDB().query(sql2);
+            int waitDays = 0;
+            
+            while(rs2.next())
+                waitDays = rs2.getInt(2);
+                
+            while(rs.next()){
+                Date date = rs.getDate(3);
+                date.setDate(date.getDate()+waitDays);
+                Date today = new Date();
+                if (today.after(date)){
+                    sql = "UPDATE tblShow SET status = 'Canceled'"+
+                            " WHERE showNumber = '"+rs.getInt(1)+"'";
+                    
+                    HandsInTheAir.getDB().insert(sql);
+                    
+                    sql = "UPDATE tblShowInvitation SET approval = 'not agreed' WHERE showID ='"+rs.getInt(1)+"'";
+            
+                    HandsInTheAir.getDB().insert(sql);
+  
+                }
             }
         } catch (SQLException ex) {                
             Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);

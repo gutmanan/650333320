@@ -114,6 +114,7 @@ public class CreateShowControl {
                                         "WHERE tblArtist.artistAlphaCode=\""+artistID+"\"");
         try {
             while (rs4.next()) {
+                
                 return new Artist(rs4.getString(1), rs4.getString(2), rs4.getString(3), rs4.getString(4), rs4.getString(5), 
                         rs4.getBoolean(6), new Agent(rs4.getString(8)));
             }
@@ -178,4 +179,31 @@ public class CreateShowControl {
         return false;
     }
  
+    public void approveParticipation(int showID){
+        System.out.println(showID);
+        ResultSet rs = HandsInTheAir.getDB().query("SELECT tblShowInvitation.showID, tblShowInvitation.artistID, tblArtist.agentID\n" +
+                        "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
+                        "WHERE (((tblShowInvitation.showID) Like '"+showID+"'));");
+        boolean flg = true;
+        try{
+        while (rs.next()){
+            flg = false;
+            if (rs.getString(3).equals(WindowManager.getTmpAgent().getId())){
+            String sql = "UPDATE tblShowInvitation SET approval = 'approved' WHERE showID = '"+showID+"'  AND artistID ='"+rs.getString(2)+"'";
+          
+            HandsInTheAir.getDB().insert(sql);
+            }
+        }
+
+        if (flg){
+            String sql = "UPDATE tblShow SET status = 'Approved' WHERE showNumber = '"+showID+"'";
+            HandsInTheAir.getDB().insert(sql);  
+  
+        }
+        
+        } catch (SQLException ex) {
+             JOptionPane.showMessageDialog(null, "Something wrong. Please try again latter..");
+        }
+
+    }
 }

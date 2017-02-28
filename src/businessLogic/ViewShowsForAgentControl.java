@@ -9,10 +9,9 @@ import java.awt.Desktop;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -65,7 +64,7 @@ public class ViewShowsForAgentControl {
           
     public ResultSet getArtistForShow(int showNum){
        
-       String sql = "SELECT tblArtist.stageName, tblShowInvitation.approvel\n" +
+       String sql = "SELECT tblArtist.stageName, tblShowInvitation.approval\n" +
                     "FROM tblArtist INNER JOIN tblShowInvitation ON tblArtist.artistAlphaCode = tblShowInvitation.artistID\n" +
                     "WHERE (((tblShowInvitation.showID) Like \""+showNum+"\"));";
        

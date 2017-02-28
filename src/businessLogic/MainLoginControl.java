@@ -9,11 +9,8 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
