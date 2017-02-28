@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <MuzaMusic_Shows>
+  <Artist id="2464afd">
+    <stageName>Natan Godham</stageName>
+    <email>natan@gmail.com</email>
+    <isActive>true</isActive>
+    <activationDate>null</activationDate>
+    <agentID>6876729</agentID>
+    <Show date="2017-02-28 07:00:00.0"/>
+  </Artist>
   <Artist id="2eba414">
     <stageName>wwe</stageName>
     <email>abceds@gmail.com</email>
@@ -9,6 +17,7 @@
     <Show date="2017-02-23 00:00:00.0"/>
     <Show date="2017-02-21 00:00:00.0"/>
     <Show date="2017-03-15 00:00:00.0"/>
+    <Show date="2017-02-28 07:00:00.0"/>
   </Artist>
   <Artist id="4edd098">
     <stageName>mm</stageName>
@@ -16,5 +25,8 @@
     <isActive>true</isActive>
     <activationDate>null</activationDate>
     <agentID>6876729</agentID>
+    <Show date="2017-02-28 03:00:00.0"/>
+    <Show date="2017-02-28 01:00:00.0"/>
+    <Show date="2017-02-28 07:00:00.0"/>
   </Artist>
 </MuzaMusic_Shows>

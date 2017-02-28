@@ -6,11 +6,13 @@ import entity.Agent;
 import entity.Artist;
 import entity.Place;
 import boundary.CreateShow;
+import entity.E_STATUS;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,23 +20,24 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class CreateShowControl {
 
     public CreateShowControl() {
     }
     
-    public Set<String> getAvailableMainArtistForDate(Date selectedDate) {
+    public Collection<Artist> getAvailableMainArtistForDate(Date selectedDate) {
         ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblArtist.*\n" +
                                             "FROM tblAgent INNER JOIN tblArtist ON tblAgent.ID = tblArtist.agentID\n" +
                                             "WHERE (((tblArtist.agentID)=\""+WindowManager.getTmpAgent().getId()+"\"))");
         ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShowInvitation.artistID\n" +
                                             "FROM tblShow INNER JOIN tblShowInvitation ON tblShow.showNumber = tblShowInvitation.showID\n" +
                                             "WHERE (((tblShowInvitation.showID)=[tblShow].[showNumber]) AND ((tblShow.showDate)=#"+selectedDate+"#))");  
-        HashMap<String,String> availableMainArtist = new HashMap<>();
+        HashMap<String,Artist> availableMainArtist = new HashMap<>();
         try {
             while (rs1.next()) {
-                availableMainArtist.put(rs1.getString(1), rs1.getString(2));
+                availableMainArtist.put(rs1.getString(1), getArtistDetails(rs1.getString(1)));
             }
             while (rs2.next()) {
                 if (availableMainArtist.containsKey(rs2.getString(1))) {
@@ -44,7 +47,7 @@ public class CreateShowControl {
         } catch (SQLException ex) {
             Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return availableMainArtist.keySet();
+        return availableMainArtist.values();
     }
     public Set<String> getAvailablePlacesForDate(Date selectedDate) {
         ResultSet rs3 = HandsInTheAir.getDB().query("SELECT tblPlace.*, tblFavoritePlace.agentID\n" +
@@ -83,50 +86,41 @@ public class CreateShowControl {
         }
         return tmp;
     }
-    public Collection<Artist> getAvailableAdditionalArtists(Date selectedDate, String mainArtistID) {
-        
+    public ArrayList<String> getAvailableAdditionalArtists(Date selectedDate, String mainArtistID) {
         ResultSet rs2 = HandsInTheAir.getDB().query("SELECT tblShowInvitation.artistID\n" +
                                             "FROM tblShow INNER JOIN tblShowInvitation ON tblShow.showNumber = tblShowInvitation.showID\n" +
                                             "WHERE (((tblShowInvitation.showID)=[tblShow].[showNumber]) AND ((tblShow.showDate)=#"+selectedDate+"#))");
-
-        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblAppreciation.appreciatedArtistID, tblArtist.*\n" +
-                                          "FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.artistAlphaCode = tblAppreciation.artistID\n" +
-                                          "WHERE (((tblArtist.artistAlphaCode)=[tblAppreciation_1].[appreciatedArtistID]) AND ((tblAppreciation.appreciatedArtistID)=\""+mainArtistID+"\") AND ((tblArtist.IsActive)=Yes))");
-        
-        final HashMap<String,Artist> availableAdditionalArtists = new HashMap<>();
+        ResultSet rs1 = HandsInTheAir.getDB().query("SELECT tblAppreciation.appreciatedArtistID\n" +
+"FROM tblArtist INNER JOIN (tblAppreciation AS tblAppreciation_1 INNER JOIN tblAppreciation ON tblAppreciation_1.artistID = tblAppreciation.appreciatedArtistID) ON tblArtist.artistAlphaCode = tblAppreciation.artistID\n" +
+"WHERE (((tblArtist.IsActive)=Yes) AND ((tblAppreciation.artistID)=\""+mainArtistID+"\") AND ((tblAppreciation_1.appreciatedArtistID)=\""+mainArtistID+"\"))");
+        ArrayList<String> availableAdditionalArtists = new ArrayList<>();
         try {
             while (rs1.next()) {
-                /*availableAdditionalArtists.put(rs1.getString(1), 
-                new Artist(rs1.getString(1), rs1.getString(2), rs1.getString(3), rs1.getString(4), rs1.getString(5), true, 
-                new Agent(rs1.getString(7))));
-            */
+                availableAdditionalArtists.add(rs1.getString(1));
             }
             while (rs2.next()) {
-                if (availableAdditionalArtists.containsKey(rs2.getString(1))) {
-                    availableAdditionalArtists.remove(rs2.getString(1));
+                if (availableAdditionalArtists.contains(rs2.getString(1))) {
+                    availableAdditionalArtists.remove(availableAdditionalArtists.indexOf(rs2.getString(1)));
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return availableAdditionalArtists.values();
+        return availableAdditionalArtists;
     }
     public Artist getArtistDetails(String artistID) {
-        Artist tmp = null;
         ResultSet rs4 = DBManager.query("SELECT tblArtist.*\n" +
                                         "FROM tblArtist " +
-                                        "WHERE tblArtist.ID=\""+artistID+"\"");
+                                        "WHERE tblArtist.artistAlphaCode=\""+artistID+"\"");
         try {
             while (rs4.next()) {
-                /*tmp = new Artist(rs4.getString(1), rs4.getString(2), 
-                                 rs4.getString(3), rs4.getString(5), 
-                                 rs4.getString(4), rs4.getBoolean(6), new Agent(rs4.getString(7)));
-            */
+                return new Artist(rs4.getString(1), rs4.getString(2), rs4.getString(3), rs4.getString(4), rs4.getString(5), 
+                        rs4.getBoolean(6), new Agent(rs4.getString(8)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(CreateShow.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return tmp;
+        return null;
     }
     public ArrayList<String> getPlacesExcluding(Date selectedDate, Set<String> favs) {
         ArrayList<String> tmp = new ArrayList();
@@ -154,4 +148,34 @@ public class CreateShowControl {
         }
         return tmp;
     }
+    public int newShow(String artist, String agent, Timestamp showDate, String start, int place, String ticketPrice, String minAge) {
+        if (!(ValidatorManager.onlyContainsNumbers(start))){
+            JOptionPane.showMessageDialog(null, "The Start time field must be a number.");
+            return -1;
+        }
+        
+        if (!(ValidatorManager.onlyContainsNumbers(ticketPrice))){
+            JOptionPane.showMessageDialog(null, "The Ticket price field must be a number.");
+            return -1;
+        }
+        
+        if (!(ValidatorManager.onlyContainsNumbers(minAge))){
+            JOptionPane.showMessageDialog(null, "The Minimum age field must be a number.");
+            return -1;
+        }
+        showDate.setHours(Integer.valueOf(start));
+        String qry = "INSERT INTO tblShow (mainArtist, showDate, place, status, createDate, ticketPrice, minAge, agentID)\n"
+                   + "VALUES('"+artist+"','"+showDate+"','"+place+"','"+E_STATUS.Awaiting+"','"+new Timestamp(new java.util.Date().getTime())+"'"
+                   + ",'"+ticketPrice+"','"+minAge+"','"+agent+"')";
+        return DBManager.insert(qry);
+    }
+    public boolean newArtistInvitations(int showID, String artist) {
+        String qry = "INSERT INTO tblShowInvitation (showID, artistID, approval)\n"
+                   + "VALUES('"+showID+"','"+artist+"','"+E_STATUS.Awaiting+"')";
+        if (DBManager.insert(qry) == -2) {
+            return true;
+        }
+        return false;
+    }
+ 
 }

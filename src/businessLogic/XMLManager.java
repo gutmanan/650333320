@@ -141,10 +141,15 @@ public class XMLManager {
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(fileName+".xml"));
             transformer.transform(source, result);
-            DebugManager.setXMLStatus(true);
+            DebugManager.setXML1Status(true);
         } catch (TransformerException  ex) {
-            DebugManager.setXMLStatus(false);
+            DebugManager.setXML1Status(false);
             Logger.getLogger(XMLManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    public static HashMap<String, ArrayList<java.util.Date>> getOccupied() {
+        return occupied;
+    }
+    
 }

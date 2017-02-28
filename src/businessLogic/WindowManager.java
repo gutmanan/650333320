@@ -1,10 +1,12 @@
 package businessLogic;
 
+import boundary.HappyBirthday;
 import entity.Agent;
 import entity.User;
 import boundary.MainGui;
 import boundary.MainLogin;
 import java.sql.SQLException;
+import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -182,9 +184,14 @@ public abstract class WindowManager {
         welcome.setBounds(190, 30, 500, 50);
         if (getTmpAgent()!= null)
             welcome.setText("Welcome "+getTmpAgent().getFirstName()+" "+getTmpAgent().getLastName());
-        else if (getTmpUser()!= null)
+        else if (getTmpUser()!= null) {
             welcome.setText("Welcome "+getTmpUser().getFirstName()+" "+getTmpUser().getLastName());
-        else 
+            Date today = new Date();
+            if (getTmpUser().getBirthday().getDate() == today.getDate() &&
+                getTmpUser().getBirthday().getMonth() == today.getMonth()) {
+                openWin(new HappyBirthday());
+            }
+        } else 
             welcome.setText("Welcome "+getAuthType());
     }
 }

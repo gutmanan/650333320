@@ -59,8 +59,8 @@ public class User {
 		this.nickname = nickname;
 	}
 
-	public Date getBirthday() {
-		return birthday;
+	public java.util.Date getBirthday() {
+		return new java.util.Date(birthday.getYear(), birthday.getMonth(), birthday.getDate());
 	}
 
 	public void setBirthday(Date birthday) {

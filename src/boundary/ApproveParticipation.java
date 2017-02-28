@@ -82,7 +82,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
         jLabel24.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel24.setText("Close Shows For this Artist :");
         add(jLabel24);
-        jLabel24.setBounds(380, 50, 190, 20);
+        jLabel24.setBounds(400, 70, 190, 20);
 
         jTable3.setModel(new DefaultTableModel(){
 
@@ -101,13 +101,13 @@ public class ApproveParticipation extends javax.swing.JPanel {
     jScrollPane3.setViewportView(jTable3);
 
     add(jScrollPane3);
-    jScrollPane3.setBounds(380, 80, 200, 110);
+    jScrollPane3.setBounds(400, 100, 200, 110);
 
     jTable1.setModel(new DefaultTableModel());
     jScrollPane1.setViewportView(jTable1);
 
     add(jScrollPane1);
-    jScrollPane1.setBounds(380, 230, 200, 110);
+    jScrollPane1.setBounds(400, 250, 200, 110);
 
     jTable2.setModel(new DefaultTableModel(){
 
@@ -126,12 +126,12 @@ public class ApproveParticipation extends javax.swing.JPanel {
     jScrollPane2.setViewportView(jTable2);
 
     add(jScrollPane2);
-    jScrollPane2.setBounds(40, 80, 200, 110);
+    jScrollPane2.setBounds(60, 100, 200, 110);
 
     jLabel8.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     jLabel8.setText("Artist participate in selected show :");
     add(jLabel8);
-    jLabel8.setBounds(380, 210, 260, 15);
+    jLabel8.setBounds(400, 230, 260, 15);
     add(jLabel5);
     jLabel5.setBounds(40, 494, 350, 30);
 
@@ -139,57 +139,57 @@ public class ApproveParticipation extends javax.swing.JPanel {
     titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     titleLabel.setText("Approve Participation");
     add(titleLabel);
-    titleLabel.setBounds(0, 0, 850, 40);
+    titleLabel.setBounds(0, 10, 850, 40);
 
     jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     jLabel4.setText("Shows Invatition :");
     add(jLabel4);
-    jLabel4.setBounds(40, 50, 170, 20);
+    jLabel4.setBounds(60, 70, 170, 20);
 
     jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     jLabel6.setText("Shows Details :");
     add(jLabel6);
-    jLabel6.setBounds(40, 210, 130, 20);
+    jLabel6.setBounds(60, 230, 130, 20);
 
     jLabel7.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel7.setText("Date :");
     add(jLabel7);
-    jLabel7.setBounds(40, 240, 110, 20);
+    jLabel7.setBounds(60, 260, 110, 20);
 
     jLabel9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel9.setText("Created Date :");
     add(jLabel9);
-    jLabel9.setBounds(40, 300, 110, 20);
+    jLabel9.setBounds(60, 320, 110, 20);
 
     jLabel10.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel10.setText("Main Artist :");
     add(jLabel10);
-    jLabel10.setBounds(40, 270, 110, 20);
+    jLabel10.setBounds(60, 290, 110, 20);
 
     jLabel13.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel13.setText("Place Name :");
     add(jLabel13);
-    jLabel13.setBounds(40, 360, 110, 20);
+    jLabel13.setBounds(60, 380, 110, 20);
 
     jLabel14.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel14.setText("Agent Invaited :");
     add(jLabel14);
-    jLabel14.setBounds(40, 330, 110, 20);
+    jLabel14.setBounds(60, 350, 110, 20);
 
     jLabel15.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel15.setText("Min. Age :");
     add(jLabel15);
-    jLabel15.setBounds(40, 390, 110, 20);
+    jLabel15.setBounds(60, 410, 110, 20);
 
     jLabel16.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel16.setText("Ticket Price :");
     add(jLabel16);
-    jLabel16.setBounds(40, 420, 110, 20);
+    jLabel16.setBounds(60, 440, 110, 20);
 
     jLabel17.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     jLabel17.setText("Last day to approve :");
     add(jLabel17);
-    jLabel17.setBounds(40, 450, 140, 20);
+    jLabel17.setBounds(60, 470, 140, 20);
 
     jLabel11.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
     add(jLabel11);
@@ -230,7 +230,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
         }
     });
     add(jButton1);
-    jButton1.setBounds(480, 440, 90, 30);
+    jButton1.setBounds(500, 460, 90, 30);
     jButton1.setEnabled(false);
 
     jButton2.setText("Not Agree");
@@ -240,7 +240,7 @@ public class ApproveParticipation extends javax.swing.JPanel {
         }
     });
     add(jButton2);
-    jButton2.setBounds(580, 440, 90, 30);
+    jButton2.setBounds(600, 460, 90, 30);
     jButton2.setEnabled(false);
 
     jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/container3.png"))); // NOI18N

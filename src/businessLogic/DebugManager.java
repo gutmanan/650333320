@@ -32,6 +32,8 @@ public abstract class DebugManager extends javax.swing.JFrame {
     private void initComponents() {
 
         xmlLabel = new javax.swing.JLabel();
+        xmlLabel1 = new javax.swing.JLabel();
+        xmlstatusLabel1 = new javax.swing.JLabel();
         xmlstatusLabel = new javax.swing.JLabel();
         objectsCounterLabel = new javax.swing.JLabel();
         counterLabel = new javax.swing.JLabel();
@@ -53,25 +55,34 @@ public abstract class DebugManager extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         xmlLabel.setForeground(new java.awt.Color(0, 0, 0));
-        xmlLabel.setText("XML status:");
+        xmlLabel.setText("XML import status:");
         getContentPane().add(xmlLabel);
-        xmlLabel.setBounds(10, 180, 100, 16);
+        xmlLabel.setBounds(10, 180, 130, 16);
+
+        xmlLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        xmlLabel1.setText("XML export status:");
+        getContentPane().add(xmlLabel1);
+        xmlLabel1.setBounds(10, 200, 130, 16);
+
+        xmlstatusLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        getContentPane().add(xmlstatusLabel1);
+        xmlstatusLabel1.setBounds(130, 200, 150, 16);
 
         xmlstatusLabel.setText("not exported");
         xmlstatusLabel.setForeground(Color.red);
         xmlstatusLabel.setForeground(new java.awt.Color(0, 0, 0));
         getContentPane().add(xmlstatusLabel);
-        xmlstatusLabel.setBounds(90, 180, 150, 16);
+        xmlstatusLabel.setBounds(130, 180, 150, 16);
 
         objectsCounterLabel.setForeground(new java.awt.Color(0, 0, 0));
         objectsCounterLabel.setText("New objects:");
         getContentPane().add(objectsCounterLabel);
-        objectsCounterLabel.setBounds(10, 200, 90, 16);
+        objectsCounterLabel.setBounds(10, 220, 90, 16);
 
         counterLabel.setText(String.valueOf(objects));
         counterLabel.setForeground(Color.RED);
         getContentPane().add(counterLabel);
-        counterLabel.setBounds(90, 200, 150, 16);
+        counterLabel.setBounds(90, 220, 150, 16);
 
         userBtn.setText("User");
         userBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -175,12 +186,22 @@ public abstract class DebugManager extends javax.swing.JFrame {
     
     public static void setXMLStatus(Boolean flag) {
         if (flag) {
-            xmlstatusLabel.setText("exported");
+            xmlstatusLabel.setText("imported");
             xmlstatusLabel.setForeground(Color.green);
             return;
         }
-        xmlstatusLabel.setText("not exported");
+        xmlstatusLabel.setText("not imported");
         xmlstatusLabel.setForeground(Color.red);
+    }
+    
+    public static void setXML1Status(Boolean flag) {
+        if (flag) {
+            xmlstatusLabel1.setText("exported");
+            xmlstatusLabel1.setForeground(Color.green);
+            return;
+        }
+        xmlstatusLabel1.setText("not exported");
+        xmlstatusLabel1.setForeground(Color.red);
     }
     
     public static void objectsPlusPlus() {
@@ -200,6 +221,8 @@ public abstract class DebugManager extends javax.swing.JFrame {
     private static javax.swing.JButton userBtn;
     private static javax.swing.JLabel wallpaper;
     private static javax.swing.JLabel xmlLabel;
+    private static javax.swing.JLabel xmlLabel1;
     private static javax.swing.JLabel xmlstatusLabel;
+    private static javax.swing.JLabel xmlstatusLabel1;
     // End of variables declaration//GEN-END:variables
 }

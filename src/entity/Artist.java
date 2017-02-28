@@ -14,9 +14,9 @@ public class Artist {
 	private String email;
 	private boolean isActive;
 	private Agent agent;
-        private Image signatrue;
+        private String signatrue;
 
-	public Artist(String id, String stageName, String biography, String facebook, String email, boolean active, Agent agent,Image image) {
+	public Artist(String id, String stageName, String biography, String email, String facebook, boolean active, Agent agent) {
             super();
             this.artistAlphaCode = id;
             this.stageName = stageName;
@@ -25,7 +25,6 @@ public class Artist {
             this.email = email;
             this.isActive = active;
             this.setAgent(agent);
-            this.signatrue = image;
 	}
         
         public Artist(String id) {
@@ -88,11 +87,11 @@ public class Artist {
 		this.agent = agent;
 	}
         
-        public Image getSignatrue() {
+        public String getSignatrue() {
 		return signatrue;
 	}
 
-	public void setImage(Image image) {
+	public void setImage(String image) {
 		this.signatrue = image;
 	}
 

@@ -102,7 +102,7 @@ public class ViewShowForAgent extends javax.swing.JPanel {
     titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
     titleLabel.setText("View Shows");
     add(titleLabel);
-    titleLabel.setBounds(0, 0, 850, 40);
+    titleLabel.setBounds(0, 10, 850, 40);
 
     jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
     jLabel4.setText("Shows you created :");
